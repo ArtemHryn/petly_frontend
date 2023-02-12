@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
+      <BrowserRouter basename="/petly_frontend">
         <App />
       </BrowserRouter>
     </ThemeProvider>
