@@ -1,10 +1,14 @@
-import { Box } from "components/Box";
-import GlobalStyle from 'components/GlobalStyle';
+import { Header } from 'components/Header/Header';
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 
 export const SharedLayout = () => {
   return (
-    <Box>
-      <GlobalStyle />
-    </Box>
+    <>
+      <Header/>
+      <Suspense fullback={null}>
+        <Outlet />
+      </Suspense>
+    </>
   );
 };
