@@ -8,7 +8,7 @@ export const theme = {
     white: '#FFFFFF',
     gradient: 'linear-gradient(90deg, #FF634E 0%, #FFDF48 105.44%)',
   },
-  backgroundColor: { white: '#FDF7F2' },
+  backgroundColor: { accent: '#FDF7F2', white: '#FFFFFF' },
   opacity: {},
   space: [
     0, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 34, 36, 40, 44, 48, 64, 68,
