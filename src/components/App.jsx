@@ -63,7 +63,7 @@ export const App = () => {
   return (
     <>
       <ScrollToTop />
-      <SharedLayout />
+      <SharedLayout/>
 
       {/* <AnimatePresence mode="wait"> */}
       <Routes key={location.pathname} location={location}>
