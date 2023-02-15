@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   color,
@@ -13,8 +13,8 @@ import {
   typography,
 } from 'styled-system';
 
-const NavLink = styled(Link)`
-display: inline-block;
+const Link = styled(NavLink)`
+  display: inline-block;
   padding: 6px 26px;
   letter-spacing: 0.04em;
   text-decoration: none;
@@ -34,7 +34,7 @@ display: inline-block;
   }
 `;
 
-export const FilledLink = styled(NavLink)`
+export const FilledLink = styled(Link)`
   background-color: ${p => p.theme.backgroundColor.orange};
   color: ${p => p.theme.colors.white};
   :hover,
@@ -58,7 +58,7 @@ export const FilledLink = styled(NavLink)`
   ${space};
 `;
 
-export const OutlineLink = styled(NavLink)`
+export const OutlineLink = styled(Link)`
   background-color: ${p => p.theme.backgroundColor.white};
   color: ${p => p.theme.colors.black};
   :hover,
