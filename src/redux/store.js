@@ -8,9 +8,12 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { authReducer } from './auth/authSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    auth: authReducer
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
