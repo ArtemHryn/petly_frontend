@@ -1,10 +1,10 @@
-import { FilledLink, OutlineLink } from "./Link.styled";
+import { FilledLink, OutlineLink } from './Link.styled';
 
-export const Link = (props) => {
-    return (
-      <>
-        {props.variant === 'filled' && <FilledLink {...props} />}
-        {props.variant === 'outline' && <OutlineLink {...props} />}
-      </>
-    );
-}
+export const Link = ({ variant, ...props }) => {
+  return (
+    <>
+      {variant === 'filled' && <FilledLink {...props} />}
+      {variant === 'outline' && <OutlineLink {...props} />}
+    </>
+  );
+};

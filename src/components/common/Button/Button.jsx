@@ -1,11 +1,11 @@
 import { FilledBtn, OutlineBtn, OutlineSm } from './Button.styled';
 
-export const Button = props => {
+export const Button = ({ variant, ...props }) => {
   return (
     <>
-      {props.variant === 'filled' && <FilledBtn {...props} />}
-      {props.variant === 'outline' && <OutlineBtn {...props} />}
-      {props.variant === 'outline-sm' && <OutlineSm {...props} />}
+      {variant === 'filled' && <FilledBtn {...props} />}
+      {variant === 'outline' && <OutlineBtn {...props} />}
+      {variant === 'outline-sm' && <OutlineSm {...props} />}
     </>
   );
 };

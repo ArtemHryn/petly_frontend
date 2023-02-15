@@ -25,7 +25,7 @@ const Button = styled.button`
   font-weight: ${p => p.theme.fonts.regular};
   font-size: ${p => p.theme.fontSizes.mobile[3]};
   line-height: ${p => p.theme.lineHeights.mobile[3]};
-  transition-property: (color, background-color,border-color);
+  transition-property: (color, background-color, border-color);
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   @media screen and (min-width: 768px) {
@@ -75,8 +75,6 @@ export const OutlineBtn = styled(Button)`
   ${grid};
   ${space};
 `;
-
-
 
 export const OutlineSm = styled(Button)`
   max-width: 248px;

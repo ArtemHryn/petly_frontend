@@ -1,10 +1,10 @@
 import { H1, H2 } from './Title.styled';
 
-export const Title = props => {
+export const Title = ({ variant, ...props }) => {
   return (
     <>
-      {props.variant === 'h1' && <H1 {...props} />}
-      {props.variant === 'h2' && <H2 {...props} />}
+      {variant === 'h1' && <H1 {...props} />}
+      {variant === 'h2' && <H2 {...props} />}
     </>
   );
 };
