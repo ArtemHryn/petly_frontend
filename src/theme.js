@@ -7,12 +7,13 @@ export const theme = {
     blue: '#3091EB',
     white: '#FFFFFF',
     gradient: 'linear-gradient(90deg, #FF634E 0%, #FFDF48 105.44%)',
+    sectionBG: '#FDF7F2',
   },
   backgroundColor: { accent: '#FDF7F2', white: '#FFFFFF' },
   opacity: {},
   space: [
-    0, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 34, 36, 40, 44, 48, 64, 68,
-    100, 128, 256,
+    0, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 34, 36, 40, 42, 44, 48, 64,
+    68, 88, 100, 128, 200, 256,
   ],
   fonts: {
     main: 'Manrope',
@@ -57,6 +58,11 @@ export const theme = {
   },
   shadows: {
     regular: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+  },
+  sizes: {
+    mob: '320px',
+    tablet: '768px',
+    desktop: '1280px',
   },
 };
 

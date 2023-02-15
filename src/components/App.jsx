@@ -14,10 +14,12 @@ const Home = lazy(() =>
 );
 
 const FindPet = lazy(() =>
-  import('../pages/FindPet').then(module => ({
+  import('../pages/FindPet/FindPet').then(module => ({
     default: module.FindPet,
   }))
 );
+
+// 'pages/FindPet'
 
 const News = lazy(() =>
   import('../pages/News').then(module => ({
