@@ -23,7 +23,7 @@ export const filterButtons = [
   { title: 'my ads' },
 ];
 
-export const FindPet = () => {
+export const NoticesPage = () => {
   return (
     <Container>
       <Title mb={[11]}>Find your favorite pet</Title>
