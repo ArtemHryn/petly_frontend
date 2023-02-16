@@ -1,3 +1,20 @@
+const fontSizes = [
+  '12px', //0
+  '14px', //1
+  '15px', //2
+  '16px', //3
+  '18px', //4
+  '20px', //5
+  '24px', //6
+  '28px', //7
+  '32px', //8
+  '36px', //9
+  '48px', //10
+  '68px', //11
+];
+
+const lineHeights = [1.33, 1.35, 1.36, 1.37, 1.38, 1.5, 1.66];
+
 export const theme = {
   breakpoints: ['768px', '1280px'],
   colors: {
@@ -8,8 +25,9 @@ export const theme = {
     white: '#FFFFFF',
     gradient: 'linear-gradient(90deg, #FF634E 0%, #FFDF48 105.44%)',
     sectionBG: '#FDF7F2',
+    hightAccent: '#FF6101',
   },
-  backgroundColor: { accent: '#FDF7F2', white: '#FFFFFF' },
+  backgroundColor: { accent: '#FDF7F2', white: '#FFFFFF', orange: '#F59256' },
   opacity: {},
   space: [
     0, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 34, 36, 40, 42, 44, 48, 64,
@@ -19,20 +37,11 @@ export const theme = {
     main: 'Manrope',
     logo: 'Poppins',
   },
-  fontSizes: [
-    '12px',
-    '14px',
-    '15px',
-    '16px',
-    '18px',
-    '20px',
-    '24px',
-    '28px',
-    '32px',
-    '36px',
-    '48px',
-    '68px',
-  ],
+  fontSizes: {
+    desktop: fontSizes,
+    tablet: fontSizes,
+    mobile: fontSizes,
+  },
   fontWeights: {
     extraLight: 200,
     light: 400,
@@ -42,7 +51,11 @@ export const theme = {
     extraBold: 800,
     black: 900,
   },
-  lineHeights: [1.33, 1.35, 1.36, 1.37, 1.38, 1.5, 1.66],
+  lineHeights: {
+    desktop: lineHeights,
+    tablet: lineHeights,
+    mobile: lineHeights,
+  },
   borders: {
     none: 'none',
     light: '2px solid #F59256',

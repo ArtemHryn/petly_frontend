@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { space } from 'styled-system';
+import { space, typography } from 'styled-system';
 
 export const TitleEl = styled.h1`
   font-family: ${p => p.theme.fonts.main};
@@ -11,4 +11,5 @@ export const TitleEl = styled.h1`
   color: ${p => p.theme.colors.black};
   text-align: center;
   ${space}
+  ${typography}
 `;
