@@ -78,3 +78,20 @@ export const theme = {
     desktop: '1280px',
   },
 };
+
+export const aliases = {
+  mediaQueries: {
+    medium: `@media screen and (min-width: ${theme.breakpoints[0]})`,
+    large: `@media screen and (min-width: ${theme.breakpoints[1]})`,
+  },
+  fontSizes: {
+    desktop: theme.fontSizes,
+    tablet: theme.fontSizes,
+    mobile: theme.fontSizes,
+  },
+  lineHeights: {
+    desktop: theme.lineHeights,
+    tablet: theme.lineHeights,
+    mobile: theme.lineHeights,
+  },
+};
