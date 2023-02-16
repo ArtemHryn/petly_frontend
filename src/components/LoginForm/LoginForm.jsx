@@ -20,8 +20,16 @@ export const LoginForm = () => {
       >
         Login
       </Title>
-      <Input type="text" placeholder="Email" {...register('email')} />
-      <Input type="text" placeholder="Password" {...register('password')} />
+      <Input
+        type="text"
+        placeholder="Email"
+        {...register('email', { required: true })}
+      />
+      <Input
+        type="text"
+        placeholder="Password"
+        {...register('password', { required: true })}
+      />
       <LoginBtn type="submit">Login</LoginBtn>
       <AuthLink
         path="/register"
