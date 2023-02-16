@@ -3,10 +3,6 @@ import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button } from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
 
-//  font-weight: ${({ theme }) => theme.fontWeights.regular};
-//     font-size: ${({ theme }) => theme.fontSizes[9]};
-//     line-height: ${({ theme }) => theme.lineHeights[2]};
-
 export const RegisterForm = () => {
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -19,7 +15,12 @@ export const RegisterForm = () => {
   });
   return (
     <Form onSubmit={handleSubmit(console.log)}>
-      <Title style={{ marginBottom: 40 }} fontSize={[36]}>
+      <Title
+        fontSize={['24px', '36px']}
+        fontWeight={['700', '500']}
+        lineHeight={['1.38', '1.36']}
+        marginBottom="15"
+      >
         Registration
       </Title>
       <Input
