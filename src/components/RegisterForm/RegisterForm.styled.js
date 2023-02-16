@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { aliases } from 'theme';
 
 export const Form = styled.form`
   display: flex;
@@ -8,7 +7,7 @@ export const Form = styled.form`
   padding-left: ${({ theme }) => theme.space[9]}px;
   padding-right: ${({ theme }) => theme.space[9]}px;
 
-  ${aliases.mediaQueries.medium} {
+  @media screen and (min-width: ${({ theme }) => theme.sizes.tablet}) {
     background-color: ${({ theme }) => theme.colors.white};
     box-shadow: ${({ theme }) => theme.shadows.regular};
 
@@ -23,7 +22,7 @@ export const Form = styled.form`
     margin: 0 auto;
   }
 
-  ${aliases.mediaQueries.large} {
+  @media screen and (min-width: ${({ theme }) => theme.sizes.desktop}) {
     padding-bottom: 60px;
     padding-left: 80px;
     padding-right: 80px;
@@ -33,8 +32,8 @@ export const Form = styled.form`
 export const Input = styled.input`
   font-family: ${({ theme }) => theme.fonts.main};
   font-weight: ${({ theme }) => theme.fontWeights.regular};
-  font-size: ${({ theme }) => theme.fontSizes[5]};
-  line-height: ${({ theme }) => theme.lineHeights[1]};
+  font-size: ${({ theme }) => theme.fontSizes.mobile[5]};
+  line-height: ${({ theme }) => theme.lineHeights.mobile[1]};
   letter-spacing: 0.04em;
 
   border: ${({ theme }) => theme.borders.input};
@@ -48,8 +47,8 @@ export const Input = styled.input`
     margin-bottom: ${({ theme }) => theme.space[15]}px;
   }
 
-  ${aliases.mediaQueries.medium} {
-    line-height: ${({ theme }) => theme.lineHeights[4]};
+  @media screen and (min-width: ${({ theme }) => theme.sizes.tablet}) {
+    line-height: ${({ theme }) => theme.lineHeights.tablet[4]};
     padding-top: ${({ theme }) => theme.space[7]}px;
     padding-bottom: ${({ theme }) => theme.space[7]}px;
     padding-left: ${({ theme }) => theme.space[12]}px;
@@ -62,8 +61,8 @@ export const Input = styled.input`
 export const Button = styled.button`
   font-family: ${({ theme }) => theme.fonts.main};
   font-weight: ${({ theme }) => theme.fontWeights.regular};
-  font-size: ${({ theme }) => theme.fontSizes[5]};
-  line-height: ${({ theme }) => theme.lineHeights[1]};
+  font-size: ${({ theme }) => theme.fontSizes.mobile[5]};
+  line-height: ${({ theme }) => theme.lineHeights.mobile[1]};
   letter-spacing: 0.04em;
 
   background-color: ${({ children, theme }) =>
