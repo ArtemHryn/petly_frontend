@@ -19,9 +19,10 @@ const NoticesPage = lazy(() =>
   }))
 );
 
-const NewsPage = lazy(() =>
-  import('../pages/NewsPage').then(module => ({
-    default: module.NewsPage,
+
+const News = lazy(() =>
+  import('../pages/News/News').then(module => ({
+    default: module.News,
   }))
 );
 

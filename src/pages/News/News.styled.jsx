@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { aliases } from 'theme';
 
 export const Label = styled.label`
   position: relative;
@@ -18,21 +17,15 @@ export const SearchInput = styled.input`
   border-radius: ${p => p.theme.radii.md};
   &::placeholder {
     font-family: ${p => p.theme.fonts.main};
-    font-size: ${p => p.theme.fontSizes[3]};
+    font-size: ${p => p.theme.fontSizes.mobile[3]};
     font-weight: ${p => p.theme.fontWeights.regular};
-    line-height: ${p => p.theme.lineHeights[0]};;
+    line-height: ${p => p.theme.lineHeights.mobile[0]};
     color: #535353;
-  ${aliases.mediaQueries.medium} {
-    font-size: ${p => p.theme.fontSizes[5]};
-  }
-  ${aliases.mediaQueries.large} {
-    font-size: ${p => p.theme.fontSizes[5]};
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    font-size: ${p => p.theme.fontSizes.tablet[5]};
   }
 }
-  ${aliases.mediaQueries.medium} {
-    height: ${p => p.theme.space[17]}px;
-  }
-  ${aliases.mediaQueries.large} {
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     height: ${p => p.theme.space[17]}px;
   }
 `;
@@ -54,16 +47,13 @@ export const NewsList = styled.ul`
   display: grid;
   grid-row-gap: ${p => p.theme.space[15]}px;
   margin-top: ${p => p.theme.space[15]}px;
-  ${aliases.mediaQueries.medium} {
+    @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     margin-top: 60px;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: ${p => p.theme.space[12]}px;
     grid-row-gap: 60px;
-  }
-  ${aliases.mediaQueries.large} {
-    margin-top: 60px;
+    }
+    @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
     grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: ${p => p.theme.space[12]}px;
-    grid-row-gap: 60px;
-  }  
+    } 
 `;
