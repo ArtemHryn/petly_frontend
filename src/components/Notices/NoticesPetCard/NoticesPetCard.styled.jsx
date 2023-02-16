@@ -20,7 +20,6 @@ export const Status = styled.p`
   border-radius: 0 20px 20px 0;
 
   font-family: 'Manrope';
-
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -84,8 +83,6 @@ export const Text = styled.p`
   display: flex;
   align-items: center;
   text-align: center;
-
-  /* Черный */
 
   color: #111111;
 `;
