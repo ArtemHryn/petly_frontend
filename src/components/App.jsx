@@ -21,13 +21,13 @@ const NoticesPage = lazy(() =>
 );
 
 const NewsPage = lazy(() =>
-  import('../pages/NewsPage').then(module => ({
+  import('../pages/NewsPage/NewsPage').then(module => ({
     default: module.NewsPage,
   }))
 );
 
 const OurFriendsPage = lazy(() =>
-  import('../pages/OurFriendsPage').then(module => ({
+  import('../pages/OurFriendsPage/OurFriendsPage').then(module => ({
     default: module.OurFriendsPage,
   }))
 );
