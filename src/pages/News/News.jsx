@@ -1,6 +1,6 @@
 import { AiOutlineSearch } from 'react-icons/ai';
-import { Container } from '../components/Container/Container';
-import { Title } from '../components/Title/Title';
+import { Container } from '../../components/Container/Container';
+import { Title } from '../../components/Title/Title';
 import { NewsItem } from 'components/News/NewsItem';
 import { Label, SearchInput, SearchBtnContainer, Button, NewsList } from './News.styled';
 

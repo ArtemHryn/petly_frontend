@@ -22,7 +22,7 @@ const FindPet = lazy(() =>
 // 'pages/FindPet'
 
 const News = lazy(() =>
-  import('../pages/News').then(module => ({
+  import('../pages/News/News').then(module => ({
     default: module.News,
   }))
 );
