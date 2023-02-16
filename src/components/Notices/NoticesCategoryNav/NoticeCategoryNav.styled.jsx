@@ -11,6 +11,10 @@ export const ButtonList = styled.ul`
     max-width: 500px;
     justify-content: flex-start;
   }
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
 `;
 
 export const ButtonElement = styled.li`

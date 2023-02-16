@@ -15,7 +15,7 @@ export const NoticesPage = () => {
   };
   return (
     <Container>
-      <Title mb={[11]} fontSize={['24px', '48px']}>
+      <Title mb={[11]} fontSize={['24px', '48px', '40px']}>
         Find your favorite pet
       </Title>
       <NoticeSearch />
