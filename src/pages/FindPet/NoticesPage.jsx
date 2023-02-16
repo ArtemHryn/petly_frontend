@@ -1,93 +1,38 @@
-import { AiOutlineSearch, AiOutlinePlus } from 'react-icons/ai';
 import { Container } from 'components/Container/Container';
-import {
-  AddPetButton,
-  AddPetText,
-  ButtonContainer,
-  ButtonElement,
-  ButtonList,
-  CardItem,
-  CardList,
-  FilterButton,
-  Input,
-  Label,
-  SearchButton,
-} from './Findpet.styled';
-import { Title } from 'components/Title/Title';
-import { FindPetCard } from 'components/FindPet/FindPetCard/FindPetCard';
-import { Box } from 'components/Box';
+import { AiOutlinePlus } from 'react-icons/ai';
 
-export const filterButtons = [
-  { title: 'lost/found', to: '#' },
-  { title: 'in good hands', to: '#' },
-  { title: 'sell', to: '#' },
-  { title: 'favorite ads', to: '#' },
-  { title: 'my ads', to: '#' },
-];
+import { Title } from 'components/Title/Title';
+import { NoticeSearch } from 'components/Notices/NoticesSearch/NoticesSearch';
+import { NoticeCategoryNav } from 'components/Notices/NoticesCategoryNav/NoticeCategoryNav';
+import { AddPetButton } from 'components/Notices/NoticesCategoryNav/NoticeCategoryNav.styled';
+import { Outlet } from 'react-router-dom';
+import { useState } from 'react';
 
 export const NoticesPage = () => {
+  const [showModal, setShowModal] = useState(false);
+  const onAddPet = () => {
+    setShowModal(true);
+  };
   return (
     <Container>
       <Title mb={[11]} fontSize={['24px', '48px']}>
         Find your favorite pet
       </Title>
+      <NoticeSearch />
 
-      <Label>
-        <Input placeholder="Search" />
-        <ButtonContainer>
-          <SearchButton
-            type="button"
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-          >
-            <AiOutlineSearch style={{ fontSize: '26px' }} />
-          </SearchButton>
-        </ButtonContainer>
-      </Label>
-      <Box
-        display={[null, 'flex']}
-        alignItems="flex-start"
-        justifyContent="space-between"
-        mb={['30px', '60px']}
-      >
-        <ButtonList>
-          {filterButtons.map(({ title, to }) => (
-            <ButtonElement key={title}>
-              <FilterButton to={to}>{title}</FilterButton>
-            </ButtonElement>
-          ))}
-        </ButtonList>
-        <Box display={['none', 'flex']} alignItems="center">
-          <AddPetText>Add pet</AddPetText>
-          <AddPetButton
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            type="button"
-            display={[null, 'flex']}
-            position={['static']}
-            width={[null, '44px']}
-            height={[null, '44px']}
-          >
-            <AiOutlinePlus style={{ color: '#FFFFFF', fontSize: '26px' }} />
-          </AddPetButton>
-        </Box>
-      </Box>
-      <CardList>
-        {filterButtons.map(item => (
-          <CardItem key={item.title}>
-            <FindPetCard title={item.title}></FindPetCard>
-          </CardItem>
-        ))}
-      </CardList>
+      <NoticeCategoryNav />
 
       <AddPetButton
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.8 }}
         type="button"
+        onClick={onAddPet}
       >
         <AiOutlinePlus style={{ color: '#FFFFFF', fontSize: '26px' }} />
         Add pet
       </AddPetButton>
+      <Outlet />
+      {showModal && <div>Test</div>}
     </Container>
   );
 };

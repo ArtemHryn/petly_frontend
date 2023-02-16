@@ -3,6 +3,7 @@ import { lazy } from 'react';
 import React from 'react';
 import { ScrollToTop } from './ScrollToTop';
 import { SharedLayout } from './SharedLayout/SharedLayout';
+import { NoticeCategoryList } from './Notices/NoticesCategoryList/NoticesCategoryList';
 // import { AnimatePresence } from 'framer-motion';
 // import { RestrictedRoute } from 'helpers/PublicRoute';
 // import { PrivateRoute } from 'helpers/PrivateRoute';
@@ -68,7 +69,10 @@ export const App = () => {
         <Route path="/">
           <Route index element={<Navigate replace to="home" />} />
           <Route path="home" element={<HomePage />} />
-          <Route path="notices/:categoryName" element={<NoticesPage />} />
+          <Route path="notices" element={<NoticesPage />}>
+            <Route index element={<Navigate to="sell" />}></Route>
+            <Route path=":categoryName" element={<NoticeCategoryList/> } />
+          </Route>
           <Route path="news" element={<NewsPage />} />
           <Route path="friends" element={<OurFriendsPage />} />
           <Route

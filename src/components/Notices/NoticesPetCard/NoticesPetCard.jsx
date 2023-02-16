@@ -10,9 +10,9 @@ import {
   NameList,
   Status,
   Text,
-} from './FindPetCard.styled';
+} from './NoticesPetCard.styled';
 
-export const FindPetCard = ({ title }) => {
+export const NoticePetCard = ({ title }) => {
   return (
     <article>
       <Box position="relative">
@@ -32,9 +32,9 @@ export const FindPetCard = ({ title }) => {
             <ListElement>
               <Text>Place:</Text>
             </ListElement>
-            <liListElement mb="0px">
+            <ListElement mb="0px">
               <Text>Age:</Text>
-            </liListElement>
+            </ListElement>
           </NameList>
           <ul>
             <ListElement>
@@ -54,6 +54,7 @@ export const FindPetCard = ({ title }) => {
           color={'accent'}
           maxWidth={[null, '248px']}
           m={[null, '0 auto 12px']}
+          mb={['12px', null, null]}
           py={[null, '8px']}
           height="100%"
           fontSize={[null, '16px']}
