@@ -7,53 +7,51 @@ import { SharedLayout } from './SharedLayout/SharedLayout';
 // import { RestrictedRoute } from 'helpers/PublicRoute';
 // import { PrivateRoute } from 'helpers/PrivateRoute';
 
-const Home = lazy(() =>
-  import('../pages/Home').then(module => ({
-    default: module.Home,
+const HomePage = lazy(() =>
+  import('../pages/HomePage').then(module => ({
+    default: module.HomePage,
   }))
 );
 
-const FindPet = lazy(() =>
-  import('../pages/FindPet/FindPet').then(module => ({
-    default: module.FindPet,
+const NoticesPage = lazy(() =>
+  import('../pages/FindPet/NoticesPage').then(module => ({
+    default: module.NoticesPage,
   }))
 );
 
-// 'pages/FindPet'
-
-const News = lazy(() =>
-  import('../pages/News').then(module => ({
-    default: module.News,
+const NewsPage = lazy(() =>
+  import('../pages/NewsPage').then(module => ({
+    default: module.NewsPage,
   }))
 );
 
-const OurFriend = lazy(() =>
-  import('../pages/OurFriend').then(module => ({
-    default: module.OurFriend,
+const OurFriendsPage = lazy(() =>
+  import('../pages/OurFriendsPage').then(module => ({
+    default: module.OurFriendsPage,
   }))
 );
 
-const Login = lazy(() =>
-  import('../pages/Login').then(module => ({
-    default: module.Login,
+const LoginPage = lazy(() =>
+  import('../pages/LoginPage').then(module => ({
+    default: module.LoginPage,
   }))
 );
 
-const Register = lazy(() =>
-  import('../pages/Register').then(module => ({
-    default: module.Register,
+const RegisterPage = lazy(() =>
+  import('../pages/RegisterPage').then(module => ({
+    default: module.RegisterPage,
   }))
 );
 
-const Profile = lazy(() =>
-  import('../pages/Profile').then(module => ({
-    default: module.Profile,
+const UserPage = lazy(() =>
+  import('../pages/UserPage').then(module => ({
+    default: module.UserPage,
   }))
 );
 
-const NotFound = lazy(() =>
-  import('../pages/NotFound').then(module => ({
-    default: module.NotFound,
+const NotFoundPage = lazy(() =>
+  import('../pages/NotFoundPage').then(module => ({
+    default: module.NotFoundPage,
   }))
 );
 
@@ -69,31 +67,31 @@ export const App = () => {
       <Routes key={location.pathname} location={location}>
         <Route path="/">
           <Route index element={<Navigate replace to="home" />} />
-          <Route path="home" element={<Home />} />
-          <Route path="find_pet" element={<FindPet />} />
-          <Route path="news" element={<News />} />
-          <Route path="our_friend" element={<OurFriend />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="notices/:categoryName" element={<NoticesPage />} />
+          <Route path="news" element={<NewsPage />} />
+          <Route path="friends" element={<OurFriendsPage />} />
           <Route
             path="login"
-            element={<Login />}
+            element={<LoginPage />}
             // element={<RestrictedRoute redirectTo="/" component={<Login />} />}
           />
           <Route
             path="register"
-            element={<Register />}
+            element={<RegisterPage />}
             // element={
             //   <RestrictedRoute redirectTo="/" component={<Register />} />
             // }
           />
           <Route
-            path="profile"
-            element={<Profile />}
+            path="user"
+            element={<UserPage />}
             // element={
             //   <PrivateRoute redirectTo="/login" component={<Profile />} />
             // }
           />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {/* </AnimatePresence> */}
     </>
