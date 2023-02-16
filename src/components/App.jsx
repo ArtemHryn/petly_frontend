@@ -27,7 +27,7 @@ const News = lazy(() =>
 );
 
 const OurFriendsPage = lazy(() =>
-  import('../pages/OurFriendsPage').then(module => ({
+  import('../pages/OurFriendsPage/OurFriendsPage').then(module => ({
     default: module.OurFriendsPage,
   }))
 );

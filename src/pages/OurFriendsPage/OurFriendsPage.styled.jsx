@@ -1,49 +1,6 @@
 import styled from 'styled-components';
-import {theme} from "../theme"
+import {theme} from "../../theme"
 
-const FriendsBox = styled.div`
-    width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-    background: #fdf7f2;
-    padding-top: 42px;
-    padding-bottom: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-    @media screen and (min-width: 768px) {
-        width: 768px;
-        padding-left: 32px;
-        padding-right: 32px;
-        padding-top: 88px;
-    }
-
-    @media screen and (min-width: 1280px) {
-        width: 1280px;
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: 72px;
-    }
-`;
-const FriendsTitle = styled.h1`
-    font-family: ${theme.fonts.main};
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.38;
-    text-align: center;
-    color: #000000;
-    margin-bottom: 28px;
-
-    @media screen and (min-width: 768px) {
-        font-size: 48px;
-        line-height: 66px;
-        margin-bottom: 40px;
-    }
-
-    @media screen and (min-width: 1280px) {
-        margin-bottom: 60px;
-    }
-`;
 const FriendsList = styled.ul`
     @media screen and (min-width: 768px) {
         display: flex;
@@ -185,8 +142,6 @@ const FriendsInfoLink = styled.a`
 `;
 
 export {
-    FriendsBox,
-    FriendsTitle,
     FriendsList,
     FriendsItem,
     FriendsMainLink,
