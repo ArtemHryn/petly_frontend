@@ -1,3 +1,11 @@
+import { RegisterForm } from 'components/RegisterForm';
+
+import { Container } from 'components/Container/Container';
+
 export const Register = () => {
-  return <>Register</>;
+  return (
+    <Container backgroundColor="#FDF7F2">
+      <RegisterForm />
+    </Container>
+  );
 };
