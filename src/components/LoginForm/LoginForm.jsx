@@ -13,10 +13,10 @@ export const LoginForm = () => {
   return (
     <Form onSubmit={handleSubmit(console.log)}>
       <Title
-        marginBottom="40"
         fontSize={['24px', '36px']}
         fontWeight={['700', '500']}
         lineHeight={['1.38', '1.36']}
+        marginBottom="15"
       >
         Login
       </Title>
