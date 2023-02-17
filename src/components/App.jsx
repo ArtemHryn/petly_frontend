@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import React from 'react';
 import { ScrollToTop } from './ScrollToTop';
 import { SharedLayout } from './SharedLayout/SharedLayout';
