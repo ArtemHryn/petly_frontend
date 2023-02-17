@@ -4,9 +4,6 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  padding-left: ${({ theme }) => theme.space[9]}px;
-  padding-right: ${({ theme }) => theme.space[9]}px;
-
   @media screen and (min-width: ${({ theme }) => theme.sizes.tablet}) {
     background-color: ${({ theme }) => theme.colors.white};
     box-shadow: ${({ theme }) => theme.shadows.regular};
@@ -18,7 +15,6 @@ export const Form = styled.form`
     border-radius: ${({ theme }) => theme.radii.lg};
     max-width: 608px;
     width: 100%;
-    min-height: 517px;
     margin: 0 auto;
   }
 
@@ -35,6 +31,7 @@ export const Input = styled.input`
   font-size: ${({ theme }) => theme.fontSizes.mobile[5]};
   line-height: ${({ theme }) => theme.lineHeights.mobile[1]};
   letter-spacing: 0.04em;
+  width: 100%;
 
   border: ${({ theme }) => theme.borders.input};
   border-radius: ${({ theme }) => theme.radii.lg};
@@ -43,7 +40,7 @@ export const Input = styled.input`
   padding-bottom: ${({ theme }) => theme.space[6]}px;
   padding-left: ${({ theme }) => theme.space[8]}px;
   padding-right: ${({ theme }) => theme.space[8]}px;
-  &:nth-of-type(3) {
+  &:nth-of-type(2) {
     margin-bottom: ${({ theme }) => theme.space[15]}px;
   }
 
@@ -64,7 +61,7 @@ export const LoginBtn = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.mobile[5]};
   line-height: ${({ theme }) => theme.lineHeights.mobile[1]};
   letter-spacing: 0.04em;
-
+  cursor: pointer;
   background-color: ${({ children, theme }) =>
     children === 'Back' ? 'transparent' : theme.colors.accent};
   color: ${({ children, theme }) =>
