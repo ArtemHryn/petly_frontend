@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useForm, useController } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button } from './RegisterForm.styled';
