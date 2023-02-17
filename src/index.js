@@ -13,14 +13,14 @@ import { persistor, store } from 'redux/store';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      {/* <Provider store={store}> */}
+      <Provider store={store}>
         {/* <PersistGate loading={null} persistor={persistor}> */}
-          <BrowserRouter basename="/petly_frontend">
-            <GlobalStyle />
-            <App />
-          </BrowserRouter>
+        <BrowserRouter basename="/petly_frontend">
+          <GlobalStyle />
+          <App />
+        </BrowserRouter>
         {/* </PersistGate> */}
-      {/* </Provider> */}
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );

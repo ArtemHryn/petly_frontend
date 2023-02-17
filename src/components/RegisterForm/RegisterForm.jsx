@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm, useController } from 'react-hook-form';
+import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button } from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
-import { register } from 'redux/auth/auth-operations';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const [isTheSecondStep, setIsTheSecondStep] = useState(false);
-  const onSubmit = async data => {
-    // const fetch = await dispatch(register)
-    console.log(data);
+  const onSubmit = async ({ email, password, name, city, phone }) => {
+    await dispatch(registerUser({ email, password, name, city, phone }));
   };
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
+    confirmedPassword: '',
     name: '',
     city: '',
     phone: '',
@@ -75,7 +75,13 @@ export const RegisterForm = () => {
             value={formValues.password}
             onChange={handleChange}
           />
-          <Input type="text" placeholder="Confirm password" />
+          <Input
+            type="text"
+            {...register('confirmedPassword', { required: true })}
+            placeholder="Confirm password"
+            value={formValues.confirmedPassword}
+            onChange={handleChange}
+          />
           <Button type="button" onClick={handleNextClick}>
             Next
           </Button>
