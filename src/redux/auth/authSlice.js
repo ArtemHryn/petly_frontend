@@ -26,10 +26,16 @@ const persistConfig = {
 
 const authSlice = createSlice({
   name: 'auth',
-    initialState,
-  extraReducers: builder => builder.addCase(logIn.fulfilled, (state, action) => { }.addCase(register.fulfilled, (state, action) => {
-    state.user = {...state.user, action.payload.user}
-  }))
+  initialState,
+  extraReducers: builder =>
+    builder
+      .addCase(logIn.fulfilled, (state, action) => {})
+      .addCase(register.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload.user };
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.error = action.payload.error;
+      }),
 });
 
 export const authReducer = persistReducer(persistConfig, authSlice.reducer);
