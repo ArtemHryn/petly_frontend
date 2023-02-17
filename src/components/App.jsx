@@ -62,42 +62,42 @@ export const App = () => {
   return (
     <>
       <ScrollToTop />
-      <SharedLayout/>
-      Suspense fallback={null}>
-      {/* <AnimatePresence mode="wait"> */}
-      <Routes key={location.pathname} location={location}>
-        <Route path="/">
-          <Route index element={<Navigate replace to="home" />} />
-          <Route path="home" element={<HomePage />} />
-          <Route path="notices" element={<NoticesPage />}>
-            <Route index element={<Navigate to="sell" />}></Route>
-            <Route path=":categoryName" element={<NoticeCategoryList/> } />
+      <SharedLayout />
+      <Suspense fallback={null}>
+        {/* <AnimatePresence mode="wait"> */}
+        <Routes key={location.pathname} location={location}>
+          <Route path="/">
+            <Route index element={<Navigate replace to="home" />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="notices" element={<NoticesPage />}>
+              <Route index element={<Navigate to="sell" />}></Route>
+              <Route path=":categoryName" element={<NoticeCategoryList />} />
+            </Route>
+            <Route path="news" element={<NewsPage />} />
+            <Route path="friends" element={<OurFriendsPage />} />
+            <Route
+              path="login"
+              element={<LoginPage />}
+              // element={<RestrictedRoute redirectTo="/" component={<Login />} />}
+            />
+            <Route
+              path="register"
+              element={<RegisterPage />}
+              // element={
+              //   <RestrictedRoute redirectTo="/" component={<Register />} />
+              // }
+            />
+            <Route
+              path="user"
+              element={<UserPage />}
+              // element={
+              //   <PrivateRoute redirectTo="/login" component={<Profile />} />
+              // }
+            />
           </Route>
-          <Route path="news" element={<NewsPage />} />
-          <Route path="friends" element={<OurFriendsPage />} />
-          <Route
-            path="login"
-            element={<LoginPage />}
-            // element={<RestrictedRoute redirectTo="/" component={<Login />} />}
-          />
-          <Route
-            path="register"
-            element={<RegisterPage />}
-            // element={
-            //   <RestrictedRoute redirectTo="/" component={<Register />} />
-            // }
-          />
-          <Route
-            path="user"
-            element={<UserPage />}
-            // element={
-            //   <PrivateRoute redirectTo="/login" component={<Profile />} />
-            // }
-          />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      {/* </AnimatePresence> */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        {/* </AnimatePresence> */}
       </Suspense>
     </>
   );
