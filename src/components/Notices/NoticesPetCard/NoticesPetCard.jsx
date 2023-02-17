@@ -10,19 +10,19 @@ import {
   NameList,
   Status,
   Text,
-} from './FindPetCard.styled';
+} from './NoticesPetCard.styled';
 
-export const FindPetCard = ({ title }) => {
+export const NoticePetCard = ({ title }) => {
   return (
     <article>
       <Box position="relative">
         <Img src={test} alt="test" />
-        <Status>Sell</Status>
+        <Status>In good hands</Status>
         <Like whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
           <LikeSvg />
         </Like>
       </Box>
-      <Box pt={['20px']} pb={['32px']} px={['16px']}>
+      <Box pt={['20px']} pb={['12px']} px={['16px', '20px']}>
         <CardTitle>{title}</CardTitle>
         <Box display="flex" mb={['50px']}>
           <NameList>
@@ -32,9 +32,9 @@ export const FindPetCard = ({ title }) => {
             <ListElement>
               <Text>Place:</Text>
             </ListElement>
-            <liListElement mb="0px">
+            <ListElement mb="0px">
               <Text>Age:</Text>
-            </liListElement>
+            </ListElement>
           </NameList>
           <ul>
             <ListElement>
@@ -49,8 +49,28 @@ export const FindPetCard = ({ title }) => {
           </ul>
         </Box>
 
-        <Button variant="outline" color={'accent'}>
+        <Button
+          variant="outline"
+          color={'accent'}
+          maxWidth={[null, '248px']}
+          m={[null, '0 auto 12px']}
+          mb={['12px', null, null]}
+          py={[null, '8px']}
+          height="100%"
+          fontSize={[null, '16px']}
+        >
           Learn more
+        </Button>
+        <Button
+          variant="outline"
+          color={'accent'}
+          maxWidth={[null, '248px']}
+          m={[null, '0 auto']}
+          py={[null, '8px']}
+          height="100%"
+          fontSize={[null, '16px']}
+        >
+          Delete
         </Button>
       </Box>
     </article>

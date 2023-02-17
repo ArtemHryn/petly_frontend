@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 
 export const Img = styled.img`
   width: 100%;
+  height: 288px;
+  object-fit: cover;
 `;
 
 export const Status = styled.p`
@@ -15,6 +17,16 @@ export const Status = styled.p`
   padding: 6px 0px 7px 20px;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(2px);
+  border-radius: 0 20px 20px 0;
+
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  letter-spacing: 0.04em;
+
+  color: #111111;
 `;
 
 export const Like = styled(motion.button)`
@@ -71,8 +83,6 @@ export const Text = styled.p`
   display: flex;
   align-items: center;
   text-align: center;
-
-  /* Черный */
 
   color: #111111;
 `;
