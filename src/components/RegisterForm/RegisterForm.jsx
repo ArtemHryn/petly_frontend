@@ -1,20 +1,55 @@
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm, useController } from 'react-hook-form';
+import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button } from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
 
 export const RegisterForm = () => {
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-      name: '',
-      city: '',
-      phone: '',
-    },
+  const dispatch = useDispatch();
+  const [isTheSecondStep, setIsTheSecondStep] = useState(false);
+  const onSubmit = async ({ email, password, name, city, phone }) => {
+    await dispatch(registerUser({ email, password, name, city, phone }));
+  };
+  const [formValues, setFormValues] = useState({
+    email: '',
+    password: '',
+    confirmedPassword: '',
+    name: '',
+    city: '',
+    phone: '',
   });
+
+  const handleChange = event => {
+    setFormValues({
+      ...formValues,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    formValues,
+    mode: 'all',
+  });
+  const handleNextClick = () => {
+    if (Object.keys(errors).length) {
+      return;
+    }
+    const { email, password } = formValues;
+
+    if (!email || !password) {
+      return;
+    }
+    setIsTheSecondStep(true);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(console.log)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Title
         fontSize={['24px', '36px']}
         fontWeight={['700', '500']}
@@ -23,18 +58,66 @@ export const RegisterForm = () => {
       >
         Registration
       </Title>
-      <Input
-        type="text"
-        {...register('email', { required: true })}
-        placeholder="Email"
-      />
-      <Input
-        type="text"
-        {...register('password', { required: true })}
-        placeholder="Password"
-      />
-      <Input type="text" placeholder="Confirm password" />
-      <Button type="button">Next</Button>
+      {!isTheSecondStep ? (
+        <>
+          <Input
+            {...register('email', { required: true })}
+            value={formValues.email}
+            type="email"
+            placeholder="Email"
+            onChange={handleChange}
+          />
+          {errors.email && <p>Email is required</p>}
+          <Input
+            type="text"
+            {...register('password', { required: true })}
+            placeholder="Password"
+            value={formValues.password}
+            onChange={handleChange}
+          />
+          <Input
+            type="text"
+            {...register('confirmedPassword', { required: true })}
+            placeholder="Confirm password"
+            value={formValues.confirmedPassword}
+            onChange={handleChange}
+          />
+          <Button type="button" onClick={handleNextClick}>
+            Next
+          </Button>
+        </>
+      ) : (
+        <>
+          <Input
+            type="text"
+            {...register('name', { required: true })}
+            placeholder="Name"
+            value={formValues.name}
+            onChange={handleChange}
+          />
+          <Input
+            type="text"
+            {...register('city', { required: true })}
+            placeholder="City,region"
+            value={formValues.city}
+            onChange={handleChange}
+          />
+          <Input
+            type="text"
+            {...register('phone', { required: true })}
+            placeholder="Mobile phone"
+            value={formValues.phone}
+            onChange={handleChange}
+          />
+          <Button type="submit" style={{ marginBottom: 20 }}>
+            Register
+          </Button>
+          <Button type="button" onClick={() => setIsTheSecondStep(false)}>
+            Back
+          </Button>
+        </>
+      )}
+
       <AuthRedirectionLink
         path="/login"
         text="Already have account?"
