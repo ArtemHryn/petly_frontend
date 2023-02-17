@@ -45,7 +45,7 @@ const RegisterPage = lazy(() =>
 );
 
 const UserPage = lazy(() =>
-  import('../pages/UserPage').then(module => ({
+  import('../pages/UserPage/UserPage').then(module => ({
     default: module.UserPage,
   }))
 );
@@ -62,7 +62,7 @@ export const App = () => {
   return (
     <>
       <ScrollToTop />
-      <SharedLayout />
+      <SharedLayout/>
 
       {/* <AnimatePresence mode="wait"> */}
       <Routes key={location.pathname} location={location}>
