@@ -63,7 +63,7 @@ export const App = () => {
     <>
       <ScrollToTop />
       <SharedLayout/>
-
+      Suspense fallback={null}>
       {/* <AnimatePresence mode="wait"> */}
       <Routes key={location.pathname} location={location}>
         <Route path="/">
@@ -98,6 +98,7 @@ export const App = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {/* </AnimatePresence> */}
+      </Suspense>
     </>
   );
 };
