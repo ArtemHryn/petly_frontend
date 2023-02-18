@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { backgroundColor, space } from 'styled-system';
 
 export const Form = styled.form`
   display: flex;
@@ -64,9 +65,14 @@ export const Button = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.mobile[5]};
   line-height: ${({ theme }) => theme.lineHeights.mobile[1]};
   letter-spacing: 0.04em;
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
 
-  background-color: ${({ children, theme }) =>
-    children === 'Back' ? 'transparent' : theme.colors.accent};
+  background-color: ${({ children, theme, disabled }) => {
+    if (disabled) {
+      return 'lightgray';
+    }
+    return children === 'Back' ? 'transparent' : theme.colors.accent;
+  }};
   color: ${({ children, theme }) =>
     children === 'Back' ? theme.colors.black : theme.colors.white};
   border-width: ${({ theme }) => theme.space[1]}px;
@@ -79,4 +85,14 @@ export const Button = styled.button`
   padding-left: ${({ theme }) => theme.space[16]}px;
   padding-right: ${({ theme }) => theme.space[16]}px;
   margin-bottom: ${({ theme }) => theme.space[15]}px;
+`;
+
+export const ErrorMsg = styled.p`
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-weight: ${({ theme }) => theme.fontWeights.light};
+  font-size: ${({ theme }) => theme.fontSizes.mobile[2]};
+  color: red;
+
+  margin-bottom: ${({ theme }) => theme.space[8]}px;
+  ${space}
 `;
