@@ -1,5 +1,4 @@
 import { AiFillPlusCircle } from 'react-icons/ai';
-import nextId from "react-id-generator";
 
 import {
     UserPageTitle,
@@ -46,8 +45,8 @@ export const UserPage = () => {
             </PetTitleBox>
             {petList ? (<PetList>
               {petList.map(pet => {
-                const {name, breed, date, avatarURL, comments} = pet
-                return (<UserPetItem key={nextId()} name={name} breed={breed} date={date} avatarURL={avatarURL} comments={comments} />)
+                const {id, name, breed, date, avatarURL, comments} = pet
+                return (<UserPetItem key={id} name={name} breed={breed} date={date} avatarURL={avatarURL} comments={comments} />)
               })}
             </PetList>) : 
               (
