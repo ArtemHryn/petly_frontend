@@ -4,7 +4,6 @@ import React from 'react';
 import { ScrollToTop } from './ScrollToTop';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { NoticeCategoryList } from './Notices/NoticesCategoryList/NoticesCategoryList';
-import { Suspense } from 'react';
 import { MainLoader } from './Loader/MainLoader';
 // import { AnimatePresence } from 'framer-motion';
 // import { RestrictedRoute } from 'helpers/PublicRoute';

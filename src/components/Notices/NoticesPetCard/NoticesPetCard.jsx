@@ -1,5 +1,6 @@
 import { Box } from 'components/Box';
 import { Button } from 'components/common/Button/Button';
+import { intervalToDuration } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { deleteNotice } from 'redux/notices/notices-operations';
 import {
@@ -17,36 +18,17 @@ export const NoticePetCard = ({ item }) => {
   const { imgURL, category, title, breed, location, birthdate, _id } = item;
   const dispatch = useDispatch();
   const parsedDate = new Date(Date.parse(birthdate));
-  const dateNow = new Date();
-
+  
   const getAge = () => {
-    const totalMonths =
-      ((dateNow.getFullYear() - parsedDate.getFullYear()) * 12 -
-        parsedDate.getMonth() +
-        dateNow.getMonth()) /
-        12 >
-      12;
-
-    if (totalMonths) {
-      return 0;
+    const { years, months } = intervalToDuration({
+      start: new Date(),
+      end: parsedDate,
+    });
+    if (years < 1) {
+      return months > 1 ? `${months} months` : `${months} month` 
     }
-
-    if (parsedDate.getMonth() - 1 >= dateNow.getMonth()) {
-      return dateNow.getFullYear() - parsedDate.getFullYear() - 1;
-    }
-    return dateNow.getFullYear() - parsedDate.getFullYear();
-  };
-
-  const getMonths = () => {
-    if (!getAge() && dateNow.getMonth() < parsedDate.getMonth()) {
-      return 12 + dateNow.getMonth() - parsedDate.getMonth();
-    }
-    if (!getAge() && dateNow.getMonth() === parsedDate.getMonth()) {
-      return 1;
-    }
-    return dateNow.getMonth() - parsedDate.getMonth();
-  };
-
+    return years > 1 ? `${years} years` : `${years} year`
+  }
 
   return (
     <article>
@@ -80,16 +62,7 @@ export const NoticePetCard = ({ item }) => {
             </ListElement>
             <ListElement mb="0px">
               <Text>
-                {getAge() >= 1 ? (
-                  <>
-                    ({getAge()} {getAge() > 1 ? 'years' : 'year'})
-                  </>
-                ) : (
-                  <>
-                    {getMonths()}
-                    {getMonths() > 1 ? 'month' : 'months'}
-                  </>
-                )}
+                {getAge()}
               </Text>
             </ListElement>
           </ul>
