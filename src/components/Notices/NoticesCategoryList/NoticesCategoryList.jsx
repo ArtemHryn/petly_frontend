@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { NoticePetCard } from '../NoticesPetCard/NoticesPetCard';
 import { CardItem, CardList } from './NoticesCategoryList.styled';
+import { fetchNotices } from 'redux/notices/notices-operations';
+import { getNotices, getSearch } from 'redux/notices/noticesSelectors';
+import { changeCategory } from 'redux/notices/searchSlice';
 
 export const filterButtons = [
   { title: 'lost/found', to: 'lost-found' },
@@ -11,13 +16,29 @@ export const filterButtons = [
 ];
 
 export const NoticeCategoryList = () => {
-    const { categoryName } = useParams();
-    console.log(categoryName);
+  const { categoryName } = useParams();
+  const dispatch = useDispatch();
+  const notices = useSelector(getNotices);
+  const search = useSelector(getSearch);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    dispatch(changeCategory(categoryName));
+    dispatch(
+      fetchNotices({
+        category: categoryName,
+        search,
+        signal: controller.signal,
+      })
+    );
+    return () => controller.abort();
+  }, [categoryName, dispatch, search]);
+console.log(notices);
   return (
     <CardList>
-      {filterButtons.map(item => (
-        <CardItem key={item.title}>
-          <NoticePetCard title={item.title} />
+      {notices.map(item => (
+        <CardItem key={item._id}>
+          <NoticePetCard item={item} />
         </CardItem>
       ))}
     </CardList>

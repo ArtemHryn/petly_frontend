@@ -12,6 +12,11 @@ const token = {
   },
 };
 
+// const token =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VjMjM0MTdiOGNhYmMzMWIwYTA1Y2YiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjc2NzQ3MTYxLCJleHAiOjE2NzY4MzM1NjF9.IW14Ijnc3KtN99vF9w4p1R9e9AHk-3YyNH-8DWBbj-4';
+
+//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
