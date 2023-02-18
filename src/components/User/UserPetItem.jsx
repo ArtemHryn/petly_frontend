@@ -9,8 +9,8 @@ import {
 import PropTypes from 'prop-types';
 import petPhotoNull from "../../images/petPhotoNull.jpg"
 
-export const UserPetItem = ({key, name, breed, date, avatarURL, comments}) => {
-    return <PetItem key={key}>
+export const UserPetItem = ({id, name, breed, date, avatarURL, comments}) => {
+    return <PetItem key={id}>
         <PetPhoto src={avatarURL ? {avatarURL} : {petPhotoNull}} alt="petPhoto" />
                     <DeletePetBtn type="button">
                         <IoTrashSharp style={{color: "rgba(17, 17, 17, 0.6)", fontSize: "20px"}} />

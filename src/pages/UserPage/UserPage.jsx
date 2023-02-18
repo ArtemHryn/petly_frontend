@@ -20,7 +20,8 @@ import { getUserPets } from 'helpers/axios/getUserPets';
 
 export const UserPage = () => {
   const [petList, setPetList] = useState(null)
-    useEffect(() => {
+
+  useEffect(() => {
         getUserPets().then(res => {
             console.log(res);
             setPetList(res.data)
@@ -45,8 +46,8 @@ export const UserPage = () => {
             </PetTitleBox>
             {petList ? (<PetList>
               {petList.map(pet => {
-                const {id, name, breed, date, avatarURL, comments} = pet
-                return (<UserPetItem key={id} name={name} breed={breed} date={date} avatarURL={avatarURL} comments={comments} />)
+                const {_id, name, breed, date, avatarURL, comments} = pet
+                return (<UserPetItem key={_id} id={_id} name={name} breed={breed} date={date} avatarURL={avatarURL} comments={comments} />)
               })}
             </PetList>) : 
               (
