@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://arcane-everglades-20653.herokuapp.com';
-
 export const fetchNews = createAsyncThunk(
   "news/fetchNews",
   async (_, thunkAPI) => {
