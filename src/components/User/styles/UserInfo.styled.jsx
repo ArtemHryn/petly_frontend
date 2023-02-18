@@ -28,7 +28,7 @@ const UserBox = styled.div`
   @media screen and (min-width: 1280px) {
     display: block;
     width: 411px;
-    height: 563px;
+    height: 590px;
     margin-left: -16px;
     padding: 20px 16px 18px;
     margin-right: 32px;
@@ -108,7 +108,32 @@ const UserInfoDescr = styled.p`
     width: 83px;
   }
 `
-const UserInfoLabel = styled.label``
+const UserInfoData = styled.p`
+  padding-left: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 141px;
+  border-radius: 40px;
+  margin-right: 9px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.33;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: #111111;
+
+  @media screen and (min-width: 768px) {
+    padding-left: 12px;
+    width: 216px;
+    font-size: 18px;
+    line-height: 1.39;
+  }
+`
+const UserDataChangeBtn = styled.button`
+  border: none;
+  background-color: transparent;
+`
 const UserInfoInput = styled.input`
   border: none;
   background-color: transparent;
@@ -172,6 +197,8 @@ export {
     UserInfoList,
     UserInfoItem,
     UserInfoDescr,
-    UserInfoLabel,
+    UserInfoData,
+    UserDataChangeBtn,
     UserInfoInput,
-    LogOutBtn}
+    LogOutBtn
+}

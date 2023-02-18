@@ -1,4 +1,5 @@
 import { AiFillPlusCircle } from 'react-icons/ai';
+import nextId from "react-id-generator";
 
 import {
     UserPageTitle,
@@ -8,12 +9,24 @@ import {
     AddPetBtn,
     PetList,
     UserPageBox,
-} from "./styles/UserPage.styled"
+    NoUserPetsBox,
+    NoPetsText,
+} from "./UserPage.styled"
 import { Container } from 'components/Container/Container';
-import { UserInfo } from './UserInfo';
-import { UserPetItem } from './UserPetItem';
+import { UserInfo } from '../../components/User/UserInfo';
+import { UserPetItem } from '../../components/User/UserPetItem';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getUserPets } from 'helpers/axios/getUserPets';
 
 export const UserPage = () => {
+  const [petList, setPetList] = useState(null)
+    useEffect(() => {
+        getUserPets().then(res => {
+            console.log(res);
+            setPetList(res.data)
+        })
+    }, [])
     return <>
       <Container>
         <UserPageBox>
@@ -31,11 +44,18 @@ export const UserPage = () => {
                     </AddPetBtn>
                 </AddPetBox>
             </PetTitleBox>
-            <PetList>
-                {/* map */}
-
-                <UserPetItem/>
-            </PetList>
+            {petList ? (<PetList>
+              {petList.map(pet => {
+                const {name, breed, date, avatarURL, comments} = pet
+                return (<UserPetItem key={nextId()} name={name} breed={breed} date={date} avatarURL={avatarURL} comments={comments} />)
+              })}
+            </PetList>) : 
+              (
+              <NoUserPetsBox>
+                  <NoPetsText>There is no pets in your list</NoPetsText>
+              </NoUserPetsBox>
+            )
+            }
           </div>
         </UserPageBox>
         </Container>
