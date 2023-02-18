@@ -1,6 +1,7 @@
-import { Title } from "components/common/Title/Title";
+import { Title } from "components/Title/Title";
 import { Container } from "components/Container/Container";
 import { useState } from "react";
+import nextId from "react-id-generator";
 import {
     FriendsList,
     FriendsItem,
@@ -12,15 +13,26 @@ import {
     TimeBtn,
     FriendsInfoLink,
     TimeList,
-    TimeItem
+    TimeItem,
+    NoInfoBox,
+    NoInfoText
 } from "./OurFriendsPage.styled"
+import { useEffect } from "react";
+import { getPartners } from "helpers/getFriends";
 
 export const OurFriendsPage = () => {
   const [showTime, setShowTime] = useState(false);
     const [timeId, setTimeId] = useState(null);
+    const [partners, setPartners] = useState(null)
+
+    useEffect(() => {
+        getPartners().then(res => {
+            setPartners(res.data)
+        })
+    }, [])
 
     const toggleTime = () => {
-        setShowTime(!showTime);
+        setShowTime(showTime => !showTime);
     };
 
     const openTime = evt => {
@@ -31,54 +43,57 @@ export const OurFriendsPage = () => {
   
   return <>
   <Container>
-            <Title>Our friends</Title>
-            <FriendsList>
-                {/* map */}
-
-                <FriendsItem>
+          <Title mb={[11]} fontSize={['24px', '48px', '40px']}>Our friends</Title>
+          {partners ? (
+              <FriendsList>
+              {partners.map(partner => {
+                    const {id, title, url, addressUrl, imageUrl, address, workDays, phone, email} = partner
+                    return (
+                        <FriendsItem key={nextId()}>
                     <h2>
-                        <FriendsMainLink>title</FriendsMainLink>
+                        <FriendsMainLink href={url} target="_blank" rel="no-refferer">{title}</FriendsMainLink>
                     </h2>
                     <FriendsInfoBox>
-                        <FriendsLogo src="" alt="friendLogo" />
+                        <FriendsLogo src={imageUrl} alt="friendLogo" />
                         <FriendsInfoList>
                             <FriendsInfoItem>
                                 <TimeBtn
                                     type="button"
                                     onClick={openTime}
-                                    id="1"
+                                    id={id}
                                 >
-                                    time
+                                    Time
                                 </TimeBtn>
                             </FriendsInfoItem>
-                            <FriendsInfoItem>address</FriendsInfoItem>
+                            <FriendsInfoItem>Address:</FriendsInfoItem>
+                            <FriendsInfoItem>{address}</FriendsInfoItem>
                             <FriendsInfoItem>
                                 Email:{' '}
-                                <FriendsInfoLink href="mailto:">
-                                    email
+                                <FriendsInfoLink href={`mailto:${email}`}>
+                                    {email}
                                 </FriendsInfoLink>
                             </FriendsInfoItem>
                             <FriendsInfoItem>
                                 Phone:{' '}
-                                <FriendsInfoLink href="tel:">
-                                    tel
+                                <FriendsInfoLink href={`tel:${phone}`}>
+                                    {phone}
                                 </FriendsInfoLink>
                             </FriendsInfoItem>
                         </FriendsInfoList>
-                        {showTime && timeId === '1' && (
-                            <TimeList>
-                                <TimeItem>MN</TimeItem>
-                                <TimeItem>TU</TimeItem>
-                                <TimeItem>WE</TimeItem>
-                                <TimeItem>TH</TimeItem>
-                                <TimeItem>FR</TimeItem>
-                                <TimeItem>SA</TimeItem>
-                                <TimeItem>SU</TimeItem>
+                        {showTime && timeId === {id} && (
+                                    <TimeList>
+                                        {workDays.map(day => {
+                                            return <TimeItem key={nextId()}>{day}</TimeItem>
+                                        })}
                             </TimeList>
                         )}
                     </FriendsInfoBox>
                 </FriendsItem>
-            </FriendsList>
+                    )
+                })}
+              </FriendsList>) : 
+              (<NoInfoBox><NoInfoText>Sorry, cant't find the information</NoInfoText></NoInfoBox>)
+          }
         </Container>
   </>;
 };
