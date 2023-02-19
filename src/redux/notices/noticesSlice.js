@@ -35,7 +35,8 @@ const noticesSlice = createSlice({
       .addCase(deleteNotice.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload.message;
-      }),
+      })
+      
 });
 
 export const noticesReducer = noticesSlice.reducer;
