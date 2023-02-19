@@ -34,7 +34,7 @@ export const ModalContainer = styled.div`
   width: 90vw;
   height: 80vh;
   padding: 30px 20px 40px;
-  background-color: #ffffff;
+  // background-color: #ffffff;
   border-radius: 20px;
   overflow-y: scroll;
   ${color}
