@@ -1,6 +1,8 @@
 import { Box } from 'components/Box';
 import { Button } from 'components/common/Button/Button';
-import test from 'images/partners/nodeJs.jpg';
+import { intervalToDuration } from 'date-fns';
+import { useDispatch } from 'react-redux';
+import { deleteNotice } from 'redux/notices/notices-operations';
 import {
   CardTitle,
   Img,
@@ -12,13 +14,32 @@ import {
   Text,
 } from './NoticesPetCard.styled';
 
-export const NoticePetCard = ({ title }) => {
+export const NoticePetCard = ({ item }) => {
+  const { imgURL, category, title, breed, location, birthdate, _id } = item;
+  const dispatch = useDispatch();
+  const parsedDate = new Date(Date.parse(birthdate));
+
+  const getAge = () => {
+    const { years, months } = intervalToDuration({
+      start: new Date(),
+      end: parsedDate,
+    });
+    if (years < 1) {
+      return months > 1 ? `${months} months` : `${months} month`;
+    }
+    return years > 1 ? `${years} years` : `${years} year`;
+  };
+
+  const onLikeClick = () => {
+    console.log('like')
+  };
+
   return (
     <article>
       <Box position="relative">
-        <Img src={test} alt="test" />
-        <Status>In good hands</Status>
-        <Like whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+        <Img src={imgURL} alt="test" />
+        <Status>{category}</Status>
+        <Like whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} onClick={onLikeClick}>
           <LikeSvg />
         </Like>
       </Box>
@@ -38,13 +59,13 @@ export const NoticePetCard = ({ title }) => {
           </NameList>
           <ul>
             <ListElement>
-              <Text>Breed</Text>
+              <Text>{breed}</Text>
             </ListElement>
             <ListElement>
-              <Text>Place</Text>
+              <Text>{location}</Text>
             </ListElement>
             <ListElement mb="0px">
-              <Text>Age</Text>
+              <Text>{getAge()}</Text>
             </ListElement>
           </ul>
         </Box>
@@ -69,6 +90,7 @@ export const NoticePetCard = ({ title }) => {
           py={[null, '8px']}
           height="100%"
           fontSize={[null, '16px']}
+          onClick={() => dispatch(deleteNotice(_id))}
         >
           Delete
         </Button>

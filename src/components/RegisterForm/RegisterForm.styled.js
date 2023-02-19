@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { space } from 'styled-system';
 
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -94,5 +95,6 @@ export const ErrorMsg = styled.p`
   color: red;
 
   margin-bottom: ${({ theme }) => theme.space[7]}px;
+
   ${space}
 `;

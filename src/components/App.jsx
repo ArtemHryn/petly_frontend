@@ -4,6 +4,7 @@ import React from 'react';
 import { ScrollToTop } from './ScrollToTop';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { NoticeCategoryList } from './Notices/NoticesCategoryList/NoticesCategoryList';
+import { MainLoader } from './Loader/MainLoader';
 
 // import { AnimatePresence } from 'framer-motion';
 // import { RestrictedRoute } from 'helpers/PublicRoute';
@@ -64,7 +65,9 @@ export const App = () => {
     <>
       <ScrollToTop />
       <SharedLayout />
-      <Suspense fallback={null}>
+
+      <Suspense fallback={<MainLoader />}>
+
         {/* <AnimatePresence mode="wait"> */}
         <Routes key={location.pathname} location={location}>
           <Route path="/">

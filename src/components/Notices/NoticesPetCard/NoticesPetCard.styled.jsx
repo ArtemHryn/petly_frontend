@@ -23,6 +23,7 @@ export const Status = styled.p`
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  text-transform: capitalize;
 
   letter-spacing: 0.04em;
 
