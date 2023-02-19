@@ -146,6 +146,7 @@ export const NoticePetCard = ({ item }) => {
             Delete
           </Button>
         </Box>
+       </Box>
       </article>
     </CardItem>
   );
