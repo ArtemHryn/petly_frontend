@@ -3,19 +3,14 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://arcane-everglades-20653.herokuapp.com';
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
-
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VjMjM0MTdiOGNhYmMzMWIwYTA1Y2YiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjc2ODM2MjEzLCJleHAiOjE2NzY5MjI2MTN9.3liYluC-mnmtJyAteIFECqGQlBJHHkBoRpoVnWNpjoA';
-
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -25,15 +20,20 @@ export const register = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.status);
     }
   }
 );
 
 export const logIn = createAsyncThunk(
   'auth/login',
-  async (credentials, thunkAPI) => {
-    console.log(token);
-    return { credentials, thunkAPI };
+  async (loginData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('/users/login', loginData);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );

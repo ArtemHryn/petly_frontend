@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { space } from 'styled-system';
 
 export const Form = styled.form`
   display: flex;
@@ -40,10 +41,8 @@ export const Input = styled.input`
   padding-bottom: ${({ theme }) => theme.space[6]}px;
   padding-left: ${({ theme }) => theme.space[8]}px;
   padding-right: ${({ theme }) => theme.space[8]}px;
-  &:nth-of-type(2) {
-    margin-bottom: ${({ theme }) => theme.space[15]}px;
-  }
 
+${space}
   @media screen and (min-width: ${({ theme }) => theme.sizes.tablet}) {
     line-height: ${({ theme }) => theme.lineHeights.tablet[4]};
     padding-top: ${({ theme }) => theme.space[7]}px;
@@ -76,4 +75,10 @@ export const LoginBtn = styled.button`
   padding-left: ${({ theme }) => theme.space[16]}px;
   padding-right: ${({ theme }) => theme.space[16]}px;
   margin-bottom: ${({ theme }) => theme.space[15]}px;
+`;
+
+export const Error = styled.p`
+  margin-bottom: 16px;
+  color: red;
+  font-style: italic;
 `;
