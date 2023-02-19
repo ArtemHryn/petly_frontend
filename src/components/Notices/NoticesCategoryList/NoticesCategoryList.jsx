@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { NoticePetCard } from '../NoticesPetCard/NoticesPetCard';
-import { CardItem, CardList } from './NoticesCategoryList.styled';
+import { CardList } from './NoticesCategoryList.styled';
 import { fetchNotices } from 'redux/notices/notices-operations';
 import { getNotices, getSearch } from 'redux/notices/noticesSelectors';
 import { changeCategory } from 'redux/notices/searchSlice';
+import { getFavorites, getIsLoggedIn } from 'redux/auth/authSelector';
 
 export const filterButtons = [
   { title: 'lost/found', to: 'lost-found' },
@@ -20,6 +21,15 @@ export const NoticeCategoryList = () => {
   const dispatch = useDispatch();
   const notices = useSelector(getNotices);
   const search = useSelector(getSearch);
+  const favorites = useSelector(getFavorites);
+  const isLoggedIn = useSelector(getIsLoggedIn);
+
+  const filteredNotices = notices.map(notice => {
+    if (isLoggedIn && favorites.includes(notice._id)) {
+      return { ...notice, isFavorite: true };
+    }
+    return { ...notice, isFavorite: false };
+  });
 
   useEffect(() => {
     const controller = new AbortController();
@@ -33,13 +43,11 @@ export const NoticeCategoryList = () => {
     );
     return () => controller.abort();
   }, [categoryName, dispatch, search]);
-console.log(notices);
+
   return (
     <CardList>
-      {notices.map(item => (
-        <CardItem key={item._id}>
-          <NoticePetCard item={item} />
-        </CardItem>
+      {filteredNotices.map(item => (
+        <NoticePetCard key={item._id} item={item} />
       ))}
     </CardList>
   );
