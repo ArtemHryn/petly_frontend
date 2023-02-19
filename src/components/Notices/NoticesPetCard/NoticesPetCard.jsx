@@ -120,7 +120,6 @@ export const NoticePetCard = ({ item }) => {
             </Button>
           </Box>
         </Box>
-       </Box>
       </article>
     </CardItem>
   );
