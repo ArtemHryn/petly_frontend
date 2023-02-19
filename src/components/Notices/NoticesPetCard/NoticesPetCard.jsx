@@ -54,6 +54,7 @@ export const NoticePetCard = ({ item }) => {
     return null;
   }
   return (
+
     <CardItem >
       <article>
         <Box position="relative">
@@ -66,6 +67,32 @@ export const NoticePetCard = ({ item }) => {
           >
             {isFavorite ? <IsLikedSvg /> : <LikeSvg />}
           </Like>
+      </Box>
+      <Box pt={['20px']} pb={['12px']} px={['16px', '20px']}>
+        <CardTitle>{title}</CardTitle>
+        <Box display="flex" mb={['50px']}>
+          <NameList>
+            <ListElement>
+              <Text>Breed:</Text>
+            </ListElement>
+            <ListElement>
+              <Text>Place:</Text>
+            </ListElement>
+            <ListElement mb="0px">
+              <Text>Age:</Text>
+            </ListElement>
+          </NameList>
+          <ul>
+            <ListElement>
+              <Text>{breed}</Text>
+            </ListElement>
+            <ListElement>
+              <Text>{location}</Text>
+            </ListElement>
+            <ListElement mb="0px">
+              <Text>{getAge()}</Text>
+            </ListElement>
+          </ul>
         </Box>
         <Box pt={['20px']} pb={['12px']} px={['16px', '20px']}>
           <CardTitle>{title}</CardTitle>
