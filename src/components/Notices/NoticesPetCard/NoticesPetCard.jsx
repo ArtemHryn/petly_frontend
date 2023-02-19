@@ -18,17 +18,21 @@ export const NoticePetCard = ({ item }) => {
   const { imgURL, category, title, breed, location, birthdate, _id } = item;
   const dispatch = useDispatch();
   const parsedDate = new Date(Date.parse(birthdate));
-  
+
   const getAge = () => {
     const { years, months } = intervalToDuration({
       start: new Date(),
       end: parsedDate,
     });
     if (years < 1) {
-      return months > 1 ? `${months} months` : `${months} month` 
+      return months > 1 ? `${months} months` : `${months} month`;
     }
-    return years > 1 ? `${years} years` : `${years} year`
-  }
+    return years > 1 ? `${years} years` : `${years} year`;
+  };
+
+  const onLikeClick = () => {
+    
+  };
 
   return (
     <article>
@@ -61,9 +65,7 @@ export const NoticePetCard = ({ item }) => {
               <Text>{location}</Text>
             </ListElement>
             <ListElement mb="0px">
-              <Text>
-                {getAge()}
-              </Text>
+              <Text>{getAge()}</Text>
             </ListElement>
           </ul>
         </Box>
