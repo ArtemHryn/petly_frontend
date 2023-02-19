@@ -11,12 +11,14 @@ import {
 import { authReducer } from './auth/authSlice';
 import { noticesReducer } from './notices/noticesSlice';
 import { filterSlice } from './notices/searchSlice';
+import { userPageReducer } from './userPage/userPageSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     notices: noticesReducer,
     filter: filterSlice.reducer,
+    userInfo: userPageReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

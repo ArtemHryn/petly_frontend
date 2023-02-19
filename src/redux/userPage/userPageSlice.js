@@ -3,15 +3,16 @@ import { updateUser } from './userOperations';
 
 const initialState = {
   user: {
-    name: 'Kseniia',
-    email: 'kellyshikova3004@gmail.com',
-    city: 'Kh',
-    phone: '+980666805185',
+    name: null,
+    email: null,
+    city: null,
+    phone: null,
     userPhotoURL: null,
-    birthday: '30/04/1994',
+    birthday: null,
   },
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2YwYWQ0ZGY0MjZlY2UyYTJiNWViMzkiLCJlbWFpbCI6ImtlbGx5c2hpa292YTMwMDRAZ21haWwuY29tIiwiaWF0IjoxNjc2NzQ4ODM0LCJleHAiOjE2NzY4MzUyMzR9.P1gy6R6s40UBfB3LHKvEr_0hppzE7U0qlVb7tVFcieg',
+  // token:
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2YwYWQ0ZGY0MjZlY2UyYTJiNWViMzkiLCJlbWFpbCI6ImtlbGx5c2hpa292YTMwMDRAZ21haWwuY29tIiwiaWF0IjoxNjc2ODQyNTc5LCJleHAiOjE2NzY5Mjg5Nzl9.DSJYAc2BoPN5FiAfoLhXblKTUs3p4QebM0SvYr_7fvo',
+  token: null,
   isLoggedIn: true,
   isRefreshing: false,
   error: null,
@@ -22,10 +23,14 @@ const userInfoSlice = createSlice({
   initialState,
   extraReducers: builder =>
     builder
-      .addCase(updateUser.fulfilled, (state, action) => {})
-      .addCase(updateUser.pending, (state, action) => {
-        console.log('arg', action.meta.arg);
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const keys = Object.keys(state.userInfo.user);
+        const key = Object.keys(action.meta.arg);
+        if (keys.includes(key.join(''))) {
+          state.userInfo.user[key] = Object.values(action.meta.arg).join('');
+        }
       })
+      .addCase(updateUser.pending, (state, action) => {})
       .addCase(updateUser.rejected, (state, action) => {}),
 });
 
