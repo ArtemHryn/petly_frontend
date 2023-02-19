@@ -31,7 +31,7 @@ export const NoticePetCard = ({ item }) => {
   };
 
   const onLikeClick = () => {
-    
+    console.log('like')
   };
 
   return (
@@ -39,7 +39,7 @@ export const NoticePetCard = ({ item }) => {
       <Box position="relative">
         <Img src={imgURL} alt="test" />
         <Status>{category}</Status>
-        <Like whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+        <Like whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }} onClick={onLikeClick}>
           <LikeSvg />
         </Like>
       </Box>
