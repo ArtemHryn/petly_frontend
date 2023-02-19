@@ -23,13 +23,7 @@ const userInfoSlice = createSlice({
   initialState,
   extraReducers: builder =>
     builder
-      .addCase(updateUser.fulfilled, (state, action) => {
-        const keys = Object.keys(state.userInfo.user);
-        const key = Object.keys(action.meta.arg);
-        if (keys.includes(key.join(''))) {
-          state.userInfo.user[key] = Object.values(action.meta.arg).join('');
-        }
-      })
+      .addCase(updateUser.fulfilled, (state, action) => {})
       .addCase(updateUser.pending, (state, action) => {})
       .addCase(updateUser.rejected, (state, action) => {}),
 });
