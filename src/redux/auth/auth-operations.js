@@ -3,6 +3,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://arcane-everglades-20653.herokuapp.com';
 
+
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -27,8 +28,13 @@ export const register = createAsyncThunk(
 
 export const logIn = createAsyncThunk(
   'auth/login',
-  async (credentials, thunkAPI) => {
-    console.log(token);
-    return { credentials, thunkAPI };
+  async (loginData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('/users/login', loginData);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );

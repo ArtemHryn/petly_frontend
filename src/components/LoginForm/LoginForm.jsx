@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 import { AuthLink } from './AuthLink';
 import { Form, Input, LoginBtn } from './LoginForm.styled';
 import { Title } from 'components/Title/Title';
-import { logIn as loginUser } from 'redux/login-auth/loginAuth-operations';
+import { logIn } from 'redux/auth/auth-operations';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const onSubmit = async ({ email, password }) => {
-    await dispatch(loginUser({ email, password }));
+  const onSubmit = ({ email, password }) => {
+    dispatch(logIn({email, password}));
   };
   const [formValues] = useState({
     email: '',
@@ -21,7 +21,7 @@ export const LoginForm = () => {
     mode: 'all',
   });
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
       <Title
         fontSize={['24px', '36px']}
         fontWeight={['700', '500']}
@@ -33,7 +33,7 @@ export const LoginForm = () => {
       <Input
         type="text"
         placeholder="Email"
-        {...register('email', { required: true })}
+        {...register('email', { required: {value: true, message: 'Email is requried'} })}
       />
       <Input
         type="password"
