@@ -4,6 +4,7 @@ import React from 'react';
 import { ScrollToTop } from './ScrollToTop';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { NoticeCategoryList } from './Notices/NoticesCategoryList/NoticesCategoryList';
+
 // import { AnimatePresence } from 'framer-motion';
 // import { RestrictedRoute } from 'helpers/PublicRoute';
 // import { PrivateRoute } from 'helpers/PrivateRoute';

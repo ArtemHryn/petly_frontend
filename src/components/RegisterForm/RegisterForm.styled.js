@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { backgroundColor, space } from 'styled-system';
+import { space } from 'styled-system';
 
 export const Form = styled.form`
   display: flex;
@@ -93,6 +93,6 @@ export const ErrorMsg = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.mobile[2]};
   color: red;
 
-  margin-bottom: ${({ theme }) => theme.space[8]}px;
+  margin-bottom: ${({ theme }) => theme.space[7]}px;
   ${space}
 `;
