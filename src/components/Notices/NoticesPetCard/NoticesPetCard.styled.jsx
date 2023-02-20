@@ -57,6 +57,7 @@ export const IsLikedSvg = styled(AiFillHeart)`
   background: transparent;
 
   fill: #f59256;
+  ${space}
 `;
 
 export const CardTitle = styled.h4`

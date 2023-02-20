@@ -1,5 +1,9 @@
 import { Box } from 'components/Box';
+import { Button } from 'components/common/Button/Button';
+import { Link } from 'components/common/Link/Link';
 import { format } from 'date-fns';
+import { IsLikedSvg } from '../NoticesPetCard/NoticesPetCard.styled';
+import { CardTitle, Img } from './LearnMoreModal.styled';
 
 const list = [
   'Name:',
@@ -11,6 +15,7 @@ const list = [
   'Phone:',
 ];
 
+
 export const LearnMoreModal = ({ item }) => {
   const {
     imgURL,
@@ -19,9 +24,9 @@ export const LearnMoreModal = ({ item }) => {
     breed,
     location,
     birthdate,
-    _id,
-    isFavorite,
-    owner,
+    // _id,
+    // isFavorite,
+    // owner,
     name,
     sex,
   } = item;
@@ -31,10 +36,10 @@ export const LearnMoreModal = ({ item }) => {
     <>
       <Box>
         <Box>
-          <img src={imgURL} alt={breed} />
+          <Img src={imgURL} alt={breed} />
           <p>{category}</p>
         </Box>
-        <h4>{title}</h4>
+        <CardTitle>{title}</CardTitle>
         <Box display="flex">
           <ul>
             {list.map(item => (
@@ -68,8 +73,19 @@ export const LearnMoreModal = ({ item }) => {
           </ul>
         </Box>
         <Box>
-          <a href={`tel:${breed}`}>Contact</a>
-          <button> Add to 3</button>
+          <Link
+            variant="outline"
+            width="100%"
+            display="flex"
+            justifyContent="center"
+            mb="12px"
+            href={`tel:${breed}`}
+          >
+            Contact
+          </Link>
+          <Button variant="outline">
+            Add to <IsLikedSvg />
+          </Button>
         </Box>
       </Box>
     </>
