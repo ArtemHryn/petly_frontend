@@ -1,39 +1,33 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { updateUser } from "redux/userPage/userOperations"
-import { UserDataChangeBtn, UserInfoData, UserInfoDescr, UserInfoInput, UserInfoItem } from "./styles/UserInfoString.styled"
-import { FaPen } from 'react-icons/fa';
-import { BsCheckLg } from "react-icons/bs";
-import { dateFormat } from "helpers/dateFormat";
+import { updateUser } from "redux/auth/auth-operations"
+import { UserDataChangeBtn, UserInfoData, UserInfoDescr, UserInfoInput, UserInfoItem, StyledFaPen, StyledCheck } from "./styles/UserInfoString.styled"
+import { format } from 'date-fns';
 
-export const InfoItem = ({item, value}) => {
+export const InfoItem = ({ item }) => {
+    const [name, value] = item
     const dispatch = useDispatch()
     const [focus, setFocus] = useState(false)
-    const onChange = () => {
-        setFocus(focus => !focus)
+    const [newValue, setNewValue] = useState("")
+
+    const onEdit = () => {
+        setFocus(prev => !prev)
+        setNewValue(value)
+        if(value === newValue) {
+            return
+        }
+        if (focus) {
+            dispatch(updateUser({[name]: newValue}))
+        }
     }
-    const onSubmit = (evt) => {
-        evt.preventDefault()
-        const data = evt.target.elements[item].value
-        const dataKey = evt.target.elements[item].getAttribute("name");
-        
-        dispatch(updateUser({[dataKey]: data}))
-        setFocus(focus => !focus)
-    }
-    return <UserInfoItem key={item}>
-                    <UserInfoDescr>{item}</UserInfoDescr>
-                    {!focus && (<>
-            <UserInfoData onDoubleClick={onChange}>{item === "birthday" ? dateFormat(value) : value}</UserInfoData>
-                        <UserDataChangeBtn type='button' onClick={onChange} data-id={item}>
-                            <FaPen style={{ background: "#FDF7F2", color: "#F59256", backdropFilter: "blur(2px)", padding: "5px", display: "block", fontSize: "20px", borderRadius: "50%" }}
-                            />
-                        </UserDataChangeBtn>
-                    </>)}
-                    {focus && (<form onSubmit={onSubmit} data-id={item}>
-                        <UserInfoInput type="text" placeholder={value} name={item} autoFocus />
-                        <UserDataChangeBtn type='submit'>
-                            <BsCheckLg style={{ background: "#FDF7F2", color: "#F59256", backdropFilter: "blur(2px)", padding: "5px", display: "block", fontSize: "20px", borderRadius: "50%" }}/>
-                    </UserDataChangeBtn>
-                    </form>)}
-                </UserInfoItem>
+
+    return <UserInfoItem>
+            <UserInfoDescr>{name}</UserInfoDescr>
+            {!focus ?
+            <UserInfoData>{value}</UserInfoData> :
+            <UserInfoInput type="text" value={newValue} onChange={(evt) => setNewValue(evt.target.value)} autoFocus/>}
+            <UserDataChangeBtn type="button" onClick={onEdit}>
+                {!focus ? <StyledFaPen/> : <StyledCheck/>}
+            </UserDataChangeBtn>
+        </UserInfoItem>
 }
