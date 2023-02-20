@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { AiOutlineClose } from 'react-icons/ai';
 
 import styled from 'styled-components';
 import {
@@ -30,10 +31,10 @@ export const ModalLayoutBox = styled(motion.div)`
 export const ModalContainer = styled.div`
   position: relative;
   height: 100%;
-  max-width: calc(100% - 40px);
+  max-width: 280px;
   width: 90vw;
   height: 80vh;
-  padding: 30px 20px 40px;
+  padding: 60px 20px 40px;
   background-color: #ffffff;
   border-radius: 20px;
   overflow-y: scroll;
@@ -48,12 +49,10 @@ export const ModalContainer = styled.div`
   ${shadow}
 
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
-    padding: 20px 20px 32px;
+    padding: 32px 24px 32px 20px;
     max-width: 704px;
-  }
-  @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
-    padding: 12px 20px 32px;
-    max-width: 704px;
+    height: 100%;
+    max-height: 540px;
   }
 `;
 
@@ -67,4 +66,30 @@ export const Button = styled.button`
   @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
     margin-bottom: 29px;
   }
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  background-color: #fdf7f2;
+  width: 34px;
+  height: 34px;
+
+  backdrop-filter: blur(2px);
+  @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
+    top: 24px;
+    right: 24px;
+  }
+`;
+
+export const CloseIcon = styled(AiOutlineClose)`
+  font-size: 22px;
+
+  fill: black;
 `;

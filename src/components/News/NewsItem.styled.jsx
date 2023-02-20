@@ -9,6 +9,7 @@ export const Gradient = styled.span`
   height: ${p => p.theme.space[2]}px;
   background: ${p => p.theme.colors.gradient};
   border-radius: ${p => p.theme.radii.lg};
+  margin-bottom: ${p => p.theme.space[2]}px;
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     width: 280px;
     height: ${p => p.theme.space[4]}px;
@@ -23,9 +24,10 @@ export const ItemTitle = styled.h3`
   font-size: ${p => p.theme.fontSizes.mobile[6]};
   line-height: ${p => p.theme.lineHeights.mobile[3]};
   font-weight: ${p => p.theme.fontWeights.bold};
-  padding-top: ${p => p.theme.space[2]}px;
+  margin-bottom: ${p => p.theme.space[8]}px;
   color: ${p => p.theme.colors.black};
   height: 66px;
+  overflow: hidden;
 `;
 
 export const Text = styled.p`
@@ -33,8 +35,12 @@ export const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.mobile[3]};
   line-height: ${p => p.theme.lineHeights.mobile[3]};
   font-weight: ${p => p.theme.fontWeights.light};
-  padding-top: ${p => p.theme.space[8]}px;
   color: #111321;
+  height: 132px;
+  overflow: hidden;
+  @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
+    height: 110px;
+  }
 `;
 
 export const BottomContainer = styled.div`

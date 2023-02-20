@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { logIn, register } from './auth-operations';
+import { fetchUser, logIn, register, updateLike } from './auth-operations';
 
 const initialState = {
   user: {
@@ -11,11 +11,14 @@ const initialState = {
     phone: null,
     userPhotoURL: null,
     birthday: null,
+    favorites: [],
   },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
+  favoriteError: null,
+  isChangingFavorite: false,
 };
 
 const persistConfig = {
@@ -44,6 +47,40 @@ const authSlice = createSlice({
       .addCase(logIn.rejected, (state, action) => {
         state.isLoggedIn = false;
         state.error = action.payload;
+      })
+      .addCase(fetchUser.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.user = { ...action.payload.user };
+        state.error = null;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(updateLike.pending, state => {
+        state.error = null;
+        state.isChangingFavorite = true;
+      })
+      .addCase(updateLike.rejected, (state, action) => {
+        state.favoriteError = action.payload;
+        state.isChangingFavorite = false;
+      })
+      .addCase(updateLike.fulfilled, (state, action) => {
+        state.error = null;
+        state.isChangingFavorite = false;
+        if (action.payload.isLiked) {
+          state.user.favorites.push(action.payload._id);
+          return;
+        }
+
+        const index = state.user.favorites.findIndex(
+          favorite => favorite._id === action.payload._id
+        );
+        state.user.favorites.splice(index, 1);
       }),
 });
 
