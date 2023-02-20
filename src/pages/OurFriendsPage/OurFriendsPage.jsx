@@ -1,84 +1,41 @@
-import { Title } from "components/common/Title/Title";
+import { Title } from "components/Title/Title";
 import { Container } from "components/Container/Container";
-import { useState } from "react";
+
 import {
     FriendsList,
-    FriendsItem,
-    FriendsMainLink,
-    FriendsInfoBox,
-    FriendsLogo,
-    FriendsInfoList,
-    FriendsInfoItem,
-    TimeBtn,
-    FriendsInfoLink,
-    TimeList,
-    TimeItem
+    NoInfoBox,
+    NoInfoText
 } from "./OurFriendsPage.styled"
+import { useEffect } from "react";
+import { OurFriendItem } from "../../components/OurFriendsItem/OurFriendsItem";
+import { useDispatch, useSelector } from "react-redux";
+import { getSponsors } from "redux/partners/partnersOperations";
+import { useRef } from "react";
 
 export const OurFriendsPage = () => {
-  const [showTime, setShowTime] = useState(false);
-    const [timeId, setTimeId] = useState(null);
+    const dispatch = useDispatch()
+    const partners = useSelector(state => state.sponsors.partners)
+    const isFirstRender = useRef(true)
 
-    const toggleTime = () => {
-        setShowTime(!showTime);
-    };
+    useEffect(() => {
+        if (isFirstRender.current) {
+            dispatch(getSponsors())
+            isFirstRender.current = false
+        }
+    }, [dispatch])
 
-    const openTime = evt => {
-        const id = evt.target.getAttribute('id');
-        setTimeId(id);
-        toggleTime();
-  };
-  
-  return <>
-  <Container>
-            <Title>Our friends</Title>
+    return <>
+    <Container>
+        <Title mb={[11]} fontSize={['24px', '48px', '40px']}>Our friends</Title>
+        {partners ? (
             <FriendsList>
-                {/* map */}
-
-                <FriendsItem>
-                    <h2>
-                        <FriendsMainLink>title</FriendsMainLink>
-                    </h2>
-                    <FriendsInfoBox>
-                        <FriendsLogo src="" alt="friendLogo" />
-                        <FriendsInfoList>
-                            <FriendsInfoItem>
-                                <TimeBtn
-                                    type="button"
-                                    onClick={openTime}
-                                    id="1"
-                                >
-                                    time
-                                </TimeBtn>
-                            </FriendsInfoItem>
-                            <FriendsInfoItem>address</FriendsInfoItem>
-                            <FriendsInfoItem>
-                                Email:{' '}
-                                <FriendsInfoLink href="mailto:">
-                                    email
-                                </FriendsInfoLink>
-                            </FriendsInfoItem>
-                            <FriendsInfoItem>
-                                Phone:{' '}
-                                <FriendsInfoLink href="tel:">
-                                    tel
-                                </FriendsInfoLink>
-                            </FriendsInfoItem>
-                        </FriendsInfoList>
-                        {showTime && timeId === '1' && (
-                            <TimeList>
-                                <TimeItem>MN</TimeItem>
-                                <TimeItem>TU</TimeItem>
-                                <TimeItem>WE</TimeItem>
-                                <TimeItem>TH</TimeItem>
-                                <TimeItem>FR</TimeItem>
-                                <TimeItem>SA</TimeItem>
-                                <TimeItem>SU</TimeItem>
-                            </TimeList>
-                        )}
-                    </FriendsInfoBox>
-                </FriendsItem>
-            </FriendsList>
+            {partners.map(partner => {
+                return (<OurFriendItem key={partner._id} partners={partner} />
+                    )
+                })}
+            </FriendsList>) : 
+            (<NoInfoBox><NoInfoText>Sorry, searching for the information</NoInfoText></NoInfoBox>)
+        }
         </Container>
-  </>;
+    </>;
 };

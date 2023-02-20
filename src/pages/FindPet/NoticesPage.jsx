@@ -13,6 +13,7 @@ export const NoticesPage = () => {
   const onAddPet = () => {
     setShowModal(true);
   };
+
   return (
     <Container>
       <Title mb={[11]} fontSize={['24px', '48px', '40px']}>
@@ -20,7 +21,7 @@ export const NoticesPage = () => {
       </Title>
       <NoticeSearch />
 
-      <NoticeCategoryNav />
+      <NoticeCategoryNav setShowModal={setShowModal} />
 
       <AddPetButton
         whileHover={{ scale: 1.2 }}
@@ -31,8 +32,8 @@ export const NoticesPage = () => {
         <AiOutlinePlus style={{ color: '#FFFFFF', fontSize: '26px' }} />
         Add pet
       </AddPetButton>
-      <Outlet />
       {showModal && <div>Test</div>}
+      <Outlet />
     </Container>
   );
 };

@@ -2,26 +2,26 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthLink } from './AuthLink';
-import { Form, Input, LoginBtn } from './LoginForm.styled';
+import { Error, Form, Input, LoginBtn } from './LoginForm.styled';
 import { Title } from 'components/Title/Title';
-import { logIn as loginUser } from 'redux/login-auth/loginAuth-operations';
+import { logIn } from 'redux/auth/auth-operations';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const onSubmit = async ({ email, password }) => {
-    await dispatch(loginUser({ email, password }));
+  const onSubmit = ({ email, password }) => {
+    dispatch(logIn({ email, password }));
   };
   const [formValues] = useState({
     email: '',
     password: '',
   });
 
-  const { register, handleSubmit } = useForm({
-    formValues,
+  const { register, handleSubmit, formState: {errors} } = useForm({
+    defaultValues: formValues,
     mode: 'all',
   });
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
       <Title
         fontSize={['24px', '36px']}
         fontWeight={['700', '500']}
@@ -33,13 +33,19 @@ export const LoginForm = () => {
       <Input
         type="text"
         placeholder="Email"
-        {...register('email', { required: true })}
+        {...register('email', {
+          required: { value: true, message: 'Email is requried' },
+        })}
       />
+      {errors.email?.message && <Error>{errors.email.message}</Error>}
       <Input
         type="password"
         placeholder="Password"
         {...register('password', { required: true })}
+        mb={['15']}
       />
+      {errors.password?.message && <Error>{errors.password.message}</Error>}
+
       <LoginBtn type="submit">Login</LoginBtn>
       <AuthLink
         path="/register"

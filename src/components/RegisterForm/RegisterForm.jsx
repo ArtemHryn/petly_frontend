@@ -14,6 +14,7 @@ import {
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const [isTheSecondStep, setIsTheSecondStep] = useState(false);
+
   const [isRegistered, setIsRegistered] = useState(false);
   const [formValues, setFormValues] = useState({
     email: '',
@@ -31,7 +32,7 @@ export const RegisterForm = () => {
     formState: { errors },
   } = useForm({
     formValues,
-    mode: 'all',
+    mode: 'onBlur',
   });
 
   const handleChange = event => {
@@ -41,7 +42,9 @@ export const RegisterForm = () => {
     });
   };
 
+
   const handleNextClick = e => {
+
     if (formValues.password !== formValues.confirmedPassword) {
       setError('confirmedPassword', {
         type: 'custom',
@@ -49,7 +52,6 @@ export const RegisterForm = () => {
       });
       return;
     }
-
     setIsTheSecondStep(true);
     e.preventDefault();
   };
@@ -76,6 +78,7 @@ export const RegisterForm = () => {
       return;
     }
     return toastError(`😿 Whoops, something get wrong. Try again later`);
+
   };
 
   return (

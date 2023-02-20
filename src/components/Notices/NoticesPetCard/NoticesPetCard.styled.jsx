@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { space } from 'styled-system';
 import { motion } from 'framer-motion';
 
@@ -23,6 +23,7 @@ export const Status = styled.p`
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  text-transform: capitalize;
 
   letter-spacing: 0.04em;
 
@@ -45,6 +46,13 @@ export const Like = styled(motion.button)`
 `;
 
 export const LikeSvg = styled(AiOutlineHeart)`
+  font-size: 28px;
+  background: transparent;
+
+  fill: #f59256;
+`;
+
+export const IsLikedSvg = styled(AiFillHeart)`
   font-size: 28px;
   background: transparent;
 

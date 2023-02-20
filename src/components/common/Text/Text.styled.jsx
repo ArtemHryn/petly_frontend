@@ -12,7 +12,7 @@ import {
   typography,
 } from 'styled-system';
 
-export const Text = styled.p`
+export const Article = styled.p`
   font-family: ${p => p.theme.fonts.main};
   font-weight: ${p => p.theme.fonts.regular};
   font-size: ${p => p.theme.fontSizes.mobile[1]};

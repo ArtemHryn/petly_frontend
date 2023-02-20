@@ -4,6 +4,11 @@ import React from 'react';
 import { ScrollToTop } from './ScrollToTop';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { NoticeCategoryList } from './Notices/NoticesCategoryList/NoticesCategoryList';
+import { MainLoader } from './Loader/MainLoader';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchUser } from 'redux/auth/auth-operations';
+import { getRefreshing } from 'redux/auth/authSelector';
 
 // import { AnimatePresence } from 'framer-motion';
 // import { RestrictedRoute } from 'helpers/PublicRoute';
@@ -60,11 +65,20 @@ const NotFoundPage = lazy(() =>
 export const App = () => {
   const location = useLocation();
 
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(getRefreshing);
+  console.log(isRefreshing);
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
   return (
     <>
       <ScrollToTop />
       <SharedLayout />
-      <Suspense fallback={null}>
+
+      <Suspense fallback={<MainLoader />}>
         {/* <AnimatePresence mode="wait"> */}
         <Routes key={location.pathname} location={location}>
           <Route path="/">
