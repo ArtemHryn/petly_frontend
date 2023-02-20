@@ -10,6 +10,21 @@ const AddPetModalBox = styled.div`
     margin-right: auto;
     margin-left: auto;
     padding: 20px 20px 40px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    @media screen and (min-width: 768px) {
+        width: 608px;
+        height: 570px;
+        box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+        border-radius: 40px;
+        padding: 40px 80px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        width: 608px;
+        height: 570px;
+    }
 `;
 const AddPetModalTitle = styled.p`
     font-family: ${theme.fonts.main};
@@ -19,18 +34,33 @@ const AddPetModalTitle = styled.p`
     color: #111111;
     text-align: center;
     margin-bottom: 28px;
+
+    @media screen and (min-width: 1280px) {
+        font-size: 36px;
+        line-height: 1.36;
+        margin-bottom: 40px;
+    }
 `;
-const AddPetodalForm = styled.form``;
+const AddPetodalForm = styled.form`
+    text-align: center;
+`;
 const AddPetModalLabel = styled.label`
+    text-align: left;
+    display: block;
     font-family: ${theme.fonts.main};
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 1.47;
-    display: flex;
     color: #111111;
+
+    @media screen and (min-width: 768px) {
+        font-size: 24px;
+        line-height: 1.1;
+    }
+
 `;
-const AddPetodalTextInput = styled.input`
+const AddPetModalTextInput = styled.input`
     width: 240px;
     height: 40px;
     background: #FDF7F2;
@@ -49,6 +79,19 @@ const AddPetodalTextInput = styled.input`
         display: flex;
         align-items: center;
     }
+
+    @media screen and (min-width: 768px) {
+        width: 448px;
+        height: 48px;
+        padding: 11px 16px;
+        margin-top: 12px;
+        margin-bottom: 28px;
+
+        ::placeholder {
+            font-size: 16px;
+            line-height: 1.63;
+        }
+    }
 `;
 const AddPetPhotoBox = styled.div`
     position: relative;
@@ -64,6 +107,11 @@ const AddPetPhotoBox = styled.div`
     background-size: auto;
     margin-top: 20px;
     margin-bottom: 20px;
+
+    @media screen and (min-width: 768px) {
+        width: 182px;
+        height: 182px;
+    }
 `
 const AddPhotoLabel = styled.label`
     font-family: ${theme.fonts.main};
@@ -73,7 +121,12 @@ const AddPhotoLabel = styled.label`
     line-height: 1.47;
     display: flex;
     color: #111111;
-    text-align: center;
+    justify-content: center;
+
+    @media screen and (min-width: 768px) {
+        font-size: 24px;
+        line-height: 1.1;
+    }
 `
 const AddPetodalFileInput = styled.input``;
 const AddPetodalTextarea = styled.textarea`
@@ -86,6 +139,7 @@ const AddPetodalTextarea = styled.textarea`
     margin-bottom: 16px;
     padding: 12px 14px;
     color: rgba(27, 27, 27, 0.6);
+    resize: none;
 
     ::placeholder {
         font-family: ${theme.fonts.main};
@@ -95,29 +149,78 @@ const AddPetodalTextarea = styled.textarea`
         display: flex;
         align-items: center;
     }
+
+    @media screen and (min-width: 768px) {
+        width: 394px;
+        height: 116px;
+        padding: 11px 16px;
+        margin-top: 12px;
+        margin-bottom: 28px;
+
+        ::placeholder {
+            font-size: 16px;
+            line-height: 1.63;
+        }
+    }
 `;
 const AddPetodalBtnList = styled.ul`
     margin-top: 24px;
+
+    @media screen and (min-width: 768px) {
+        display: flex;
+        justify-content: center;
+    }
 `;
 const AddPetodalBtnItem = styled.li`
     :not(:last-child) {
         margin-bottom: 12px;
     }
+
+    @media screen and (min-width: 768px) {
+        :not(:last-child) {
+            margin-bottom: 0;
+            margin-right: 20px;
+        }
+    }
 `;
 const AddPetModalOkBtn = styled.button`
-    width: 240px;
-    height: 40px;
+    font-family: ${theme.fonts.main};
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.38;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.04em;
+    padding: 9px 99px;
     background: #F59256;
     border-radius: 40px;
     border: none;
     color: #FFF;
+
+    @media screen and (min-width: 768px) {
+        padding: 9px 66px;
+        font-size: 20px;
+        line-height: 1.35;
+    }
 `;
 const AddPetModalNoBtn = styled.button`
-    width: 240px;
-    height: 40px;
+    font-family: ${theme.fonts.main};
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.38;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.04em;
+    padding: 9px 90px;
     background: #FFFFFF;
     border: 2px solid #F59256;
     border-radius: 40px;
+
+    @media screen and (min-width: 768px) {
+        padding: 9px 66px;
+        font-size: 20px;
+        line-height: 1.35;
+    }
 `;
 
 export {
@@ -125,7 +228,7 @@ export {
     AddPetModalTitle,
     AddPetodalForm,
     AddPetModalLabel,
-    AddPetodalTextInput,
+    AddPetModalTextInput,
     AddPetPhotoBox,
     AddPetodalFileInput,
     AddPhotoLabel,
