@@ -19,7 +19,9 @@ export const UserInfo = () => {
     const userData = useSelector(state => state.auth.user)
 
     const info = Object.keys(userData)
+    info.splice(0, 1)
     info.splice(4, 1)
+    info.splice(5, 3)
 
     const logOut = () => {
         logout()

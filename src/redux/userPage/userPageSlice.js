@@ -10,10 +10,7 @@ const initialState = {
     userPhotoURL: null,
     birthday: null,
   },
-  token: null,
-  isLoggedIn: true,
-  isRefreshing: false,
-  error: null,
+  pets: [],
 };
 
 const userInfoSlice = createSlice({

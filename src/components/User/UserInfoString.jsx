@@ -4,6 +4,7 @@ import { updateUser } from "redux/userPage/userOperations"
 import { UserDataChangeBtn, UserInfoData, UserInfoDescr, UserInfoInput, UserInfoItem } from "./styles/UserInfoString.styled"
 import { FaPen } from 'react-icons/fa';
 import { BsCheckLg } from "react-icons/bs";
+import { dateFormat } from "helpers/dateFormat";
 
 export const InfoItem = ({item, value}) => {
     const dispatch = useDispatch()
@@ -22,7 +23,7 @@ export const InfoItem = ({item, value}) => {
     return <UserInfoItem key={item}>
                     <UserInfoDescr>{item}</UserInfoDescr>
                     {!focus && (<>
-            <UserInfoData onDoubleClick={onChange}>{value}</UserInfoData>
+            <UserInfoData onDoubleClick={onChange}>{item === "birthday" ? dateFormat(value) : value}</UserInfoData>
                         <UserDataChangeBtn type='button' onClick={onChange} data-id={item}>
                             <FaPen style={{ background: "#FDF7F2", color: "#F59256", backdropFilter: "blur(2px)", padding: "5px", display: "block", fontSize: "20px", borderRadius: "50%" }}
                             />
