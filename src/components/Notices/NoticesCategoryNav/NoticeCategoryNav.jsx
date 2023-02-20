@@ -16,7 +16,7 @@ export const filterButtons = [
   { title: 'my ads', to: 'own' },
 ];
 
-export const NoticeCategoryNav = () => {
+export const NoticeCategoryNav = ({ setShowModal}) => {
   return (
     <Box
       display={[null, 'flex']}
@@ -41,6 +41,7 @@ export const NoticeCategoryNav = () => {
           position={['static']}
           width={[null, '44px']}
           height={[null, '44px']}
+          onClick={setShowModal}
         >
           <AiOutlinePlus style={{ color: '#FFFFFF', fontSize: '26px' }} />
         </AddPetButton>
