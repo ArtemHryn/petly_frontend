@@ -1,60 +1,9 @@
 import styled from 'styled-components';
-import { theme } from '../theme';
+import {theme} from "../../theme"
 
-const FriendsBox = styled.div`
-  width: 320px;
-  margin-left: auto;
-  margin-right: auto;
-  background: #fdf7f2;
-  padding-top: 42px;
-  padding-bottom: 100px;
-  padding-left: 20px;
-  padding-right: 20px;
-
-  @media screen and (min-width: 768px) {
-    width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
-    padding-top: 88px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    width: 1280px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 72px;
-  }
-`;
-const FriendsTitle = styled.h1`
-  font-family: ${theme.fonts.main};
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 1.38;
-  text-align: center;
-  color: #000000;
-  margin-bottom: 28px;
-
-  @media screen and (min-width: 768px) {
-    font-size: 48px;
-    line-height: 66px;
-    margin-bottom: 40px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    margin-bottom: 60px;
-  }
-`;
-const FriendsList = styled.ul`
-  @media screen and (min-width: 768px) {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: -32px;
-    margin-right: -32px;
-  }
-`;
 const FriendsItem = styled.li`
-  width: 242px;
-  padding: 12px 34px 12px 4px;
+  width: 280px;
+  padding: 12px 4px 12px 4px;
   background: #ffffff;
   border-radius: 20px;
   margin-left: auto;
@@ -65,7 +14,7 @@ const FriendsItem = styled.li`
   }
 
   @media screen and (min-width: 768px) {
-    width: calc(100% / 2 - 64px);
+    width: calc(100% / 2 - 32px);
     margin-top: 32px;
     margin-right: 32px;
     margin-left: 0;
@@ -77,7 +26,7 @@ const FriendsItem = styled.li`
   }
 
   @media screen and (min-width: 1280px) {
-    width: calc(100% / 3 - 98px);
+    width: calc(100% / 3 - 32px);
   }
 `;
 const FriendsMainLink = styled.a`
@@ -88,6 +37,7 @@ const FriendsMainLink = styled.a`
   line-height: 1.33;
   display: flex;
   align-items: center;
+  text-align: center;
   text-decoration-line: underline;
   color: #f59256;
   justify-content: center;
@@ -109,18 +59,18 @@ const FriendsInfoBox = styled.div`
 const FriendsLogo = styled.img`
   width: 110px;
   height: 78px;
-  margin-left: 12px;
+  margin-right: 12px;
 
   @media screen and (min-width: 768px) {
     width: 120px;
     height: 85px;
-    margin-left: 14px;
+    margin-right: 14px;
   }
 
   @media screen and (min-width: 1280px) {
     width: 158px;
     height: 115px;
-    margin-left: 16px;
+    margin-right: 16px;
   }
 `;
 const FriendsInfoList = styled.ul``;
@@ -155,6 +105,38 @@ const FriendsInfoItem = styled.li`
     }
   }
 `;
+const FriendsAddressLink = styled.a`
+  font-family: ${theme.fonts.main};
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+
+  :not(:last-child) {
+    margin-bottom: 4px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+    line-height: 1.36;
+
+    :not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
+    line-height: 1.38;
+
+    :not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+`
 const TimeBtn = styled.button`
   border: none;
   background-color: transparent;
@@ -184,23 +166,10 @@ const FriendsInfoLink = styled.a`
   text-decoration: none;
 `;
 
-export {
-  FriendsBox,
-  FriendsTitle,
-  FriendsList,
-  FriendsItem,
-  FriendsMainLink,
-  FriendsInfoBox,
-  FriendsLogo,
-  FriendsInfoList,
-  FriendsInfoItem,
-  TimeBtn,
-  FriendsInfoLink,
-};
-
-export const TimeList = styled.ul`
+const TimeList = styled.ul`
   position: absolute;
-  width: 96px;
+  z-index: 2;
+  width: 120px;
   top: 35px;
   left: 120px;
   background: #ffffff;
@@ -208,19 +177,48 @@ export const TimeList = styled.ul`
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   padding: 12px;
+
+  @media screen and (min-width: 768px) {
+    left: 135px;
+    top: 55px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    left: 175px;
+    top: 65px;
+  }
 `;
 
-export const TimeItem = styled.li`
+const TimeItem = styled.li`
   font-family: ${theme.fonts.main};
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
   display: flex;
   align-items: center;
-  text-align: center;
   color: #000000;
 
   :not(:last-child) {
     margin-bottom: 4px;
   }
 `;
+
+const TimeSpan = styled.span`
+  width: 15px;
+  margin-right: 5px;
+`
+
+export {
+    FriendsItem,
+    FriendsMainLink,
+    FriendsInfoBox,
+    FriendsLogo,
+    FriendsInfoList,
+    FriendsInfoItem,
+    TimeBtn,
+    FriendsInfoLink,
+    TimeList,
+    TimeItem,
+    FriendsAddressLink,
+    TimeSpan,
+}
