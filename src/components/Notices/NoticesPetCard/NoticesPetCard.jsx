@@ -134,8 +134,11 @@ export const NoticePetCard = ({ item }) => {
           </Box>
         </article>
       </CardItem>
-      {showModal && <ModalLayout setShowModal={setShowModal}><LearnMoreModal item={item} />
-      </ModalLayout>}
+      {showModal && (
+        <ModalLayout setShowModal={setShowModal}>
+          <LearnMoreModal item={item} />
+        </ModalLayout>
+      )}
     </>
   );
 };
