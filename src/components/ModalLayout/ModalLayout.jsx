@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { ModalContainer, ModalLayoutBox } from './ModalLayout.styled';
+import { CloseButton, CloseIcon, ModalContainer, ModalLayoutBox } from './ModalLayout.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -39,6 +39,9 @@ export const ModalLayout = ({
       onClick={onBackdropClick}
     >
       <ModalContainer backgroundColor={backgroundColor} boxShadow={boxShadow}>
+        <CloseButton onClick={() => setShowModal(false)}>
+          <CloseIcon />
+        </CloseButton>
         {children}
       </ModalContainer>
     </ModalLayoutBox>,

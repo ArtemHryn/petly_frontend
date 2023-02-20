@@ -18,6 +18,7 @@ const initialState = {
   isRefreshing: false,
   error: null,
   favoriteError: null,
+  isChangingFavorite: false,
 };
 
 const persistConfig = {
@@ -62,17 +63,20 @@ const authSlice = createSlice({
       })
       .addCase(updateLike.pending, state => {
         state.error = null;
+        state.isChangingFavorite = true;
       })
       .addCase(updateLike.rejected, (state, action) => {
         state.favoriteError = action.payload;
+        state.isChangingFavorite = false;
       })
       .addCase(updateLike.fulfilled, (state, action) => {
         state.error = null;
+        state.isChangingFavorite = false;
         if (action.payload.isLiked) {
           state.user.favorites.push(action.payload._id);
           return;
         }
-        
+
         const index = state.user.favorites.findIndex(
           favorite => favorite._id === action.payload._id
         );
