@@ -1,5 +1,3 @@
-import { Box } from 'components/Box';
-import { Button } from 'components/common/Button/Button';
 import { intervalToDuration } from 'date-fns';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,17 +8,22 @@ import { getCategory } from 'redux/notices/noticesSelectors';
 import { LearnMoreModal } from '../LearnMoreModal/LearnMoreModal';
 import { ModalLayout } from 'components/ModalLayout/ModalLayout';
 import { CardItem } from '../NoticesCategoryList/NoticesCategoryList.styled';
+import { Box } from 'components/Box';
+import { Button } from 'components/common/Button/Button';
 import {
   CardTitle,
+  DeleteIcon,
   Img,
   IsLikedSvg,
   Like,
+  LikeContainer,
   LikeSvg,
   ListElement,
   NameList,
   Status,
   Text,
 } from './NoticesPetCard.styled';
+import { AnimatePresence } from 'framer-motion';
 
 export const NoticePetCard = ({ item }) => {
   const {
@@ -64,7 +67,7 @@ export const NoticePetCard = ({ item }) => {
   return (
     <>
       <CardItem>
-        <article>
+        <Box as="article" display="flex" flexDirection={'column'} height="100%">
           <Box position="relative">
             <Img src={imgURL} alt="test" />
             <Status>{category}</Status>
@@ -73,10 +76,33 @@ export const NoticePetCard = ({ item }) => {
               whileTap={{ scale: 0.8 }}
               onClick={onLikeClick}
             >
-              {isFavorite ? <IsLikedSvg /> : <LikeSvg />}
+              {isFavorite ? (
+                <LikeContainer
+                  key="1"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1, transition: { duration: 0.3 } }}
+                >
+                  <IsLikedSvg />
+                </LikeContainer>
+              ) : (
+                <LikeContainer
+                  key="2"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1, transition: { duration: 0.3 } }}
+                >
+                  <LikeSvg />
+                </LikeContainer>
+              )}
             </Like>
           </Box>
-          <Box pt={['20px']} pb={['12px']} px={['16px', '20px']}>
+          <Box
+            pt={['20px']}
+            pb={['12px']}
+            px={['16px', '20px']}
+            flexGrow="1"
+            display="flex"
+            flexDirection={'column'}
+          >
             <CardTitle>{title}</CardTitle>
             <Box display="flex">
               <NameList>
@@ -102,15 +128,24 @@ export const NoticePetCard = ({ item }) => {
                 </ListElement>
               </ul>
             </Box>
-            <Box pt={['20px']} pb={['12px']} px={['16px', '20px']}>
+            <Box
+              pt={['20px']}
+              pb={['12px']}
+              px={['16px', '20px']}
+              flexGrow="1"
+              display="flex"
+              flexDirection={'column'}
+              justifyContent="flex-end"
+            >
               <Button
                 variant="outline"
                 color={'accent'}
+                display={['flex']}
                 maxWidth={[null, '248px']}
                 m={[null, '0 auto 12px']}
                 mb={['12px', null, null]}
                 py={[null, '8px']}
-                height="100%"
+                height="38px"
                 fontSize={[null, '16px']}
                 onClick={() => setShowModal(true)}
               >
@@ -123,19 +158,28 @@ export const NoticePetCard = ({ item }) => {
                   maxWidth={[null, '248px']}
                   m={[null, '0 auto']}
                   py={[null, '8px']}
-                  height="100%"
+                  height="38px"
                   fontSize={[null, '16px']}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
                   onClick={() => dispatch(deleteNotice(_id))}
                 >
                   Delete
+                  <DeleteIcon />
                 </Button>
               )}
             </Box>
           </Box>
-        </article>
+        </Box>
       </CardItem>
-      {showModal && <ModalLayout setShowModal={setShowModal}><LearnMoreModal item={item} />
-      </ModalLayout>}
+      <AnimatePresence mode="wait">
+        {showModal && (
+          <ModalLayout setShowModal={setShowModal}>
+            <LearnMoreModal item={item} onLikeClick={onLikeClick} />
+          </ModalLayout>
+        )}
+      </AnimatePresence>
     </>
   );
 };

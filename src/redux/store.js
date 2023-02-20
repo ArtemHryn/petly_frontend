@@ -9,11 +9,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { authReducer } from './auth/authSlice';
-
+import { partnersReducer } from './partners/partnersSlice';
 import { noticesReducer } from './notices/noticesSlice';
 import { filterSlice } from './notices/searchSlice';
-
-import { partnersReducer } from './partners/partnersSlice';
 
 export const store = configureStore({
   reducer: {
