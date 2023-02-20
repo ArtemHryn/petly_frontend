@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import {theme} from '../../theme'
+import {theme} from "../../theme"
+
 const FriendsItem = styled.li`
   width: 280px;
   padding: 12px 4px 12px 4px;
