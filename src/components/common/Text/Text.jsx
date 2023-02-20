@@ -1,3 +1,9 @@
+import { Article } from './Text.styled';
+
 export const Text = (props) => {
-    return <><Text {...props} /></>
+    return (
+      <>
+        <Article {...props} />
+      </>
+    );
 }
