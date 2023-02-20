@@ -7,7 +7,6 @@ import { Container } from 'components/Container/Container';
 export const RegisterPage = () => {
   return (
     <Container
-      height="100vh"
       backgroundImage={[
         `url('${backgroundMobile}')`,
         `url('${backgroundTablet}')`,
