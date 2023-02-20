@@ -2,7 +2,12 @@ import { deleteNotice, fetchNotices } from './notices-operations';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
-const initialState = { notices: [], isLoading: false, error: null };
+const initialState = {
+  notices: [],
+  cardOwner: {},
+  isLoading: false,
+  error: null,
+};
 
 const noticesSlice = createSlice({
   name: 'notices',
@@ -35,8 +40,7 @@ const noticesSlice = createSlice({
       .addCase(deleteNotice.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload.message;
-      })
-      
+      }),
 });
 
 export const noticesReducer = noticesSlice.reducer;
