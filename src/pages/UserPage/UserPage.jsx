@@ -1,5 +1,5 @@
 import { AiFillPlusCircle } from 'react-icons/ai';
-
+import {useState} from "react"
 import {
     UserPageTitle,
     PetTitleBox,
@@ -12,8 +12,15 @@ import {
 import { Container } from 'components/Container/Container';
 import { UserInfo } from './UserInfo';
 import { UserPetItem } from './UserPetItem';
+import { ModalLayout } from 'components/ModalLayout/ModalLayout';
+import { AddUserPetModal } from 'components/AddUserPetModal/AddUserPetModal';
 
 export const UserPage = () => {
+  const [showModal, setShowModal] = useState(false)
+
+  const toggleModal = () => {
+    setShowModal(showModal => !showModal)
+  }
     return <>
       <Container>
         <UserPageBox>
@@ -26,7 +33,7 @@ export const UserPage = () => {
                 <UserPageTitle>My pets:</UserPageTitle>
                 <AddPetBox>
                     <AddPetText>Add pet</AddPetText>
-                    <AddPetBtn type="button">
+                <AddPetBtn type="button" onClick={toggleModal}>
                         <AiFillPlusCircle style={{display: "block", fontSize: "40px", color: "#F59256"}} />
                     </AddPetBtn>
                 </AddPetBox>
@@ -38,6 +45,9 @@ export const UserPage = () => {
             </PetList>
           </div>
         </UserPageBox>
+        {showModal && <ModalLayout setShowModal={toggleModal}>
+          <AddUserPetModal onClose={toggleModal}/>
+        </ModalLayout>}
         </Container>
     </>;
 };
