@@ -23,7 +23,7 @@ export const Navigation = () => {
 
   return (
     <>
-      {windowSize.innerWidth > 1280 && (
+      {windowSize.innerWidth >= 1280 && (
         <Box as="nav" width="100%">
           <Box as="ul" display="flex" justifyContent="space-between">
             <li>
