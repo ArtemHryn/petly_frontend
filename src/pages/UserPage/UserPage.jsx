@@ -32,7 +32,6 @@ export const UserPage = () => {
   const toggleModal = () => {
     setShowModal(showModal => !showModal)
   }
-
     return <>
       <Container>
         <UserPageBox>
