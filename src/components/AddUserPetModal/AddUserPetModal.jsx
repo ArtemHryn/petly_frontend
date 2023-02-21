@@ -1,6 +1,6 @@
 import { useState } from "react"
 import {useDispatch} from "react-redux"
-import { addPet } from "redux/pets/petsOperations"
+//import { addPet } from "redux/pets/petsOperations"
 import {
     AddPetModalBox,
     AddPetModalTitle,
@@ -18,7 +18,7 @@ import {
 } from "./AddUserPetModal.styled"
 
 export const AddUserPetModal = ({ onClose }) => {
-    const dispatch = useDispatch()
+//    const dispatch = useDispatch()
     const [modalPage, setModalPage] = useState(1)
     const [pet, setPet] = useState({})
     
