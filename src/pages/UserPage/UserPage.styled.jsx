@@ -45,6 +45,10 @@ const AddPetText = styled.p`
 const AddPetBtn = styled.button`
   border: none;
   background-color: transparent;
+
+  :hover {
+    transform: scale(1.3);
+  }
 `;
 const PetList = styled.ul`
   margin-top: 26px;

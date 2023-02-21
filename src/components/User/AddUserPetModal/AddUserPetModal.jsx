@@ -22,36 +22,12 @@ export const AddUserPetModal = ({ onClose }) => {
     const [pet, setPet] = useState({})
     const dispatch = useDispatch()
     const formData = new FormData()
-
-    // const onSubmit = (evt) => {
-    //     evt.preventDefault()
-    //     const formData = new FormData()
-    //     const name = evt.target.elements.name.value
-    //     formData.append("name", name)
-    //     const date = evt.target.elements.date.value
-    //     formData.append("date", date)
-    //     const breed = evt.target.elements.breed.value
-    //     formData.append("breed", breed)
-    //     const avatarURL = evt.target.elements.avatarURL.files
-    //     const petPhoto = avatarURL[0]
-    //     formData.append("petPhoto", petPhoto)
-    //     const comments = evt.target.elements.comments.value
-    //     formData.append("comments", comments)
-    //     console.log(formData);
-    //     dispatch(addPet(formData))
-    //     onClose()
-    // }
-
-    
     
     const firstSubmit = (evt) => {
         evt.preventDefault()
         const name = evt.target.elements.name.value
-        formData.append("name", name)
         const date = evt.target.elements.date.value
-        formData.append("date", date)
         const breed = evt.target.elements.breed.value
-        formData.append("breed", breed)
         const petInfo = { name, date, breed }
         setPet({ ...pet, ...petInfo })
         setModalPage(2)
@@ -67,8 +43,6 @@ export const AddUserPetModal = ({ onClose }) => {
         formData.append("petPhoto", petPhoto)
         const comments = evt.target.elements.comments.value
         formData.append("comments", comments)
-        const petInfo = { petPhoto, comments }
-        setPet({ ...pet, ...petInfo })
         dispatch(addPet(formData))
         onClose()
     }

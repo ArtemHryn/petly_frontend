@@ -16,13 +16,14 @@ import { InfoItem } from './UserInfoString';
 import { useSelector } from 'react-redux';
 import { getUser } from 'redux/auth/authSelector';
 import { logout, pushUserPhoto } from 'redux/auth/auth-operations';
+import { format } from 'date-fns';
 
 export const UserInfo = () => {
     const dispatch = useDispatch()
     const { name, email, birthday, phone, city, userPhotoURL } = useSelector(getUser)
-
-    const info = { name, email, birthday, phone, city }
-    
+    const parsedDate = new Date(Date.parse(birthday));
+    const info = { name, email, birthday: format(new Date(parsedDate),'dd.MM.yyyy'), phone, city }
+    console.log(info);
     const onChange = (evt) => {
         const files = evt.target.files;
         dispatch(pushUserPhoto({userPhoto: files[0]}))

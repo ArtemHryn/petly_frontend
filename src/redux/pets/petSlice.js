@@ -13,11 +13,11 @@ const petsSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(getPets.fulfilled, (state, action) => {
-        state.pets = action.payload;
+        state.pets = action.payload.pets;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(getPets.pending, (state, action) => {
+      .addCase(getPets.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(getPets.rejected, (state, action) => {
@@ -25,11 +25,12 @@ const petsSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(addPet.fulfilled, (state, action) => {
+        console.log(action);
         state.pets = [...state.pets, action.payload];
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(addPet.pending, (state, action) => {
+      .addCase(addPet.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(addPet.rejected, (state, action) => {
@@ -42,7 +43,7 @@ const petsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(deletePet.pending, (state, action) => {
+      .addCase(deletePet.pending, state => {
         state.isRefreshing = true;
       })
       .addCase(deletePet.rejected, (state, action) => {

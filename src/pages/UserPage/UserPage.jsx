@@ -14,20 +14,20 @@ import {
 import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
 import { UserPetItem } from '../../components/User/UserPetItem';
-import { getUserPets } from 'helpers/axios/getUserPets';
 import { ModalLayout } from 'components/ModalLayout/ModalLayout';
-import {AddUserPetModal} from "components/AddUserPetModal/AddUserPetModal"
+import {AddUserPetModal} from "components/User/AddUserPetModal/AddUserPetModal"
+import { useDispatch, useSelector } from 'react-redux';
+import { getPets } from 'redux/pets/petsOperations';
+import { petsList } from 'redux/pets/petSelectors';
 
 export const UserPage = () => {
-  const [petList, setPetList] = useState(null)
+  const dispatch = useDispatch()
+  const userPets = useSelector(petsList)
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-        getUserPets().then(res => {
-            console.log(res);
-            setPetList(res.data)
-        })
-  }, [])
+    dispatch(getPets())
+  }, [dispatch])
   
   const toggleModal = () => {
     setShowModal(showModal => !showModal)
@@ -44,15 +44,14 @@ export const UserPage = () => {
                 <UserPageTitle>My pets:</UserPageTitle>
                 <AddPetBox>
                     <AddPetText>Add pet</AddPetText>
-                <AddPetBtn type="button" onClick={toggleModal}>
+                      <AddPetBtn type="button" onClick={toggleModal}>
                         <AiFillPlusCircle style={{display: "block", fontSize: "40px", color: "#F59256"}} />
-                    </AddPetBtn>
+                      </AddPetBtn>
                 </AddPetBox>
             </PetTitleBox>
-            {petList ? (<PetList>
-              {petList.map(pet => {
-                const {_id, name, breed, date, avatarURL, comments} = pet
-                return (<UserPetItem key={_id} id={_id} name={name} breed={breed} date={date} avatarURL={avatarURL} comments={comments} />)
+            {userPets.length !== 0 ? (<PetList>
+              {userPets.map(pet => {
+                return (<UserPetItem id={pet._id} key={pet._id} pet={pet} />)
               })}
             </PetList>) : 
               (
