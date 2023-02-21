@@ -25,8 +25,6 @@ export const store = configureStore({
     filter: filterSlice.reducer,
     news: newsReducer,
     pets: petsReducer,
-
-
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
