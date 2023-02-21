@@ -44,4 +44,10 @@ h5 {
   padding: 0;
 }
 
+
+#root {
+  display: flex;
+  flex-direction: column;
+min-height: 100vh;
+}
 `;
