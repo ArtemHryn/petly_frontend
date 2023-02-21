@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { updateUser } from "redux/auth/auth-operations"
 import { UserDataChangeBtn, UserInfoData, UserInfoDescr, UserInfoInput, UserInfoItem, StyledFaPen, StyledCheck } from "./styles/UserInfoString.styled"
-import { format } from 'date-fns';
+//import { format } from 'date-fns';
 
 export const InfoItem = ({ item }) => {
     const [name, value] = item
