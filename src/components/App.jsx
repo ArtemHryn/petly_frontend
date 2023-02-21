@@ -10,8 +10,8 @@ import { fetchUser } from 'redux/auth/auth-operations';
 import { getRefreshing } from 'redux/auth/authSelector';
 
 // import { AnimatePresence } from 'framer-motion';
-// import { RestrictedRoute } from 'helpers/PublicRoute';
-// import { PrivateRoute } from 'helpers/PrivateRoute';
+import { RestrictedRoute } from 'helpers/PublicRoute';
+import { PrivateRoute } from 'helpers/PrivateRoute';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage').then(module => ({
@@ -55,6 +55,22 @@ const UserPage = lazy(() =>
   }))
 );
 
+const VerifyPage = lazy(() =>
+  import('../pages/VerifyPage').then(module => ({
+    default: module.VerifyPage,
+  }))
+);
+const RestorePasswordPage = lazy(() =>
+  import('../pages/RestorePasswordPage').then(module => ({
+    default: module.RestorePasswordPage,
+  }))
+);
+const ForgotPasswordPage = lazy(() =>
+  import('../pages/ForgotPasswordPage').then(module => ({
+    default: module.ForgotPasswordPage,
+  }))
+);
+
 const NotFoundPage = lazy(() =>
   import('../pages/NotFoundPage').then(module => ({
     default: module.NotFoundPage,
@@ -76,40 +92,64 @@ export const App = () => {
     <>
       <ScrollToTop />
 
-        {/* <AnimatePresence mode="wait"> */}
-        <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<SharedLayout />}>
-            <Route index element={<Navigate replace to="home" />} />
-            <Route path="home" element={<HomePage />} />
-            <Route path="notices" element={<NoticesPage />}>
-              <Route index element={<Navigate to="sell" />}></Route>
-              <Route path=":categoryName" element={<NoticeCategoryList />} />
-            </Route>
-            <Route path="news" element={<NewsPage />} />
-            <Route path="friends" element={<OurFriendsPage />} />
-            <Route
-              path="login"
-              element={<LoginPage />}
-              // element={<RestrictedRoute redirectTo="/" component={<Login />} />}
-            />
-            <Route
-              path="register"
-              element={<RegisterPage />}
-              // element={
-              //   <RestrictedRoute redirectTo="/" component={<Register />} />
-              // }
-            />
-            <Route
-              path="user"
-              element={<UserPage />}
-              // element={
-              //   <PrivateRoute redirectTo="/login" component={<Profile />} />
-              // }
-            />
+      {/* <AnimatePresence mode="wait"> */}
+      <Routes key={location.pathname} location={location}>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Navigate replace to="home" />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="notices" element={<NoticesPage />}>
+            <Route index element={<Navigate replace to="sell" />} />
+            <Route path=":categoryName" element={<NoticeCategoryList />} />
           </Route>
+          <Route path="news" element={<NewsPage />} />
+          <Route path="friends" element={<OurFriendsPage />} />
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute redirectTo="/" component={<LoginPage />} />
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute redirectTo="/" component={<RegisterPage />} />
+            }
+          />
+          <Route
+            path="user"
+            element={
+              <PrivateRoute redirectTo="/login" component={<UserPage />} />
+            }
+          />
+          <Route
+            path="verify/:token"
+            element={
+              <RestrictedRoute redirectTo="/" component={<VerifyPage />} />
+            }
+          />
+          <Route
+            path="restore-password/:token"
+            element={
+              <RestrictedRoute
+                redirectTo="/"
+                component={<RestorePasswordPage />}
+              />
+            }
+          />
+          <Route
+            path="forgot-password"
+            element={
+              <RestrictedRoute
+                redirectTo="/"
+                component={<ForgotPasswordPage />}
+              />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        {/* </AnimatePresence> */}
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      {/* </AnimatePresence> */}
     </>
   );
 };
