@@ -1,18 +1,13 @@
 import { toast } from 'react-toastify';
 
-export const toastSuccess = message => {
-  toast.success(message, {
+export const toastSuccessRegister = message => {
+  return toast.success(message, {
     position: 'top-center',
     autoClose: 3000,
     hideProgressBar: false,
     progress: undefined,
+    pauseOnHover: false,
     theme: 'light',
-  });
-
-  toast.onChange(payload => {
-    if (payload.status === 'removed') {
-      console.log('Redirect');
-    }
   });
 };
 

@@ -17,16 +17,12 @@ export const RegisterPage = () => {
       backgroundSize="contain"
       backgroundRepeat="no-repeat"
       backgroundPosition={[
-        isTheSecondStep ? 'bottom -11% right 50%' : 'bottom',
+        isTheSecondStep ? 'bottom -28% right 50%' : 'bottom -20% right 50%',
+        'bottom',
         'bottom',
       ]}
       pt={[16, '170px', '46px']}
-      pb={[
-        isTheSecondStep ? '59px' : 22,
-        isTheSecondStep ? '223px' : '270px',
-        isTheSecondStep ? '51px' : '113px',
-      ]}
-      // height={['calc(100vh - 54px)', 'calc(100vh - 71px)', '100%']}
+      pb="0"
     >
       <RegisterForm
         isTheSecondStep={isTheSecondStep}

@@ -1,19 +1,20 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { ToastContainer } from 'react-toastify';
-import { register as registerUser } from 'redux/auth/auth-operations';
+import { toast, ToastContainer } from 'react-toastify';
+import { register as registerUser, logIn } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button, ErrorMsg } from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
 import {
-  toastSuccess,
+  toastSuccessRegister,
   toastError,
 } from 'helpers/toast-notifications/toasts-notifications';
 
 export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [isRegistered, setIsRegistered] = useState(false);
   const [formValues, setFormValues] = useState({
     email: '',
@@ -76,12 +77,20 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
     }
 
     if (response.payload.user) {
-      toastSuccess(
-        '🐶 Registered! Check your email and confirm your registration!'
+      toastSuccessRegister(
+        '🐶 Registered! Now you will redirected to your page!'
       );
+      await dispatch(logIn({ email, password }));
+
+      toast.onChange(async payload => {
+        if (payload.status === 'removed') {
+          navigate('/user');
+        }
+      });
       setIsRegistered(true);
       return;
     }
+
     return toastError(`😿 Whoops, something get wrong. Try again later`);
   };
 
@@ -225,7 +234,7 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
               )}
               <Button
                 type="submit"
-                style={{ marginBottom: 20 }}
+                marginBottom={[6, 8]}
                 disabled={
                   Object.keys(errors).length ||
                   !formValues.name ||
