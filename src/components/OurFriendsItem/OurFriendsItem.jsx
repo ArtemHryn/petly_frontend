@@ -21,8 +21,14 @@ const days = ["MN", "TU", "WE", "TH", "FR", "ST", "SU"]
 export const OurFriendItem = ({id, partners}) => {
     const [showTime, setShowTime] = useState(false);
 
-    const toggleTime = () => {
+    const toggleTime = (evt) => {
         setShowTime(showTime => !showTime);
+        if (!showTime) {
+            evt.currentTarget.style.color = "#f59256"
+        }
+        if (showTime) {
+            evt.currentTarget.style.color = "#000000"
+        }
     };
 
     const { title, url, addressUrl, imageUrl, address, workDays, phone, email } = partners
@@ -55,10 +61,8 @@ export const OurFriendItem = ({id, partners}) => {
             <FriendsInfoBox>
                 <FriendsLogo src={imageUrl ? imageUrl : {AllianceLogoHoriz}} alt="friendLogo" />
                 <FriendsInfoList>
-                    <FriendsInfoItem>
-                        <TimeBtn type="button" onClick={() => toggleTime()}>Time</TimeBtn>
-                    </FriendsInfoItem>
-                    <FriendsInfoItem>
+                    <FriendsInfoItem style={{display: "block"}} onClick={(evt) => toggleTime(evt)}>
+                        <TimeBtn type="button">Time</TimeBtn>
                         {workDays && workDays.length !== 0 ?
                             (workDays[0].isOpen && `${workDays[0].from}-${workDays[0].to}`) || (!workDays[0].isOpen && `${workDays[6].from}-${workDays[6].to}`) :
                             "---------"}

@@ -146,19 +146,20 @@ const TimeBtn = styled.button`
   line-height: 16px;
   display: flex;
   align-items: center;
-
-  :focus {
-    color: #f59256;
-  }
+  color: inherit;
+  padding: 0;
+  margin-bottom: 4px;
 
   @media screen and (min-width: 768px) {
     font-size: 14px;
     line-height: 1.36;
+    margin-bottom: 8px;
   }
 
   @media screen and (min-width: 1280px) {
     font-size: 16px;
     line-height: 1.38;
+    margin-bottom: 12px;
   }
 `;
 const FriendsInfoLink = styled.a`
