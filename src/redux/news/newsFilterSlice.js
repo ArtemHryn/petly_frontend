@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const newsFilterSlice = createSlice({
-  name: "filter",
+  name: "newsFilter",
   initialState: { search: ''},
   reducers: {
      setNewsFilter(state, action) {

@@ -4,4 +4,4 @@ export const selectIsLoading = state => state.news.isLoading;
 
 export const selectError = state => state.news.error;
 
-export const selectFilter = state => state.filter.search;
+export const selectFilter = state => state.newsFilter.search;

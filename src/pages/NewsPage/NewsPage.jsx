@@ -16,11 +16,16 @@ export const NewsPage = () => {
   const news = useSelector(selectNews);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  // const search = useSelector(selectFilter);
+  const search = useSelector(selectFilter);
   
-   useEffect(() => {
-    dispatch(fetchNews());
-   }, [dispatch]);
+ useEffect(() => {
+    const controller = new AbortController();
+    dispatch(fetchNews({
+      search,
+      signal: controller.signal,
+    }));
+    return () => controller.abort();
+   }, [dispatch, search]);
   
   return (
     <Container>

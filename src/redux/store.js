@@ -14,6 +14,7 @@ import { newsReducer } from './news/newsSlice';
 import { noticesReducer } from './notices/noticesSlice';
 import { filterSlice } from './notices/searchSlice';
 import { petsReducer } from './pets/petSlice';
+import { filterReducer } from './news/newsFilterSlice';
 
 
 export const store = configureStore({
@@ -24,6 +25,7 @@ export const store = configureStore({
     notices: noticesReducer,
     filter: filterSlice.reducer,
     news: newsReducer,
+    newsFilter: filterReducer,
     pets: petsReducer,
   },
   middleware: getDefaultMiddleware =>
