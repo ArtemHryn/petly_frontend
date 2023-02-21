@@ -13,7 +13,7 @@ import { partnersReducer } from './partners/partnersSlice';
 import { newsReducer } from './news/newsSlice';
 import { noticesReducer } from './notices/noticesSlice';
 import { filterSlice } from './notices/searchSlice';
-
+import { petsReducer } from './pets/petSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +21,9 @@ export const store = configureStore({
     sponsors: partnersReducer,
     notices: noticesReducer,
     filter: filterSlice.reducer,
-    news: newsReducer
+    news: newsReducer,
+    pets: petsReducer,
+
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
