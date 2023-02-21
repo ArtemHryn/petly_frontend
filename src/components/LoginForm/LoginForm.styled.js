@@ -42,7 +42,7 @@ export const Input = styled.input`
   padding-left: ${({ theme }) => theme.space[8]}px;
   padding-right: ${({ theme }) => theme.space[8]}px;
 
-${space}
+  ${space}
   @media screen and (min-width: ${({ theme }) => theme.sizes.tablet}) {
     line-height: ${({ theme }) => theme.lineHeights.tablet[4]};
     padding-top: ${({ theme }) => theme.space[7]}px;
@@ -75,10 +75,21 @@ export const LoginBtn = styled.button`
   padding-left: ${({ theme }) => theme.space[16]}px;
   padding-right: ${({ theme }) => theme.space[16]}px;
   margin-bottom: ${({ theme }) => theme.space[15]}px;
+  transition: 100ms linear;
+  &:hover {
+    transform: scale(1.06);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 
 export const Error = styled.p`
-  margin-bottom: 16px;
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-weight: ${({ theme }) => theme.fontWeights.light};
+  font-size: ${({ theme }) => theme.fontSizes.mobile[2]};
   color: red;
-  font-style: italic;
+  margin-bottom: ${({ theme }) => theme.space[7]}px;
+
+  ${space}
 `;
