@@ -28,6 +28,7 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     formValues,
@@ -39,6 +40,13 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
       ...formValues,
       [event.target.name]: event.target.value,
     });
+
+    if (
+      event.target.name === formValues.confirmedPassword &&
+      formValues.password === formValues.confirmedPassword
+    ) {
+      clearErrors('confirmedPassword');
+    }
   };
 
   const handleNextClick = e => {
