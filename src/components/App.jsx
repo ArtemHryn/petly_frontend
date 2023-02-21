@@ -1,10 +1,9 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 import React from 'react';
 import { ScrollToTop } from './ScrollToTop';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { NoticeCategoryList } from './Notices/NoticesCategoryList/NoticesCategoryList';
-import { MainLoader } from './Loader/MainLoader';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchUser } from 'redux/auth/auth-operations';
@@ -76,12 +75,10 @@ export const App = () => {
   return (
     <>
       <ScrollToTop />
-      <SharedLayout />
 
-      <Suspense fallback={<MainLoader />}>
         {/* <AnimatePresence mode="wait"> */}
         <Routes key={location.pathname} location={location}>
-          <Route path="/">
+          <Route path="/" element={<SharedLayout />}>
             <Route index element={<Navigate replace to="home" />} />
             <Route path="home" element={<HomePage />} />
             <Route path="notices" element={<NoticesPage />}>
@@ -113,7 +110,6 @@ export const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         {/* </AnimatePresence> */}
-      </Suspense>
     </>
   );
 };
