@@ -10,8 +10,7 @@ const AddPetModalBox = styled.div`
     margin-right: auto;
     margin-left: auto;
     padding: 20px 20px 40px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+
 
     @media screen and (min-width: 768px) {
         width: 608px;
@@ -41,7 +40,7 @@ const AddPetModalTitle = styled.p`
         margin-bottom: 40px;
     }
 `;
-const AddPetodalForm = styled.form`
+const AddPetModalForm = styled.form`
     text-align: center;
 `;
 const AddPetModalLabel = styled.label`
@@ -226,7 +225,7 @@ const AddPetModalNoBtn = styled.button`
 export {
     AddPetModalBox,
     AddPetModalTitle,
-    AddPetodalForm,
+    AddPetModalForm,
     AddPetModalLabel,
     AddPetModalTextInput,
     AddPetPhotoBox,
