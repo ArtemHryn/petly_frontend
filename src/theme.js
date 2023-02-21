@@ -26,6 +26,7 @@ export const theme = {
     gradient: 'linear-gradient(90deg, #FF634E 0%, #FFDF48 105.44%)',
     sectionBG: '#FDF7F2',
     hightAccent: '#FF6101',
+    links: '#181C27',
   },
   backgroundColor: { accent: '#FDF7F2', white: '#FFFFFF', orange: '#F59256' },
   opacity: {},
