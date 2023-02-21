@@ -28,7 +28,7 @@ const UserBox = styled.div`
   @media screen and (min-width: 1280px) {
     display: block;
     width: 411px;
-    height: 563px;
+    height: 590px;
     margin-left: -16px;
     padding: 20px 16px 18px;
     margin-right: 32px;
@@ -76,74 +76,8 @@ const UserInfoList = styled.ul`
     margin-bottom: 24px;
   }
 `
-const UserInfoItem = styled.li`
-  display: flex;
-  margin-bottom: 12px;
-  width: 252px;
-  align-items: center;
 
-  @media screen and (min-width: 768px) {
-    margin-bottom: 8px;
-    width: 379px;
-  }
 
-  @media screen and (min-width: 1280px) {
-    margin-bottom: 15px;
-  }
-`
-const UserInfoDescr = styled.p`
-  font-family: ${theme.fonts.main};
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.04em;
-  color: #111111;
-  width: 56px;
-
-  @media screen and (min-width: 768px) {
-    font-size: 18px;
-    line-height: 1.39;
-    width: 83px;
-  }
-`
-const UserInfoLabel = styled.label``
-const UserInfoInput = styled.input`
-  border: none;
-  background-color: transparent;
-  padding-left: 18px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  width: 141px;
-  border-radius: 40px;
-  margin-right: 9px;
-
-  :focus {
-    background: #fdf7f2;
-    outline: 1px solid rgba(245, 146, 86, 0.5);
-  }
-
-  ::placeholder {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 1.33;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.04em;
-    color: #111111;
-  }
-
-  @media screen and (min-width: 768px) {
-    padding-left: 12px;
-    width: 216px;
-
-    ::placeholder {
-      font-size: 18px;
-      line-height: 1.39;
-    }
-  }
-`;
 const LogOutBtn = styled.button`
   border: none;
   background-color: transparent;
@@ -170,8 +104,5 @@ export {
     UserPhotoForm,
     UserPhotoLabel,
     UserInfoList,
-    UserInfoItem,
-    UserInfoDescr,
-    UserInfoLabel,
-    UserInfoInput,
-    LogOutBtn}
+    LogOutBtn
+}

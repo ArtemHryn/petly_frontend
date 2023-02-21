@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { space } from 'styled-system';
 import { motion } from 'framer-motion';
 
@@ -45,6 +46,12 @@ export const Like = styled(motion.button)`
   border: none;
 `;
 
+export const LikeContainer = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const LikeSvg = styled(AiOutlineHeart)`
   font-size: 28px;
   background: transparent;
@@ -57,6 +64,7 @@ export const IsLikedSvg = styled(AiFillHeart)`
   background: transparent;
 
   fill: #f59256;
+  ${space}
 `;
 
 export const CardTitle = styled.h4`
@@ -93,4 +101,9 @@ export const Text = styled.p`
   text-align: center;
 
   color: #111111;
+`;
+
+export const DeleteIcon = styled(RiDeleteBin5Fill)`
+  margin-left: 10px;
+  font-size: 20px;
 `;

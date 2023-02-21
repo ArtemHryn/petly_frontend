@@ -11,7 +11,7 @@ export const CardList = styled.ul`
 export const CardItem = styled.li`
   margin-bottom: 32px;
   background-color: #ffffff;
-  height: 606px;
+  height: 626px;
 
   box-shadow: ${p => p.theme.shadows.regular};
   border-radius: 0px 0px 20px 20px;
