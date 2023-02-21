@@ -1,8 +1,10 @@
-import {useState} from "react"
+import { useState } from "react"
+import {useDispatch} from "react-redux"
+import { addPet } from "redux/pets/petsOperations"
 import {
     AddPetModalBox,
     AddPetModalTitle,
-    AddPetodalForm,
+    AddPetModalForm,
     AddPetModalLabel,
     AddPetModalTextInput,
     AddPetPhotoBox,
@@ -15,27 +17,35 @@ import {
     AddPhotoLabel,
 } from "./AddUserPetModal.styled"
 
-export const AddUserPetModal = ({onClose}) => {
+export const AddUserPetModal = ({ onClose }) => {
+    const dispatch = useDispatch()
     const [modalPage, setModalPage] = useState(1)
-    const [pets, setPets] = useState([])
-
-    const onSubmit = (evt) => {
+    const [pet, setPet] = useState({})
+    
+    const firstSubmit = (evt) => {
         evt.preventDefault()
         const name = evt.target.elements.name.value
-        const birthday = evt.target.elements.birthday.value
+        const date = evt.target.elements.date.value
         const breed = evt.target.elements.breed.value
-        const avatarURL = evt.target.elements.avatarURL.value
+        const petInfo = { name, date, breed }
+        setPet({ ...pet, ...petInfo })
+        setModalPage(2)
+    }
+    const secondSubmit = (evt) => {
+        evt.preventDefault()
+        const avatarURL = evt.target.elements.avatarURL.files
+        const petPhoto = avatarURL[0]
         const comments = evt.target.elements.comments.value
-        const pet = { name, birthday, breed, avatarURL, comments }
-        setPets([...pets, pet])
+        const petInfo = { petPhoto, comments }
+        setPet({ ...pet, ...petInfo })
         onClose()
     }
-    console.log(pets);
 
     return (<AddPetModalBox>
         <AddPetModalTitle>Add pet</AddPetModalTitle>
-        {modalPage === 1 && (<AddPetodalForm>
-            <AddPetModalLabel>
+        {modalPage === 1 && (
+            <AddPetModalForm onSubmit={firstSubmit}>
+                <AddPetModalLabel>
                 Name pet
                 <AddPetModalTextInput
                     type="text"
@@ -48,7 +58,7 @@ export const AddUserPetModal = ({onClose}) => {
                 <AddPetModalTextInput
                     type="text"
                     placeholder="Type date of birth"
-                    name="birthday"
+                    name="date"
                     />
                 </AddPetModalLabel>
             <AddPetModalLabel>
@@ -57,7 +67,7 @@ export const AddUserPetModal = ({onClose}) => {
             </AddPetModalLabel>
                 <AddPetodalBtnList>
                     <AddPetodalBtnItem>
-                        <AddPetModalOkBtn type="button" onClick={() => setModalPage(2)}>Next</AddPetModalOkBtn>
+                        <AddPetModalOkBtn type="submit">Next</AddPetModalOkBtn>
                     </AddPetodalBtnItem>
                     <AddPetodalBtnItem>
                         <AddPetModalNoBtn type="button" onClick={onClose}>
@@ -65,8 +75,10 @@ export const AddUserPetModal = ({onClose}) => {
                         </AddPetModalNoBtn>
                     </AddPetodalBtnItem>
                 </AddPetodalBtnList>
-            </AddPetodalForm>)}
-            {modalPage === 2 && (<AddPetodalForm>
+            </AddPetModalForm>
+        )}
+        {modalPage === 2 && (
+            <AddPetModalForm onSubmit={secondSubmit}>
                 <AddPhotoLabel>Add photo and some comments</AddPhotoLabel>
             <AddPetModalLabel>
                 <AddPetPhotoBox>
@@ -75,6 +87,7 @@ export const AddUserPetModal = ({onClose}) => {
                         accept="image/*"
                         type="file"
                         name="avatarURL"
+                            encType="multipart/form-data"
                     />
                 </AddPetPhotoBox>
                 </AddPetModalLabel>
@@ -88,13 +101,14 @@ export const AddUserPetModal = ({onClose}) => {
             </AddPetModalLabel>
                 <AddPetodalBtnList>
                     <AddPetodalBtnItem>
-                        <AddPetModalOkBtn type="submit" onSubmit={onSubmit}>Done</AddPetModalOkBtn>
+                        <AddPetModalOkBtn type="submit">Done</AddPetModalOkBtn>
                     </AddPetodalBtnItem>
                     <AddPetodalBtnItem>
                     <AddPetModalNoBtn type="button" onClick={() => setModalPage(1)}>Back</AddPetModalNoBtn>
                     </AddPetodalBtnItem>
                 </AddPetodalBtnList>
-            </AddPetodalForm>)}
+            </AddPetModalForm>
+        )}
         </AddPetModalBox>
     );
 }

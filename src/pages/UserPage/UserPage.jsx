@@ -15,16 +15,23 @@ import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
 import { UserPetItem } from '../../components/User/UserPetItem';
 import { getUserPets } from 'helpers/axios/getUserPets';
+import { ModalLayout } from 'components/ModalLayout/ModalLayout';
+import {AddUserPetModal} from "components/AddUserPetModal/AddUserPetModal"
 
 export const UserPage = () => {
   const [petList, setPetList] = useState(null)
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
         getUserPets().then(res => {
             console.log(res);
             setPetList(res.data)
         })
-    }, [])
+  }, [])
+  
+  const toggleModal = () => {
+    setShowModal(showModal => !showModal)
+  }
 
     return <>
       <Container>
@@ -38,7 +45,7 @@ export const UserPage = () => {
                 <UserPageTitle>My pets:</UserPageTitle>
                 <AddPetBox>
                     <AddPetText>Add pet</AddPetText>
-                <AddPetBtn type="button">
+                <AddPetBtn type="button" onClick={toggleModal}>
                         <AiFillPlusCircle style={{display: "block", fontSize: "40px", color: "#F59256"}} />
                     </AddPetBtn>
                 </AddPetBox>
@@ -57,6 +64,9 @@ export const UserPage = () => {
             }
           </div>
         </UserPageBox>
+        {showModal && <ModalLayout setShowModal={toggleModal}>
+          <AddUserPetModal onClose={toggleModal}/>
+        </ModalLayout>}
         </Container>
     </>;
 };
