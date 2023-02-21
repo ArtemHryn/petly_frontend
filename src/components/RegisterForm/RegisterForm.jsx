@@ -11,9 +11,8 @@ import {
   toastError,
 } from 'helpers/toast-notifications/toasts-notifications';
 
-export const RegisterForm = () => {
+export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
   const dispatch = useDispatch();
-  const [isTheSecondStep, setIsTheSecondStep] = useState(false);
 
   const [isRegistered, setIsRegistered] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -29,6 +28,7 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     formValues,
@@ -40,11 +40,16 @@ export const RegisterForm = () => {
       ...formValues,
       [event.target.name]: event.target.value,
     });
+
+    if (
+      event.target.name === formValues.confirmedPassword &&
+      formValues.password === formValues.confirmedPassword
+    ) {
+      clearErrors('confirmedPassword');
+    }
   };
 
-
   const handleNextClick = e => {
-
     if (formValues.password !== formValues.confirmedPassword) {
       setError('confirmedPassword', {
         type: 'custom',
@@ -78,7 +83,6 @@ export const RegisterForm = () => {
       return;
     }
     return toastError(`😿 Whoops, something get wrong. Try again later`);
-
   };
 
   return (
@@ -107,7 +111,6 @@ export const RegisterForm = () => {
                 type="email"
                 placeholder="Email"
                 onChange={handleChange}
-                autoFocus
                 style={errors.email && { marginBottom: 1, borderColor: 'red' }}
               />
               {errors.email && <ErrorMsg>{errors.email?.message}</ErrorMsg>}
