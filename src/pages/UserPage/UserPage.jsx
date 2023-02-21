@@ -1,5 +1,5 @@
 import { AiFillPlusCircle } from 'react-icons/ai';
-import {useState} from "react"
+import { useState, useEffect } from 'react';
 import {
     UserPageTitle,
     PetTitleBox,
@@ -14,8 +14,6 @@ import {
 import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
 import { UserPetItem } from '../../components/User/UserPetItem';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { getUserPets } from 'helpers/axios/getUserPets';
 
 export const UserPage = () => {
@@ -40,7 +38,7 @@ export const UserPage = () => {
                 <UserPageTitle>My pets:</UserPageTitle>
                 <AddPetBox>
                     <AddPetText>Add pet</AddPetText>
-                <AddPetBtn type="button" onClick={toggleModal}>
+                <AddPetBtn type="button">
                         <AiFillPlusCircle style={{display: "block", fontSize: "40px", color: "#F59256"}} />
                     </AddPetBtn>
                 </AddPetBox>
@@ -59,9 +57,6 @@ export const UserPage = () => {
             }
           </div>
         </UserPageBox>
-        {showModal && <ModalLayout setShowModal={toggleModal}>
-          <AddUserPetModal onClose={toggleModal}/>
-        </ModalLayout>}
         </Container>
     </>;
 };

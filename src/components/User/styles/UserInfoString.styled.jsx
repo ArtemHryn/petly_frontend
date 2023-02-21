@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '../../../theme';
+import { FaPen } from 'react-icons/fa';
+import { BsCheckLg } from "react-icons/bs";
 
 const UserInfoDescr = styled.p`
   font-family: ${theme.fonts.main};
@@ -95,5 +97,24 @@ const UserInfoItem = styled.li`
     margin-bottom: 15px;
   }
 `
+const StyledFaPen = styled(FaPen)`
+  background: #FDF7F2;
+  color: #F59256; 
+  backdrop-filter: blur(2px);
+  padding: 5px; 
+  display: block; 
+  font-size: 20px; 
+  border-radius: 50%;
+`
 
-export { UserDataChangeBtn, UserInfoData, UserInfoDescr, UserInfoInput, UserInfoItem }
+const StyledCheck = styled(BsCheckLg)`
+  background: #FDF7F2;
+  color: #F59256; 
+  backdrop-filter: blur(2px);
+  padding: 5px; 
+  display: block; 
+  font-size: 20px; 
+  border-radius: 50%;
+`
+
+export { UserDataChangeBtn, UserInfoData, UserInfoDescr, UserInfoInput, UserInfoItem, StyledFaPen, StyledCheck}

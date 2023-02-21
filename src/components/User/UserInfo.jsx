@@ -1,5 +1,6 @@
 import { MdPhotoCamera } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
+import {useDispatch} from "react-redux"
 
 import {
     UserBox,
@@ -11,38 +12,34 @@ import {
     LogOutBtn,
 } from "./styles/UserInfo.styled"
 import userAvatar from "../../images/userAvatar.png"
-import { logout } from 'helpers/axios/logout';
 import { InfoItem } from './UserInfoString';
 import { useSelector } from 'react-redux';
+import { getUser } from 'redux/auth/authSelector';
+import { logout, pushUserPhoto } from 'redux/auth/auth-operations';
 
 export const UserInfo = () => {
-    const userData = useSelector(state => state.auth.user)
+    const dispatch = useDispatch()
+    const { name, email, birthday, phone, city, userPhotoURL } = useSelector(getUser)
 
-    const info = Object.keys(userData)
-    info.splice(0, 1)
-    info.splice(4, 1)
-    info.splice(5, 3)
-
-    const logOut = () => {
-        logout()
+    const info = { name, email, birthday, phone, city }
+    
+    const onChange = (evt) => {
+        const files = evt.target.files;
+        dispatch(pushUserPhoto({userPhoto: files[0]}))
     }
 
-    if (!userData) {
-        return
-    }
-
-    const { userPhotoURL } = userData
     return <UserBox>
                 <UserPhotoBox>
                     <UserPhoto src={userPhotoURL ? userPhotoURL : userAvatar} alt="profilePhoto" />
                     <UserPhotoForm>
-                <UserPhotoLabel>
+                        <UserPhotoLabel>
                         <input
-                                style={{ visibility: 'hidden', width: '1px' }}
-                                accept="image/*"
-                                type="file"
+                            style={{ visibility: 'hidden', width: '1px' }}
+                            accept="image/*"
+                            type="file"
+                            onChange={onChange}
+                            encType="multipart/form-data"
                             />
-                            
                             <MdPhotoCamera
                                 style={{
                                     color: '#F59256',
@@ -57,11 +54,11 @@ export const UserInfo = () => {
                 </UserPhotoBox>
         <div>
             <UserInfoList>
-                {info.map(item => {
-                    return (<InfoItem key={item} item={item} value={userData[item]} />)
+                {Object.entries(info).map(item => {
+                    return (<InfoItem key={item} item={item}/>)
                 })}
             </UserInfoList>
-            <LogOutBtn type="button" onClick={logOut}>
+            <LogOutBtn type="button" onClick={() => dispatch(logout())}>
                 <FiLogOut style={{color: "#F59256", marginRight: "8px", fontSize: "18px"}} />
                 Log Out
             </LogOutBtn>
