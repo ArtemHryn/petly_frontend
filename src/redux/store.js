@@ -10,15 +10,19 @@ import {
 } from 'redux-persist';
 import { authReducer } from './auth/authSlice';
 import { partnersReducer } from './partners/partnersSlice';
+import { newsReducer } from './news/newsSlice';
 import { noticesReducer } from './notices/noticesSlice';
 import { filterSlice } from './notices/searchSlice';
+import { petsReducer } from './pets/petSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    sponsors: partnersReducer,
     notices: noticesReducer,
     filter: filterSlice.reducer,
-    sponsors: partnersReducer,
+    news: newsReducer,
+    pets: petsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

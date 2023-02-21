@@ -76,3 +76,56 @@ export const updateLike = createAsyncThunk(
     }
   }
 );
+
+export const updateUser = createAsyncThunk(
+  'users/update',
+  async (info, thunkAPI) => {
+    try {
+      await axios.patch('users/update', info);
+      return info;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logout = createAsyncThunk('users/logout', async (_, thunkAPI) => {
+  const currentToken = thunkAPI.getState().auth.token;
+  if (currentToken === null) {
+    return thunkAPI.rejectWithValue();
+  }
+  try {
+    const { data } = await axios.get('/users/logout');
+    return data;
+  } catch (error) {
+    if (error.response.status === 401) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+    return thunkAPI.rejectWithValue('something went wrong, please, try again');
+  }
+});
+
+export const pushUserPhoto = createAsyncThunk(
+  'users/photo',
+  async (photo, thunkAPI) => {
+    const currentToken = thunkAPI.getState().auth.token;
+    if (currentToken === null) {
+      return thunkAPI.rejectWithValue();
+    }
+    try {
+      const res = await axios.patch('/users/photo', photo, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return res.data;
+    } catch (error) {
+      if (error.response.status === 401) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+      return thunkAPI.rejectWithValue(
+        'something went wrong, please, try again'
+      );
+    }
+  }
+);
