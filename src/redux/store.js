@@ -15,9 +15,11 @@ import { noticesReducer } from './notices/noticesSlice';
 import { filterSlice } from './notices/searchSlice';
 import { petsReducer } from './pets/petSlice';
 
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+
     sponsors: partnersReducer,
     notices: noticesReducer,
     filter: filterSlice.reducer,
