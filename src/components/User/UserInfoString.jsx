@@ -24,7 +24,7 @@ export const InfoItem = ({ item }) => {
     return <UserInfoItem>
             <UserInfoDescr>{name}</UserInfoDescr>
             {!focus ?
-            <UserInfoData>{value}</UserInfoData> :
+            <UserInfoData onDoubleClick={() => setFocus(prev => !prev)}>{value}</UserInfoData> :
             <UserInfoInput type="text" value={newValue} onChange={(evt) => setNewValue(evt.target.value)} autoFocus/>}
             <UserDataChangeBtn type="button" onClick={onEdit}>
                 {!focus ? <StyledFaPen/> : <StyledCheck/>}

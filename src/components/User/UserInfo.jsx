@@ -21,9 +21,15 @@ import { format } from 'date-fns';
 export const UserInfo = () => {
     const dispatch = useDispatch()
     const { name, email, birthday, phone, city, userPhotoURL } = useSelector(getUser)
-    const parsedDate = new Date(Date.parse(birthday));
-    const info = { name, email, birthday: format(new Date(parsedDate),'dd.MM.yyyy'), phone, city }
-    console.log(info);
+    let rightBirth
+    const parsedDate = new Date(Date.parse(birthday))
+    try {
+        rightBirth = format(new Date(parsedDate), 'dd.MM.yyyy')
+    } catch (error) {
+        rightBirth = format(new Date(birthday),'yyyy-MM-dd')
+    }
+    const info = { name, email, birthday: rightBirth, phone, city }
+
     const onChange = (evt) => {
         const files = evt.target.files;
         dispatch(pushUserPhoto({userPhoto: files[0]}))
