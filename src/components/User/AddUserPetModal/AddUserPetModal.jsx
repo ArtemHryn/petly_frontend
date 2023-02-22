@@ -21,8 +21,7 @@ export const AddUserPetModal = ({ onClose }) => {
     const [modalPage, setModalPage] = useState(1)
     const [pet, setPet] = useState({})
     const dispatch = useDispatch()
-    const formData = new FormData()
-    
+        
     const firstSubmit = (evt) => {
         evt.preventDefault()
         const name = evt.target.elements.name.value
@@ -34,7 +33,7 @@ export const AddUserPetModal = ({ onClose }) => {
     }
     const secondSubmit = (evt) => {
         evt.preventDefault()
-        console.log(pet);
+        const formData = new FormData()
         formData.append("name", pet.name)
         formData.append("date", pet.date)
         formData.append("breed", pet.breed)

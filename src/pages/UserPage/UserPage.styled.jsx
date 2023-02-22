@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { theme } from '../../theme';
 import noPets from "../../images/noPets.jpg"
 import noPetsMob from "../../images/noPetsMob.jpg"
 
@@ -10,7 +9,7 @@ const UserPageBox = styled.div`
 `
 
 const UserPageTitle = styled.p`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 20px;
   line-height: 1.35;
@@ -36,7 +35,7 @@ const AddPetBox = styled.div`
   align-items: center;
 `;
 const AddPetText = styled.p`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 20px;
   line-height: 1.35;
@@ -97,7 +96,7 @@ const NoUserPetsBox = styled.div`
 `
 
 const NoPetsText = styled.p`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 16px;
   line-height: 1.35;

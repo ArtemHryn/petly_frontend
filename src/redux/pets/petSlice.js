@@ -18,10 +18,10 @@ const petsSlice = createSlice({
         state.error = null;
       })
       .addCase(getPets.pending, state => {
-        state.isRefreshing = true;
+        state.isLoading = true;
       })
       .addCase(getPets.rejected, (state, action) => {
-        state.isLoggedIn = false;
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(addPet.fulfilled, (state, action) => {
@@ -31,10 +31,10 @@ const petsSlice = createSlice({
         state.error = null;
       })
       .addCase(addPet.pending, state => {
-        state.isRefreshing = true;
+        state.isLoading = true;
       })
       .addCase(addPet.rejected, (state, action) => {
-        state.isLoggedIn = false;
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(deletePet.fulfilled, (state, action) => {
@@ -44,10 +44,10 @@ const petsSlice = createSlice({
         state.error = null;
       })
       .addCase(deletePet.pending, state => {
-        state.isRefreshing = true;
+        state.isLoading = true;
       })
       .addCase(deletePet.rejected, (state, action) => {
-        state.isLoggedIn = false;
+        state.isLoading = false;
         state.error = action.payload;
       }),
 });
