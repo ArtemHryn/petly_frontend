@@ -17,7 +17,7 @@ export const RegisterPage = () => {
       backgroundSize="contain"
       backgroundRepeat="no-repeat"
       backgroundPosition={[
-        isTheSecondStep ? 'bottom -28% right 50%' : 'bottom -20% right 50%',
+        isTheSecondStep ? 'bottom -27% right 50%' : 'bottom -15% right 50%',
         'bottom',
         'bottom',
       ]}
