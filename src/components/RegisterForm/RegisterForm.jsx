@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
-import { register as registerUser, logIn } from 'redux/auth/auth-operations';
+import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button, ErrorMsg } from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
@@ -78,13 +78,12 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
 
     if (response.payload.user) {
       toastSuccessRegister(
-        '🐶 Registered! Now you will redirected to your page!'
+        '🐶 Registered! Check your email and confirm the registration!'
       );
-      await dispatch(logIn({ email, password }));
 
       toast.onChange(async payload => {
         if (payload.status === 'removed') {
-          navigate('/user');
+          navigate('/login');
         }
       });
       setIsRegistered(true);
