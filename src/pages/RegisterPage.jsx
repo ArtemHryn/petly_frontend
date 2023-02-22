@@ -22,7 +22,16 @@ export const RegisterPage = () => {
         'bottom',
       ]}
       pt={[16, '170px', '46px']}
+<<<<<<< Updated upstream
       pb="0"
+=======
+      pb={[
+        isTheSecondStep ? '59px' : 22,
+        isTheSecondStep ? '223px' : '270px',
+        isTheSecondStep ? '51px' : '113px',
+      ]}
+      height={['calc(100vh - 54px)', 'calc(100vh - 71px)']}
+>>>>>>> Stashed changes
     >
       <RegisterForm
         isTheSecondStep={isTheSecondStep}
