@@ -15,7 +15,8 @@ import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
 import { UserPetItem } from '../../components/User/UserPetItem';
 import { ModalLayout } from 'components/ModalLayout/ModalLayout';
-import {AddUserPetModal} from "components/User/AddUserPetModal/AddUserPetModal"
+// import { AddUserPetModal } from "components/User/AddUserPetModal/AddUserPetModal"
+import {AddUserPetModal} from "components/User/AddUserPetModal/Add"
 import { useDispatch, useSelector } from 'react-redux';
 import { getPets } from 'redux/pets/petsOperations';
 import { petsList } from 'redux/pets/petSelectors';
@@ -30,7 +31,7 @@ export const UserPage = () => {
   }, [dispatch])
   
   const toggleModal = () => {
-    setShowModal(showModal => !showModal)
+    setShowModal(true)
   }
     return <>
       <Container>
@@ -62,8 +63,11 @@ export const UserPage = () => {
             }
           </div>
         </UserPageBox>
-        {showModal && <ModalLayout setShowModal={toggleModal}>
+        {/* {showModal && <ModalLayout setShowModal={toggleModal}>
           <AddUserPetModal onClose={toggleModal}/>
+        </ModalLayout>} */}
+        {showModal && <ModalLayout setShowModal={toggleModal}>
+          <AddUserPetModal setShowModal={toggleModal}/>
         </ModalLayout>}
         </Container>
     </>;
