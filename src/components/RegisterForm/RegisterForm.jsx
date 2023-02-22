@@ -8,7 +8,7 @@ import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button, ErrorMsg } from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
 import {
-  toastSuccessRegister,
+  toastSuccess,
   toastError,
 } from 'helpers/toast-notifications/toasts-notifications';
 
@@ -77,7 +77,7 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
     }
 
     if (response.payload.user) {
-      toastSuccessRegister(
+      toastSuccess(
         '🐶 Registered! Check your email and confirm the registration!'
       );
 
