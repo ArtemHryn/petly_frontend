@@ -2,10 +2,19 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { Box } from 'components/Box';
+
 import { toast, ToastContainer } from 'react-toastify';
 import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
-import { Form, Input, Button, ErrorMsg } from './RegisterForm.styled';
+import {
+  Form,
+  Input,
+  Button,
+  ErrorMsg,
+  ShowPasswordButton,
+} from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
 import {
   toastSuccess,
@@ -16,6 +25,10 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isRegistered, setIsRegistered] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    showPassBtn: false,
+    showConfirmPassBtn: false,
+  });
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -64,6 +77,13 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
 
   const handleBackClick = () => {
     setIsTheSecondStep(false);
+  };
+
+  const handleShowPassword = event => {
+    setShowPassword({
+      ...showPassword,
+      [event.currentTarget.name]: !showPassword[event.currentTarget.name],
+    });
   };
 
   const onSubmit = async ({ email, password, name, city, phone }) => {
@@ -122,41 +142,65 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
                 style={errors.email && { marginBottom: 1, borderColor: 'red' }}
               />
               {errors.email && <ErrorMsg>{errors.email?.message}</ErrorMsg>}
-              <Input
-                type="password"
-                {...register('password', {
-                  required: 'Please, enter your password',
-                  minLength: { value: 7, message: 'Min-length is 7' },
-                  maxLength: {
-                    value: 32,
-                    message: 'Max-length is 32',
-                  },
-                })}
-                placeholder="Password"
-                value={formValues.password}
-                onChange={handleChange}
-                style={
-                  errors.password && { marginBottom: 1, borderColor: 'red' }
-                }
-              />
+              <Box mb={errors.password ? 1 : 8} position="relative">
+                <Input
+                  type={showPassword.showPassBtn ? 'text' : 'password'}
+                  {...register('password', {
+                    required: 'Please, enter your password',
+                    minLength: { value: 7, message: 'Min-length is 7' },
+                    maxLength: {
+                      value: 32,
+                      message: 'Max-length is 32',
+                    },
+                  })}
+                  placeholder="Password"
+                  value={formValues.password}
+                  onChange={handleChange}
+                  style={errors.password && { borderColor: 'red' }}
+                />
+                <ShowPasswordButton
+                  type="button"
+                  name="showPassBtn"
+                  onClick={handleShowPassword}
+                >
+                  {showPassword.showPassBtn ? (
+                    <AiFillEye size="20px" />
+                  ) : (
+                    <AiFillEyeInvisible size="20px" />
+                  )}
+                </ShowPasswordButton>
+              </Box>
               {errors.password && (
                 <ErrorMsg>{errors.password?.message}</ErrorMsg>
               )}
-              <Input
-                type="password"
-                {...register('confirmedPassword', {
-                  required: 'Please, confirm password',
-                })}
-                placeholder="Confirm password"
-                value={formValues.confirmedPassword}
-                onChange={handleChange}
-                style={
-                  errors.confirmedPassword && {
-                    marginBottom: 1,
-                    borderColor: 'red',
+              <Box mb={errors.confirmedPassword ? 1 : 15} position="relative">
+                <Input
+                  type={showPassword.showConfirmPassBtn ? 'text' : 'password'}
+                  {...register('confirmedPassword', {
+                    required: 'Please, confirm password',
+                  })}
+                  placeholder="Confirm password"
+                  value={formValues.confirmedPassword}
+                  onChange={handleChange}
+                  mb
+                  style={
+                    errors.confirmedPassword && {
+                      borderColor: 'red',
+                    }
                   }
-                }
-              />
+                />
+                <ShowPasswordButton
+                  type="button"
+                  name="showConfirmPassBtn"
+                  onClick={handleShowPassword}
+                >
+                  {showPassword.showConfirmPassBtn ? (
+                    <AiFillEye size="20px" />
+                  ) : (
+                    <AiFillEyeInvisible size="20px" />
+                  )}
+                </ShowPasswordButton>
+              </Box>
               {errors.confirmedPassword && (
                 <ErrorMsg marginBottom={15}>
                   {errors.confirmedPassword?.message}
