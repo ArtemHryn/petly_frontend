@@ -86,9 +86,8 @@ const authSlice = createSlice({
           state.user.favorites.push(action.payload._id);
           return;
         }
-
         const index = state.user.favorites.findIndex(
-          favorite => favorite._id === action.payload._id
+          favorite => favorite === action.payload._id
         );
         state.user.favorites.splice(index, 1);
       })

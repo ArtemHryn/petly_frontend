@@ -1,4 +1,4 @@
-import { deleteNotice, fetchNotices } from './notices-operations';
+import { addNotice, deleteNotice, fetchNotices, getOwnerInfo } from './notices-operations';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
@@ -7,6 +7,7 @@ const initialState = {
   cardOwner: {},
   isLoading: false,
   error: null,
+  isAdding: false
 };
 
 const noticesSlice = createSlice({
@@ -40,6 +41,16 @@ const noticesSlice = createSlice({
       .addCase(deleteNotice.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload.message;
+      })
+      .addCase(getOwnerInfo.fulfilled, (state, action) => {
+        state.error = null;
+        state.cardOwner = { ...action.payload };
+      }).addCase(getOwnerInfo.rejected, (state, action) => {
+        state.error = action.error
+      }).addCase(addNotice.pending, (state) => {
+        state.isAdding = true
+      }).addCase(addNotice.fulfilled, (state, action) => {
+        state.notices.unshift(action.payload)
       }),
 });
 
