@@ -31,6 +31,7 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
+  width: 100%;
   font-family: ${({ theme }) => theme.fonts.main};
   font-weight: ${({ theme }) => theme.fontWeights.regular};
   font-size: ${({ theme }) => theme.fontSizes.mobile[5]};
@@ -39,7 +40,8 @@ export const Input = styled.input`
 
   border: ${({ theme }) => theme.borders.input};
   border-radius: ${({ theme }) => theme.radii.lg};
-  margin-bottom: ${({ theme }) => theme.space[8]}px;
+  margin-bottom: ${({ name, theme }) =>
+    name === 'password' || name === 'confirmedPassword' ? 0 : theme.space[8]}px;
   padding-top: ${({ theme }) => theme.space[6]}px;
   padding-bottom: ${({ theme }) => theme.space[6]}px;
   padding-left: ${({ theme }) => theme.space[8]}px;
@@ -99,4 +101,14 @@ export const ErrorMsg = styled.p`
   margin-bottom: ${({ theme }) => theme.space[7]}px;
 
   ${space}
+`;
+
+export const ShowPasswordButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
