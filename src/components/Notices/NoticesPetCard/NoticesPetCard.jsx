@@ -43,9 +43,9 @@ export const NoticePetCard = ({ item }) => {
   const userId = useSelector(getUserId);
   const [showModal, setShowModal] = useState(false);
 
-  const parsedDate = new Date(Date.parse(birthdate));
-
   const getAge = () => {
+    const parsedDate = new Date(Date.parse(birthdate));
+
     const { years, months } = intervalToDuration({
       start: new Date(),
       end: parsedDate,
@@ -124,7 +124,7 @@ export const NoticePetCard = ({ item }) => {
                   <Text>{location}</Text>
                 </ListElement>
                 <ListElement mb="0px">
-                  <Text>{getAge()}</Text>
+                  <Text>{birthdate ? getAge() : 'no info'}</Text>
                 </ListElement>
               </ul>
             </Box>

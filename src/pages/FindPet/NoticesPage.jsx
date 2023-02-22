@@ -7,6 +7,9 @@ import { NoticeCategoryNav } from 'components/Notices/NoticesCategoryNav/NoticeC
 import { AddPetButton } from 'components/Notices/NoticesCategoryNav/NoticeCategoryNav.styled';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
+import { ModalLayout } from 'components/ModalLayout/ModalLayout';
+import { AddNoticeModal } from 'components/Notices/AddNoticeModal/AddNoticeModal';
+import { AnimatePresence } from 'framer-motion';
 
 export const NoticesPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -32,7 +35,15 @@ export const NoticesPage = () => {
         <AiOutlinePlus style={{ color: '#FFFFFF', fontSize: '26px' }} />
         Add pet
       </AddPetButton>
-      {showModal && <div>Test</div>}
+      <AnimatePresence>
+        {' '}
+        {showModal && (
+          <ModalLayout setShowModal={setShowModal} maxWidth={[null, '608px']} maxHeight={[null, '885px']} p={[null, '40px 80px']}>
+            <AddNoticeModal setShowModal={setShowModal } />
+          </ModalLayout>
+        )}
+      </AnimatePresence>
+
       <Outlet />
     </Container>
   );

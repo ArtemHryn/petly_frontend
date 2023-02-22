@@ -42,4 +42,26 @@ export const deleteNotice = createAsyncThunk(
   }
 );
 
+export const getOwnerInfo = createAsyncThunk(
+  'noticces/getOwnerInfo',
+  async (owner, thunkAPI) => {
+    try {
+      const result = await axios(`notices/notice/${owner}`);
+      return result.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
+export const addNotice = createAsyncThunk(
+  'notices/addNotice',
+  async (formData, thunkAPI) => {
+    try {
+      const result = await axios.post('notices/', formData)
+      return result.data.pet
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
