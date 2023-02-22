@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
 import { Form, Input, Button, ErrorMsg } from './RegisterForm.styled';
@@ -13,7 +14,7 @@ import {
 
 export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [isRegistered, setIsRegistered] = useState(false);
   const [formValues, setFormValues] = useState({
     email: '',
@@ -77,11 +78,18 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
 
     if (response.payload.user) {
       toastSuccess(
-        '🐶 Registered! Check your email and confirm your registration!'
+        '🐶 Registered! Check your email and confirm the registration!'
       );
+
+      toast.onChange(async payload => {
+        if (payload.status === 'removed') {
+          navigate('/login');
+        }
+      });
       setIsRegistered(true);
       return;
     }
+
     return toastError(`😿 Whoops, something get wrong. Try again later`);
   };
 
@@ -225,7 +233,7 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
               )}
               <Button
                 type="submit"
-                style={{ marginBottom: 20 }}
+                marginBottom={[6, 8]}
                 disabled={
                   Object.keys(errors).length ||
                   !formValues.name ||

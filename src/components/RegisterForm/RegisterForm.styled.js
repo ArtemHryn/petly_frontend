@@ -45,7 +45,8 @@ export const Input = styled.input`
   padding-left: ${({ theme }) => theme.space[8]}px;
   padding-right: ${({ theme }) => theme.space[8]}px;
   &:nth-of-type(3) {
-    margin-bottom: ${({ theme }) => theme.space[15]}px;
+    margin-bottom: ${({ name, theme }) =>
+      name === 'phone' ? theme.space[11] : theme.space[15]}px;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.sizes.tablet}) {
@@ -85,6 +86,8 @@ export const Button = styled.button`
   padding-left: ${({ theme }) => theme.space[16]}px;
   padding-right: ${({ theme }) => theme.space[16]}px;
   margin-bottom: ${({ theme }) => theme.space[15]}px;
+
+  ${space}
 `;
 
 export const ErrorMsg = styled.p`
