@@ -57,9 +57,8 @@ export const UserPage = () => {
                 </AddPetBox>
             </PetTitleBox>
             {userPets.length !== 0 ? (<PetList>
-              {userPets.map(pet => {
-                return (<UserPetItem id={pet._id} key={pet._id} pet={pet} />)
-              })}
+              {userPets.map(pet => (<UserPetItem id={pet._id} key={pet._id} pet={pet} />)
+              )}
             </PetList>) :
             (
               <NoUserPetsBox>

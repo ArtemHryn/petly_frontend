@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { updateUser } from "redux/auth/auth-operations"
 import { UserDataChangeBtn, UserInfoData, UserInfoDescr, UserInfoInput, UserInfoItem, StyledFaPen, StyledCheck } from "./styles/UserInfoString.styled"
+import PropTypes from 'prop-types';
 
 
 export const InfoItem = ({ item }) => {
@@ -30,4 +31,8 @@ export const InfoItem = ({ item }) => {
                 {!focus ? <StyledFaPen/> : <StyledCheck/>}
             </UserDataChangeBtn>
         </UserInfoItem>
+}
+
+InfoItem.propTypes = {
+    item: PropTypes.array
 }

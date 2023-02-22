@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addPet } from 'redux/pets/petsOperations';
+import PropTypes from 'prop-types';
 import { ActionButton,
   Error,
   FileIcon,
@@ -206,3 +207,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
     </form>
   );
 };
+
+AddUserPetModal.propTypes = {
+    setShowModal: PropTypes.func
+}

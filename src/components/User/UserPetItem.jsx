@@ -29,10 +29,6 @@ export const UserPetItem = ({ id, pet }) => {
 }
 
 UserPetItem.propTypes = {
-    key: PropTypes.string,
-    name: PropTypes.string,
-    breed: PropTypes.string,
-    date: PropTypes.string,
-    avatarURL: PropTypes.string,
-    comments: PropTypes.string
+    id: PropTypes.string,
+    pet: PropTypes.object,
 }
