@@ -25,7 +25,6 @@ const petsSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(addPet.fulfilled, (state, action) => {
-        console.log(action);
         state.pets = [...state.pets, action.payload];
         state.isLoading = false;
         state.error = null;
