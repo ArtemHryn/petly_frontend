@@ -1,17 +1,16 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { CloseButton, CloseIcon, ModalContainer, ModalLayoutBox } from './ModalLayout.styled';
+import {
+  CloseButton,
+  CloseIcon,
+  ModalContainer,
+  ModalLayoutBox,
+} from './ModalLayout.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const ModalLayout = ({
-  setShowModal,
-  children,
-  boxShadow,
-  backgroundColor,
-}) => {
-  console.log(1);
+export const ModalLayout = ({ setShowModal, children, ...props }) => {
   useEffect(() => {
     const onCloseByEscape = e => {
       if (e.code === 'Escape') {
@@ -38,7 +37,7 @@ export const ModalLayout = ({
       exit={{ opacity: 0, transition: { duration: 0.3 } }}
       onClick={onBackdropClick}
     >
-      <ModalContainer backgroundColor={backgroundColor} boxShadow={boxShadow}>
+      <ModalContainer {...props}>
         <CloseButton onClick={() => setShowModal(false)}>
           <CloseIcon />
         </CloseButton>
