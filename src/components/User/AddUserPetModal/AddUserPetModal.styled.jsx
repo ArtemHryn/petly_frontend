@@ -1,6 +1,5 @@
 import styled from "styled-components"
-import { theme } from '../../theme';
-import Vector from "../../images/Vector.png"
+import Vector from "../../../images/Vector.png"
 
 const AddPetModalBox = styled.div`
     width: 280px;
@@ -26,7 +25,7 @@ const AddPetModalBox = styled.div`
     }
 `;
 const AddPetModalTitle = styled.p`
-    font-family: ${theme.fonts.main};
+    font-family: ${p => p.theme.colors.main};
     font-weight: 500;
     font-size: 24px;
     line-height: 1.38;
@@ -46,7 +45,7 @@ const AddPetModalForm = styled.form`
 const AddPetModalLabel = styled.label`
     text-align: left;
     display: block;
-    font-family: ${theme.fonts.main};
+    font-family: ${p => p.theme.colors.main};
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -71,7 +70,7 @@ const AddPetModalTextInput = styled.input`
     color: rgba(27, 27, 27, 0.6);
 
     ::placeholder {
-        font-family: ${theme.fonts.main};
+        font-family:${p => p.theme.colors.main};
         font-weight: 400;
         font-size: 14px;
         line-height: 1.36;
@@ -113,7 +112,7 @@ const AddPetPhotoBox = styled.div`
     }
 `
 const AddPhotoLabel = styled.label`
-    font-family: ${theme.fonts.main};
+    font-family: ${p => p.theme.colors.main};
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -141,7 +140,7 @@ const AddPetodalTextarea = styled.textarea`
     resize: none;
 
     ::placeholder {
-        font-family: ${theme.fonts.main};
+        font-family: ${p => p.theme.colors.main};
         font-weight: 400;
         font-size: 14px;
         line-height: 1.36;
@@ -183,7 +182,7 @@ const AddPetodalBtnItem = styled.li`
     }
 `;
 const AddPetModalOkBtn = styled.button`
-    font-family: ${theme.fonts.main};
+    font-family: ${p => p.theme.colors.main};
     font-weight: 500;
     font-size: 16px;
     line-height: 1.38;
@@ -203,7 +202,7 @@ const AddPetModalOkBtn = styled.button`
     }
 `;
 const AddPetModalNoBtn = styled.button`
-    font-family: ${theme.fonts.main};
+    font-family: ${p => p.theme.colors.main};
     font-weight: 500;
     font-size: 16px;
     line-height: 1.38;

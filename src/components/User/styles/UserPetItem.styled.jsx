@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { theme } from '../../../theme';
 
 const PetItem = styled.li`
   position: relative;
@@ -57,7 +56,7 @@ const DeletePetBtn = styled.button`
 `;
 const PetInfoList = styled.ul``;
 const PetInfoItem = styled.li`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 14px;
   line-height: 1.36;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { theme } from '../../../theme';
 
 const UserBox = styled.div`
   width: 280px;
@@ -54,7 +53,7 @@ const UserPhotoForm = styled.form`
   }
 `;
 const UserPhotoLabel = styled.label`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 400;
   font-size: 12px;
   line-height: 1.83;
@@ -84,7 +83,7 @@ const LogOutBtn = styled.button`
   display: flex;
   align-items: center;
   margin-left: auto;
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 16px;
   line-height: 1.38;
