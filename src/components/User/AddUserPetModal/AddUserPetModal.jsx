@@ -128,7 +128,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
             </LabelTitle>
             {errors?.breed?.message && <Error>{errors.breed.message}</Error>}
           </LabelContainer>
-          <Box display={[null, 'flex']}>
+          <Box display={[null, 'flex']} mt={'40px'}>
             <ActionButton
               mb={['12px', '0px']}
               order={[null, '1']}
@@ -176,7 +176,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
               })}
             />
           </Box>
-          <LabelTitle style={{ display: 'grid', justifyContent: 'center' }}>
+          <LabelTitle style={{ display: 'grid'}}>
             Comments
           </LabelTitle>
           <AddPetModalTextarea
@@ -189,7 +189,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
             onChange={onChangeTextArea}
             placeholder="Leave your comment"
           />
-          <Box display={[null, 'flex']}>
+          <Box display={[null, 'flex']} mt={'40px'}>
             <ActionButton
               type="submit"
               mb={['12px', '0px']}

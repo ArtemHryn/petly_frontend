@@ -1,10 +1,10 @@
-import { IoTrashSharp } from 'react-icons/io5';
 import {
   PetItem,
   PetPhoto,
   DeletePetBtn,
   PetInfoList,
   PetInfoItem,
+  Trash,
 } from './styles/UserPetItem.styled';
 import PropTypes from 'prop-types';
 import petPhotoNull from '../../images/petPhotoNull.jpg';
@@ -18,9 +18,7 @@ export const UserPetItem = ({ pet }) => {
     <PetItem>
       <PetPhoto src={avatarURL ? avatarURL : petPhotoNull} alt="petPhoto" />
       <DeletePetBtn type="button" onClick={() => dispatch(deletePet(_id))}>
-        <IoTrashSharp
-          style={{ color: 'rgba(17, 17, 17, 0.6)', fontSize: '20px' }}
-        />
+        <Trash/>
       </DeletePetBtn>
       <PetInfoList>
         <PetInfoItem>Name: {name}</PetInfoItem>
