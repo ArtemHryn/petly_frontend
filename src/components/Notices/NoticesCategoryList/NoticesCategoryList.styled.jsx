@@ -5,7 +5,6 @@ export const CardList = styled(motion.ul)`
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 32px;
   }
 `;
