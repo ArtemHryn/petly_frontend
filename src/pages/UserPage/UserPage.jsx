@@ -23,6 +23,7 @@ import { AnimatePresence } from 'framer-motion';
 import { ListLoader } from 'components/common/ListLoader/ListLoader';
 import { UpdatingLoader } from 'components/common/UpdatingLoader/UpdatingLoader';
 import { updateUser } from 'redux/auth/authSelector';
+import { Box } from 'components/Box';
 
 export const UserPage = () => {
   const dispatch = useDispatch();
@@ -35,15 +36,6 @@ export const UserPage = () => {
   useEffect(() => {
     dispatch(getPets());
   }, [dispatch]);
-
-  useEffect(() => {
-        if (showModal) {
-            document.querySelector('body').style.overflow = 'hidden';
-        }
-        if (!showModal) {
-            document.querySelector('body').style.overflow = 'scroll';
-        }
-    }, [showModal]);
 
   const toggleModal = () => {
     setShowModal(true);
@@ -71,7 +63,7 @@ export const UserPage = () => {
               {upadeteUserInfo && <UpdatingLoader />}
             <UserInfo />
           </div>
-          <div style={{flexGrow: "1"}}>
+          <Box flexGrow='1'>
             <PetTitleBox>
                 <UserPageTitle>My pets:</UserPageTitle>
                 {updatePetList && <UpdatingLoader />}
@@ -99,7 +91,7 @@ export const UserPage = () => {
                 <NoPetsText>There is no pets in your list</NoPetsText>
               </NoUserPetsBox>
             )}
-          </div>
+          </Box>
         </UserPageBox>
         )}
         <AnimatePresence>
