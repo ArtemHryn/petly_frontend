@@ -1,4 +1,3 @@
-import { AiFillPlusCircle } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import {
   UserPageTitle,
@@ -10,6 +9,7 @@ import {
   UserPageBox,
   NoUserPetsBox,
   NoPetsText,
+  PlusCircle,
 } from './UserPage.styled';
 import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
@@ -70,13 +70,7 @@ export const UserPage = () => {
               <AddPetBox>
                 <AddPetText>Add pet</AddPetText>
                 <AddPetBtn type="button" onClick={toggleModal}>
-                  <AiFillPlusCircle
-                    style={{
-                      display: 'block',
-                      fontSize: '40px',
-                      color: '#F59256',
-                    }}
-                  />
+                  <PlusCircle/>
                 </AddPetBtn>
               </AddPetBox>
             </PetTitleBox>
@@ -99,7 +93,7 @@ export const UserPage = () => {
             <ModalLayout
               setShowModal={setShowModal}
               maxWidth={[null, '608px']}
-              maxHeight={[null, '600px']}
+              maxHeight={[null, '670px']}
               p={[null, '40px 80px']}
             >
               <AddUserPetModal setShowModal={setShowModal} />

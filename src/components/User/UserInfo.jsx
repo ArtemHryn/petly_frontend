@@ -1,5 +1,3 @@
-import { MdPhotoCamera } from 'react-icons/md';
-import { FiLogOut } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -10,6 +8,8 @@ import {
   UserPhotoLabel,
   UserInfoList,
   LogOutBtn,
+  Camera,
+  LogOutIcon,
 } from './styles/UserInfo.styled';
 import userAvatar from '../../images/userAvatar.png';
 import { InfoItem } from './UserInfoString';
@@ -56,14 +56,7 @@ export const UserInfo = () => {
               onChange={onChange}
               encType="multipart/form-data"
             />
-            <MdPhotoCamera
-              style={{
-                color: '#F59256',
-                marginRight: '5px',
-                width: '18px',
-                height: '18px',
-              }}
-            />
+            <Camera/>
             Edit photo
           </UserPhotoLabel>
         </UserPhotoForm>
@@ -75,9 +68,7 @@ export const UserInfo = () => {
           ))}
         </UserInfoList>
         <LogOutBtn type="button" onClick={() => dispatch(logout())}>
-          <FiLogOut
-            style={{ color: '#F59256', marginRight: '8px', fontSize: '18px' }}
-          />
+          <LogOutIcon/>
           Log Out
         </LogOutBtn>
       </div>

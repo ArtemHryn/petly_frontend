@@ -176,7 +176,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
               })}
             />
           </Box>
-          <LabelTitle style={{ display: 'grid', justifyContent: 'center' }}>
+          <LabelTitle style={{ display: 'grid'}}>
             Comments
           </LabelTitle>
           <AddPetModalTextarea

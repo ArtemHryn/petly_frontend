@@ -94,15 +94,18 @@ export const FileLabel = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 116px;
-  height: 116px;
+  width: 208px;
+  height: 208px;
+  margin-left: auto;
+  margin-right: auto;
   background: #fdf7f2;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 12px;
+  margin-top: 20px;
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
-    width: 140px;
-    height: 140px;
+    width: 182px;
+    height: 182px;
   }
 `;
 
@@ -176,7 +179,7 @@ const AddPetModalTextarea = styled.textarea`
     }
 
     @media screen and (min-width: 768px) {
-        width: 394px;
+        width: 100%;
         height: 116px;
         padding: 11px 16px;
         margin-top: 12px;
