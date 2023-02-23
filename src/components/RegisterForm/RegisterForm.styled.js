@@ -46,6 +46,17 @@ export const Input = styled.input`
   padding-bottom: ${({ theme }) => theme.space[6]}px;
   padding-left: ${({ theme }) => theme.space[8]}px;
   padding-right: ${({ theme }) => theme.space[8]}px;
+
+  transition: border-color 0.3s cubic-bezier(0.5, 0.1, 0.2, 1);
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.inputAccent};
+    box-shadow: ${({ theme }) => theme.shadows.inputFocus};
+    transition: ${({ theme }) => theme.animations.input};
+  }
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.inputAccent};
+  }
   &:nth-of-type(3) {
     margin-bottom: ${({ name, theme }) =>
       name === 'phone' ? theme.space[11] : theme.space[15]}px;
@@ -72,7 +83,7 @@ export const Button = styled.button`
 
   background-color: ${({ children, theme, disabled }) => {
     if (disabled) {
-      return 'lightgray';
+      return '#f9a88c';
     }
     return children === 'Back' ? 'transparent' : theme.colors.accent;
   }};
@@ -89,14 +100,25 @@ export const Button = styled.button`
   padding-right: ${({ theme }) => theme.space[16]}px;
   margin-bottom: ${({ theme }) => theme.space[15]}px;
 
-  ${space}
+  transition: ${({ theme }) => theme.animations.button};
+
+  &:hover,
+  &:focus {
+    background-color: ${({ theme, disabled, children }) =>
+      !disabled && children !== 'Back' && theme.colors.hightAccent};
+
+    border-color: ${({ theme, children }) =>
+      children === 'Back' && theme.colors.hightAccent};
+  }
+
+  ${space};
 `;
 
 export const ErrorMsg = styled.p`
   font-family: ${({ theme }) => theme.fonts.main};
   font-weight: ${({ theme }) => theme.fontWeights.light};
   font-size: ${({ theme }) => theme.fontSizes.mobile[2]};
-  color: red;
+  color: ${({ theme }) => theme.colors.red};
 
   margin-bottom: ${({ theme }) => theme.space[7]}px;
 
@@ -104,11 +126,18 @@ export const ErrorMsg = styled.p`
 `;
 
 export const ShowPasswordButton = styled.button`
+  background-color: transparent;
+  color: ${({ theme }) => theme.colors.gray};
+  border-radius: 50%;
   position: absolute;
   top: 50%;
   right: 1em;
   transform: translateY(-50%);
   border: none;
-  background-color: transparent;
   cursor: pointer;
+  transition: ${({ theme }) => theme.animations.showPasswordBtn};
+
+  &:hover {
+    color: rgba(17, 17, 17, 1);
+  }
 `;
