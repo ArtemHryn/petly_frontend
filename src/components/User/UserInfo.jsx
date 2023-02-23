@@ -22,14 +22,18 @@ export const UserInfo = () => {
   const dispatch = useDispatch();
   const { name, email, birthday, phone, city, userPhotoURL } =
     useSelector(getUser);
-  let rightBirth;
-  const parsedDate = new Date(Date.parse(birthday));
-  try {
-    rightBirth = format(new Date(parsedDate), 'dd.MM.yyyy');
-  } catch (error) {
-    rightBirth = format(new Date(birthday), 'yyyy-MM-dd');
-  }
-  const info = { name, email, birthday: rightBirth, phone, city };
+
+  const setCorrectBD = () => {
+    const parsedDate = new Date(Date.parse(birthday));
+    return format(new Date(parsedDate), 'dd.MM.yyyy');
+  };
+  const info = {
+    name,
+    email,
+    birthday: birthday ? setCorrectBD() : 'no info',
+    phone,
+    city,
+  };
 
   const onChange = evt => {
     const files = evt.target.files;
@@ -66,7 +70,9 @@ export const UserInfo = () => {
       </UserPhotoBox>
       <div>
         <UserInfoList>
-          {Object.entries(info).map(item => <InfoItem key={item} item={item} />)}
+          {Object.entries(info).map(item => (
+            <InfoItem key={item} item={item} />
+          ))}
         </UserInfoList>
         <LogOutBtn type="button" onClick={() => dispatch(logout())}>
           <FiLogOut
