@@ -48,9 +48,9 @@ export const AddUserPetModal = ({ setShowModal }) => {
   };
 
   const onChangePage = () => {
-    const { name } = watch();
-    if (!name) {
-      setError(name === '' ? 'title' : 'name');
+    const { name, breed } = watch();
+    if (!name || !breed) {
+      setError(name === '' ? 'name' : 'breed');
       return;
     }
     setNextpage(true);
