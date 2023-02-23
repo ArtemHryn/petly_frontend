@@ -75,7 +75,6 @@ export const AddPetButton = styled(motion.button)`
   border-radius: 50%;
   border: none;
   box-shadow: ${p => p.theme.shadows.regular};
-  z-index: 100;
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     display: none;
   }
