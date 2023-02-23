@@ -27,6 +27,8 @@ export const theme = {
     sectionBG: '#FDF7F2',
     hightAccent: '#FF6101',
     links: '#181C27',
+    inputAccent: ' rgba(245, 146, 86, 1)',
+    red: '#FF0000',
   },
   backgroundColor: { accent: '#FDF7F2', white: '#FFFFFF', orange: '#F59256' },
   opacity: {},
@@ -72,11 +74,19 @@ export const theme = {
   },
   shadows: {
     regular: '7px 4px 14px rgba(49, 21, 4, 0.07)',
+    inputFocus: '0 0 5px rgba(245, 146, 86, 0.5)',
   },
   sizes: {
     mob: '320px',
     tablet: '768px',
     desktop: '1280px',
+  },
+  animations: {
+    input:
+      'border-color 0.3s cubic-bezier(0.5, 0.1, 0.2, 1), box-shadow 0.3s cubic-bezier(0.5, 0.1, 0.2, 1)',
+    button:
+      'background-color 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),border-color 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+    showPasswordBtn: 'color 0.3s cubic-bezier(0.65, 0, 0.35, 1)',
   },
 };
 
