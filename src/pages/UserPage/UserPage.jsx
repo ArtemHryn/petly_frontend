@@ -62,7 +62,7 @@ export const UserPage = () => {
             {userPets.length !== 0 ? (
               <PetList>
                 {userPets.map(pet => (
-                  <UserPetItem id={pet._id} key={pet._id} pet={pet} />
+                  <UserPetItem key={pet._id} pet={pet} />
                 ))}
               </PetList>
             ) : (
