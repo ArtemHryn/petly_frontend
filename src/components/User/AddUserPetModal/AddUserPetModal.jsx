@@ -6,7 +6,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addPet } from 'redux/pets/petsOperations';
 import PropTypes from 'prop-types';
-import { ActionButton,
+import {
+  ActionButton,
   Error,
   FileIcon,
   FileLabel,
@@ -15,7 +16,11 @@ import { ActionButton,
   LabelContainer,
   LabelTitle,
   Title,
-  Warning, AddPetModalFileInput, AddPetModalTextarea, AddPhotoLabel } from './AddUserPetModal.styled';
+  Warning,
+  AddPetModalFileInput,
+  AddPetModalTextarea,
+  AddPhotoLabel,
+} from './AddUserPetModal.styled';
 
 export const AddUserPetModal = ({ setShowModal }) => {
   const dispatch = useDispatch();
@@ -32,7 +37,6 @@ export const AddUserPetModal = ({ setShowModal }) => {
     setError,
     formState: { errors },
   } = useForm();
-
 
   const onChangeTextArea = e => {
     const { value } = e.target;
@@ -55,6 +59,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
     }
     setNextpage(true);
   };
+
   const onFormSubmit = data => {
     const formData = new FormData();
     Object.keys(data).forEach(key => {
@@ -62,15 +67,15 @@ export const AddUserPetModal = ({ setShowModal }) => {
         formData.append(key, data[key][0]);
         return;
       }
-      formData.append(key, data[key] || "no info");
+      formData.append(key, data[key] || 'no info');
     });
-    formData.append('comments', commentVal || "There are no commets about pet");
+    formData.append('comments', commentVal || 'There are no commets about pet');
     dispatch(addPet(formData));
-    setShowModal(false)
+    setShowModal(false);
   };
 
-    return (
-        <form onSubmit={handleSubmit(onFormSubmit)} ref={containerRef}>
+  return (
+    <form onSubmit={handleSubmit(onFormSubmit)} ref={containerRef}>
       <Title>Add Pet</Title>
       {!nextPage ? (
         <>
@@ -86,8 +91,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
             display="inline-flex"
             flexWrap="wrap"
             mb={['32px']}
-          >
-          </Box>
+          ></Box>
           <LabelContainer>
             <LabelTitle>
               Name pet{' '}
@@ -102,7 +106,6 @@ export const AddUserPetModal = ({ setShowModal }) => {
             </LabelTitle>
             {errors?.name?.message && <Error>{errors.name.message}</Error>}
           </LabelContainer>
-
           <LabelTitle>
             Date of birth
             <InputEnter
@@ -110,8 +113,8 @@ export const AddUserPetModal = ({ setShowModal }) => {
               placeholder="Enter the birthday"
               {...register('date', { required: 'date is required' })}
             />
-                        </LabelTitle>
-            <LabelContainer>
+          </LabelTitle>
+          <LabelContainer>
             <LabelTitle>
               Breed{' '}
               <Warning as="span" color="red">
@@ -125,7 +128,6 @@ export const AddUserPetModal = ({ setShowModal }) => {
             </LabelTitle>
             {errors?.breed?.message && <Error>{errors.breed.message}</Error>}
           </LabelContainer>
-          
           <Box display={[null, 'flex']}>
             <ActionButton
               mb={['12px', '0px']}
@@ -174,7 +176,9 @@ export const AddUserPetModal = ({ setShowModal }) => {
               })}
             />
           </Box>
-          <LabelTitle style={{display: "grid", justifyContent: "center"}}>Comments</LabelTitle>
+          <LabelTitle style={{ display: 'grid', justifyContent: 'center' }}>
+            Comments
+          </LabelTitle>
           <AddPetModalTextarea
             as="textarea"
             name="comments"
@@ -209,5 +213,5 @@ export const AddUserPetModal = ({ setShowModal }) => {
 };
 
 AddUserPetModal.propTypes = {
-    setShowModal: PropTypes.func
-}
+  setShowModal: PropTypes.func,
+};
