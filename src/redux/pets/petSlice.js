@@ -5,6 +5,7 @@ const initialState = {
   pets: [],
   isLoading: false,
   error: null,
+  isUpdating: false,
 };
 
 const petsSlice = createSlice({
@@ -26,27 +27,27 @@ const petsSlice = createSlice({
       })
       .addCase(addPet.fulfilled, (state, action) => {
         state.pets = [action.payload, ...state.pets];
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = null;
       })
       .addCase(addPet.pending, state => {
-        state.isLoading = true;
+        state.isUpdating = true;
       })
       .addCase(addPet.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = action.payload;
       })
       .addCase(deletePet.fulfilled, (state, action) => {
         const index = state.pets.findIndex(pet => pet._id === action.payload);
         state.pets.splice(index, 1);
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = null;
       })
       .addCase(deletePet.pending, state => {
-        state.isLoading = true;
+        state.isUpdating = true;
       })
       .addCase(deletePet.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = action.payload;
       }),
 });

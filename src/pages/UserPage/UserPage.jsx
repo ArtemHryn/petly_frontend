@@ -1,6 +1,5 @@
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
-import { ThreeCircles } from 'react-loader-spinner';
 import {
   UserPageTitle,
   PetTitleBox,
@@ -19,18 +18,32 @@ import { ModalLayout } from 'components/ModalLayout/ModalLayout';
 import { AddUserPetModal } from 'components/User/AddUserPetModal/AddUserPetModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPets } from 'redux/pets/petsOperations';
-import { petAwait, petsList } from 'redux/pets/petSelectors';
+import { petAwait, petsList, updateList } from 'redux/pets/petSelectors';
 import { AnimatePresence } from 'framer-motion';
+import { ListLoader } from 'components/common/ListLoader/ListLoader';
+import { UpdatingLoader } from 'components/common/UpdatingLoader/UpdatingLoader';
+import { updateUser } from 'redux/auth/authSelector';
 
 export const UserPage = () => {
   const dispatch = useDispatch();
   const userPets = useSelector(petsList);
-  const petListUpdate = useSelector(petAwait);
+  const pageAwait = useSelector(petAwait);
+  const updatePetList = useSelector(updateList)
+  const upadeteUserInfo = useSelector(updateUser)
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(getPets());
   }, [dispatch]);
+
+  useEffect(() => {
+        if (showModal) {
+            document.querySelector('body').style.overflow = 'hidden';
+        }
+        if (!showModal) {
+            document.querySelector('body').style.overflow = 'scroll';
+        }
+    }, [showModal]);
 
   const toggleModal = () => {
     setShowModal(true);
@@ -38,14 +51,30 @@ export const UserPage = () => {
   return (
     <>
       <Container>
-        <UserPageBox>
+        {pageAwait ? (<ListLoader />) : (
+          <UserPageBox
+            initial={{
+              y: -70,
+              opacity: 0.3,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.7,
+            type: 'cubic-bezier(.49,.99,.82,.98)',
+            delayChildren: 0.5,
+          },
+        }}>
           <div>
-            <UserPageTitle>My information:</UserPageTitle>
+              <UserPageTitle>My information:</UserPageTitle>
+              {upadeteUserInfo && <UpdatingLoader />}
             <UserInfo />
           </div>
-          <div>
+          <div style={{flexGrow: "1"}}>
             <PetTitleBox>
-              <UserPageTitle>My pets:</UserPageTitle>
+                <UserPageTitle>My pets:</UserPageTitle>
+                {updatePetList && <UpdatingLoader />}
               <AddPetBox>
                 <AddPetText>Add pet</AddPetText>
                 <AddPetBtn type="button" onClick={toggleModal}>
@@ -71,35 +100,14 @@ export const UserPage = () => {
               </NoUserPetsBox>
             )}
           </div>
-          {petListUpdate && (
-            <div
-              style={{
-                justifyContent: 'center',
-                marginTop: '20px',
-                display: 'flex',
-              }}
-            >
-              <ThreeCircles
-                height="100"
-                width="100"
-                color="#ffc107"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-                ariaLabel="three-circles-rotating"
-                outerCircleColor=""
-                innerCircleColor=""
-                middleCircleColor=""
-              />
-            </div>
-          )}
         </UserPageBox>
+        )}
         <AnimatePresence>
           {showModal && (
             <ModalLayout
               setShowModal={setShowModal}
               maxWidth={[null, '608px']}
-              maxHeight={[null, '540px']}
+              maxHeight={[null, '600px']}
               p={[null, '40px 80px']}
             >
               <AddUserPetModal setShowModal={setShowModal} />

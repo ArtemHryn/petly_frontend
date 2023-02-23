@@ -1,8 +1,9 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import noPets from "../../images/noPets.jpg"
 import noPetsMob from "../../images/noPetsMob.jpg"
 
-const UserPageBox = styled.div`
+const UserPageBox = styled(motion.div)`
   @media screen and (min-width: 1280px) {
     display: flex;
   }
@@ -86,7 +87,7 @@ const NoUserPetsBox = styled.div`
   }
 
   @media screen and (min-width: 1280px) {
-    width: 411px;
+    width: 100%;;
     height: 590px;
     margin-left: auto;
     padding: 20px 16px 18px;
