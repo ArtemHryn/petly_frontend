@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { theme } from '../../theme';
 import cantFind from "../../images/cantFind.jpg"
+import { motion } from 'framer-motion';
 
-const FriendsList = styled.ul`
+const FriendsList = styled(motion.ul)`
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;

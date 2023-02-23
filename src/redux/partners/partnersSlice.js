@@ -3,6 +3,8 @@ import { getSponsors } from './partnersOperations';
 
 const initialState = {
   partners: [],
+  isLoading: false,
+  error: null
 };
 
 const partnersSlice = createSlice({
@@ -12,11 +14,16 @@ const partnersSlice = createSlice({
     builder
       .addCase(getSponsors.fulfilled, (state, action) => {
         state.partners = action.payload.data;
+        state.isLoading = false
       })
-      .addCase(getSponsors.pending, (state, action) => {
+      .addCase(getSponsors.pending, state => {
+        state.isLoading = true
         state.partners = null;
       })
-      .addCase(getSponsors.rejected, (state, action) => {}),
+      .addCase(getSponsors.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload.message
+      }),
 });
 
 export const partnersReducer = partnersSlice.reducer;
