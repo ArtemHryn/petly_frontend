@@ -1,5 +1,5 @@
 import { AiFillPlusCircle } from 'react-icons/ai';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
 import {
   UserPageTitle,
@@ -27,13 +27,9 @@ export const UserPage = () => {
   const userPets = useSelector(petsList);
   const petListUpdate = useSelector(petAwait);
   const [showModal, setShowModal] = useState(false);
-  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      dispatch(getPets());
-      isFirstRender.current = false;
-    }
+    dispatch(getPets());
   }, [dispatch]);
 
   const toggleModal = () => {
@@ -66,7 +62,7 @@ export const UserPage = () => {
             {userPets.length !== 0 ? (
               <PetList>
                 {userPets.map(pet => (
-                  <UserPetItem id={pet._id} key={pet._id} pet={pet} />
+                  <UserPetItem key={pet._id} pet={pet} />
                 ))}
               </PetList>
             ) : (
