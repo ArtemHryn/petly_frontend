@@ -40,7 +40,9 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
   const dispatch = useDispatch();
   const { email, phone } = useSelector(selectOwnerInfo);
   // const error = useSelector(getNoticeError);
-  const formatedDate = format(new Date(Date.parse(birthdate)), 'dd.MM.yyyy');
+  const formatedDate = birthdate
+    ? format(new Date(Date.parse(birthdate)), 'dd.MM.yyyy')
+    : 'no info';
   const list = [
     { title: 'Name:', value: name },
     { title: 'Birthday:', value: formatedDate },
