@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getSponsors } from './partnersOperations';
 
 const initialState = {
-  partners: [],
+  partners: null,
   isLoading: false,
   error: null
 };

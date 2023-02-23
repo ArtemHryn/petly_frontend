@@ -86,7 +86,14 @@ export const OurFriendItem = ({id, partners}) => {
                 </FriendsInfoList>
                     
                 {showTime && (
-                    <TimeList>
+                    <TimeList
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            duration: 0.8,
+                            delay: 0.2,
+                            ease: [0, 0.71, 0.2, 1.01]
+                        }}>
                         {workTime.map(time => {
                             return <OurFriendTime key={time.day || "1"} days={time}/> 
                         })}
