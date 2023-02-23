@@ -33,6 +33,5 @@ export const UserPetItem = ({ pet }) => {
 };
 
 UserPetItem.propTypes = {
-  id: PropTypes.string,
   pet: PropTypes.object,
 };
