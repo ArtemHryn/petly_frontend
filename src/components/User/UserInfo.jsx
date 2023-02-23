@@ -24,8 +24,12 @@ export const UserInfo = () => {
     useSelector(getUser);
 
   const setCorrectBD = () => {
-    const parsedDate = new Date(Date.parse(birthday));
-    return format(new Date(parsedDate), 'dd.MM.yyyy');
+    try {
+      const parsedDate = new Date(Date.parse(birthday));
+      return format(new Date(parsedDate), 'dd.MM.yyyy');
+    } catch (error) {
+      return 'MM.DD.YYYY';
+    }
   };
   const info = {
     name,
