@@ -8,7 +8,6 @@ export const addPet = createAsyncThunk('pets/add', async (info, thunkAPI) => {
   }
   try {
     const res = await axios.post('pets', info);
-    console.log(res);
     return res.data.result;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

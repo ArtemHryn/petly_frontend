@@ -1,116 +1,143 @@
 import styled from "styled-components"
-import Vector from "../../../images/Vector.png"
+import { color, space, flexbox } from 'styled-system';
+import { motion } from 'framer-motion';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { Box } from 'components/Box';
 
-const AddPetModalBox = styled.div`
-    width: 280px;
-    height: 530px;
-    background: #FFFFFF;
-    border-radius: 20px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 20px 20px 40px;
-
-
-    @media screen and (min-width: 768px) {
-        width: 608px;
-        height: 570px;
-        box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
-        border-radius: 40px;
-        padding: 40px 80px;
-    }
-
-    @media screen and (min-width: 1280px) {
-        width: 608px;
-        height: 570px;
-    }
+export const Title = styled.h4`
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 33px;
+  color: #111111;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 49px;
+  }
 `;
-const AddPetModalTitle = styled.p`
-    font-family: ${p => p.theme.colors.main};
-    font-weight: 500;
+
+export const Warning = styled.p`
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  color: #111111;
+  margin-bottom: 20px;
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    font-size: 20px;
+    line-height: 27px;
+  }
+  ${color}
+`;
+
+export const LabelTitle = styled.label`
+  display: block;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
+
+  color: #111111;
+
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     font-size: 24px;
-    line-height: 1.38;
-    color: #111111;
-    text-align: center;
-    margin-bottom: 28px;
-
-    @media screen and (min-width: 1280px) {
-        font-size: 36px;
-        line-height: 1.36;
-        margin-bottom: 40px;
-    }
+    line-height: 26px;
+  }
+  ${space}
 `;
-const AddPetModalForm = styled.form`
-    text-align: center;
+
+export const InputEnter = styled.input`
+  width: 100%;
+  background: #fdf7f2;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  margin-top: 8px;
+  padding: 11px 20px 12px 20px;
+  ${space}
 `;
-const AddPetModalLabel = styled.label`
-    text-align: left;
-    display: block;
-    font-family: ${p => p.theme.colors.main};
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 1.47;
-    color: #111111;
 
-    @media screen and (min-width: 768px) {
-        font-size: 24px;
-        line-height: 1.1;
-    }
+export const ActionButton = styled(motion.button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
 
+  border-radius: 40px;
+  border: 2px solid #f59256;
+
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+
+  color: #ffffff;
+  background: #f59256;
+  ${color}
+  ${space}
+  ${flexbox}
 `;
-const AddPetModalTextInput = styled.input`
-    width: 240px;
-    height: 40px;
-    background: #FDF7F2;
-    border: 1px solid rgba(245, 146, 86, 0.5);
-    border-radius: 40px;
-    margin-top: 8px;
-    margin-bottom: 16px;
-    padding: 11px 14px;
-    color: rgba(27, 27, 27, 0.6);
 
-    ::placeholder {
-        font-family:${p => p.theme.colors.main};
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 1.36;
-        display: flex;
-        align-items: center;
-    }
-
-    @media screen and (min-width: 768px) {
-        width: 448px;
-        height: 48px;
-        padding: 11px 16px;
-        margin-top: 12px;
-        margin-bottom: 28px;
-
-        ::placeholder {
-            font-size: 16px;
-            line-height: 1.63;
-        }
-    }
+export const FileLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 116px;
+  height: 116px;
+  background: #fdf7f2;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    width: 140px;
+    height: 140px;
+  }
 `;
-const AddPetPhotoBox = styled.div`
-    position: relative;
-    width: 208px;
-    height: 208px;
-    background: #FDF7F2;
-    border-radius: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    background-image: url(${Vector});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
 
-    @media screen and (min-width: 768px) {
-        width: 182px;
-        height: 182px;
-    }
-`
+export const FileIcon = styled(AiOutlinePlus)`
+  font-size: 50px;
+  fill: rgba(17, 17, 17, 0.6);
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    font-size: 70px;
+  }
+`;
+
+export const ImgFile = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+`;
+
+export const LabelContainer = styled(Box)`
+  margin-bottom: 8px;
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    margin-bottom: 12px;
+  }
+  ${space}
+`;
+
+export const Error = styled.p`
+  margin-top: 8px;
+  color: red;
+  font-style: italic;
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+`;
+
 const AddPhotoLabel = styled.label`
     font-family: ${p => p.theme.colors.main};
     font-style: normal;
@@ -126,8 +153,8 @@ const AddPhotoLabel = styled.label`
         line-height: 1.1;
     }
 `
-const AddPetodalFileInput = styled.input``;
-const AddPetodalTextarea = styled.textarea`
+const AddPetModalFileInput = styled.input``;
+const AddPetModalTextarea = styled.textarea`
     width: 240px;
     height: 100px;
     background: #FDF7F2;
@@ -161,78 +188,9 @@ const AddPetodalTextarea = styled.textarea`
         }
     }
 `;
-const AddPetodalBtnList = styled.ul`
-    margin-top: 24px;
-
-    @media screen and (min-width: 768px) {
-        display: flex;
-        justify-content: center;
-    }
-`;
-const AddPetodalBtnItem = styled.li`
-    :not(:last-child) {
-        margin-bottom: 12px;
-    }
-
-    @media screen and (min-width: 768px) {
-        :not(:last-child) {
-            margin-bottom: 0;
-            margin-right: 20px;
-        }
-    }
-`;
-const AddPetModalOkBtn = styled.button`
-    font-family: ${p => p.theme.colors.main};
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.38;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.04em;
-    padding: 9px 99px;
-    background: #F59256;
-    border-radius: 40px;
-    border: none;
-    color: #FFF;
-
-    @media screen and (min-width: 768px) {
-        padding: 9px 66px;
-        font-size: 20px;
-        line-height: 1.35;
-    }
-`;
-const AddPetModalNoBtn = styled.button`
-    font-family: ${p => p.theme.colors.main};
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.38;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.04em;
-    padding: 9px 90px;
-    background: #FFFFFF;
-    border: 2px solid #F59256;
-    border-radius: 40px;
-
-    @media screen and (min-width: 768px) {
-        padding: 9px 66px;
-        font-size: 20px;
-        line-height: 1.35;
-    }
-`;
 
 export {
-    AddPetModalBox,
-    AddPetModalTitle,
-    AddPetModalForm,
-    AddPetModalLabel,
-    AddPetModalTextInput,
-    AddPetPhotoBox,
-    AddPetodalFileInput,
+    AddPetModalFileInput,
     AddPhotoLabel,
-    AddPetodalTextarea,
-    AddPetodalBtnList,
-    AddPetodalBtnItem,
-    AddPetModalOkBtn,
-    AddPetModalNoBtn,
+    AddPetModalTextarea,
 };
