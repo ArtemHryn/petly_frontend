@@ -4,17 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NoticePetCard } from '../NoticesPetCard/NoticesPetCard';
 import { CardList } from './NoticesCategoryList.styled';
 import { fetchNotices } from 'redux/notices/notices-operations';
-import { getNotices, getSearch } from 'redux/notices/noticesSelectors';
+import {
+  getNoticeIsLoading,
+  getNotices,
+  getSearch,
+} from 'redux/notices/noticesSelectors';
 import { changeCategory } from 'redux/notices/searchSlice';
 import { getFavorites, getIsLoggedIn } from 'redux/auth/authSelector';
-
-export const filterButtons = [
-  { title: 'lost/found', to: 'lost-found' },
-  { title: 'in good hands', to: 'for-free' },
-  { title: 'sell', to: 'sell' },
-  { title: 'favorite ads', to: 'favorite' },
-  { title: 'my ads', to: 'own' },
-];
+import { ListLoader } from 'components/common/ListLoader/ListLoader';
+import { ToastContainer } from 'react-toastify';
 
 export const NoticeCategoryList = () => {
   const { categoryName } = useParams();
@@ -23,6 +21,7 @@ export const NoticeCategoryList = () => {
   const search = useSelector(getSearch);
   const favorites = useSelector(getFavorites);
   const isLoggedIn = useSelector(getIsLoggedIn);
+  const isLoading = useSelector(getNoticeIsLoading);
 
   const filteredNotices = notices.map(notice => {
     if (isLoggedIn && favorites.includes(notice._id)) {
@@ -44,11 +43,31 @@ export const NoticeCategoryList = () => {
     return () => controller.abort();
   }, [categoryName, dispatch, search]);
 
-  return (
-    <CardList>
-      {filteredNotices.map(item => (
-        <NoticePetCard key={item._id} item={item} />
-      ))}
-    </CardList>
+  return isLoading ? (
+    <ListLoader />
+  ) : (
+    <>
+      {' '}
+      <ToastContainer />
+      <CardList
+        initial={{
+          y: -70,
+          opacity: 0.3,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.7,
+            type: 'cubic-bezier(.49,.99,.82,.98)',
+            delayChildren: 0.5,
+          },
+        }}
+      >
+        {filteredNotices.map(item => (
+          <NoticePetCard key={item._id} item={item} />
+        ))}
+      </CardList>
+    </>
   );
 };

@@ -1,4 +1,9 @@
-import { addNotice, deleteNotice, fetchNotices, getOwnerInfo } from './notices-operations';
+import {
+  addNotice,
+  deleteNotice,
+  fetchNotices,
+  getOwnerInfo,
+} from './notices-operations';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
@@ -7,7 +12,7 @@ const initialState = {
   cardOwner: {},
   isLoading: false,
   error: null,
-  isAdding: false
+  isUpdating: false,
 };
 
 const noticesSlice = createSlice({
@@ -28,10 +33,10 @@ const noticesSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(deleteNotice.pending, state => {
-        state.isLoading = true;
+        state.isUpdating = true;
       })
       .addCase(deleteNotice.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = null;
         const index = state.notices.findIndex(
           notice => notice._id === action.payload
@@ -39,18 +44,26 @@ const noticesSlice = createSlice({
         state.notices.splice(index, 1);
       })
       .addCase(deleteNotice.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = action.payload.message;
       })
       .addCase(getOwnerInfo.fulfilled, (state, action) => {
         state.error = null;
         state.cardOwner = { ...action.payload };
-      }).addCase(getOwnerInfo.rejected, (state, action) => {
-        state.error = action.error
-      }).addCase(addNotice.pending, (state) => {
-        state.isAdding = true
-      }).addCase(addNotice.fulfilled, (state, action) => {
-        state.notices.unshift(action.payload)
+      })
+      .addCase(getOwnerInfo.rejected, (state, action) => {
+        state.error = action.error;
+      })
+      .addCase(addNotice.pending, state => {
+        state.isUpdating = true;
+      })
+      .addCase(addNotice.fulfilled, (state, action) => {
+        state.isUpdating = false;
+        state.notices.unshift(action.payload);
+      })
+      .addCase(addNotice.rejected, (state, action) => {
+        state.isUpdating = false;
+        state.error = action.payload;
       }),
 });
 

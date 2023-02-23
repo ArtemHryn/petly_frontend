@@ -1,9 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const CardList = styled.ul`
+export const CardList = styled(motion.ul)`
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 32px;
   }
 `;
