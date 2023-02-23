@@ -66,9 +66,7 @@ export const UserInfo = () => {
       </UserPhotoBox>
       <div>
         <UserInfoList>
-          {Object.entries(info).map(item => {
-            return <InfoItem key={item} item={item} />;
-          })}
+          {Object.entries(info).map(item => <InfoItem key={item} item={item} />)}
         </UserInfoList>
         <LogOutBtn type="button" onClick={() => dispatch(logout())}>
           <FiLogOut
