@@ -38,8 +38,13 @@ export const NoticesPage = () => {
       <AnimatePresence>
         {' '}
         {showModal && (
-          <ModalLayout setShowModal={setShowModal} maxWidth={[null, '608px']} maxHeight={[null, '885px']} p={[null, '40px 80px']}>
-            <AddNoticeModal setShowModal={setShowModal } />
+          <ModalLayout
+            setShowModal={setShowModal}
+            maxWidth={[null, '608px']}
+            maxHeight={[null, '885px']}
+            p={[null, '40px 80px']}
+          >
+            <AddNoticeModal setShowModal={setShowModal} />
           </ModalLayout>
         )}
       </AnimatePresence>

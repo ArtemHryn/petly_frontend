@@ -60,6 +60,7 @@ const noticesSlice = createSlice({
         state.isUpdating = true;
       })
       .addCase(addNotice.fulfilled, (state, action) => {
+        state.error = null
         state.isUpdating = false;
         state.notices.unshift(action.payload);
       })

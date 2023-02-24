@@ -70,6 +70,7 @@ const authSlice = createSlice({
       .addCase(fetchUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
+        state.token = null
       })
       .addCase(updateLike.pending, state => {
         state.error = null;

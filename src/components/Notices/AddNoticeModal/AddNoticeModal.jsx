@@ -261,9 +261,13 @@ export const AddNoticeModal = ({ setShowModal }) => {
               </Warning>
               :
               <InputEnter
+                type="number"
                 name="price"
                 placeholder="10$"
-                {...register('price', { required: 'Price is required' })}
+                {...register('price', {
+                  required: 'Price is required',
+                  valueAsNumber: true,
+                })}
               />
             </LabelTitle>
           )}

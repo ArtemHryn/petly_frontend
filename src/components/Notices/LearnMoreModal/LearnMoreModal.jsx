@@ -51,7 +51,7 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
     { title: 'The sex:', value: sex },
     { title: 'Email:', value: email },
     { title: 'Phone:', value: phone },
-    { title: 'price:', value: price },
+    { title: 'price:', value: `${price}$` },
   ];
 
   useEffect(() => {
