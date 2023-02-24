@@ -76,6 +76,7 @@ const UserPhotoLabel = styled.label`
   justify-content: end;
   letter-spacing: 0.04em;
   color: #111111;
+  cursor: pointer;
 `;
 
 const UserInfoList = styled.ul`
@@ -92,6 +93,7 @@ const UserInfoList = styled.ul`
 
 
 const LogOutBtn = styled.button`
+  cursor: pointer;
   border: none;
   background-color: transparent;
   display: flex;

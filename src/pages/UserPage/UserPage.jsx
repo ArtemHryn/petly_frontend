@@ -10,6 +10,7 @@ import {
   NoUserPetsBox,
   NoPetsText,
   PlusCircle,
+  UserInformation,
 } from './UserPage.styled';
 import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
@@ -48,20 +49,22 @@ export const UserPage = () => {
             initial={{
               y: -70,
               opacity: 0.3,
-        }}
-        animate={{
-          y: 0,
-          opacity: 1,
-          transition: {
-            duration: 0.7,
-            type: 'cubic-bezier(.49,.99,.82,.98)',
-            delayChildren: 0.5,
-          },
-        }}>
-          <div>
-              <UserPageTitle>My information:</UserPageTitle>
-              {upadeteUserInfo && <UpdatingLoader />}
-            <UserInfo />
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.7,
+                type: 'cubic-bezier(.49,.99,.82,.98)',
+                delayChildren: 0.5,
+              },
+            }}>
+            <div>
+              <UserInformation>
+                <UserPageTitle>My information:</UserPageTitle>
+                {upadeteUserInfo && <UpdatingLoader />}
+              </UserInformation>
+              <UserInfo />
           </div>
           <Box flexGrow='1'>
             <PetTitleBox>

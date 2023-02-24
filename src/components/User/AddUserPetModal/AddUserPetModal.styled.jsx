@@ -99,6 +99,7 @@ export const ActionButton = styled(motion.button)`
   align-items: center;
   width: 100%;
   height: 40px;
+  cursor: pointer;
 
   border-radius: 40px;
   border: 2px solid #f59256;
