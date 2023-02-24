@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import {theme} from "../../theme"
 
@@ -167,7 +168,7 @@ const FriendsInfoLink = styled.a`
   text-decoration: none;
 `;
 
-const TimeList = styled.ul`
+const TimeList = styled(motion.ul)`
   position: absolute;
   z-index: 2;
   width: 120px;
