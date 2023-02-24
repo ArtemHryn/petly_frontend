@@ -11,10 +11,13 @@ import { OurFriendItem } from "../../components/OurFriendsItem/OurFriendsItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getSponsors } from "redux/partners/partnersOperations";
 import { useRef } from "react";
+import { parnersList, waiting } from "redux/partners/partnersSelectors";
+import { ListLoader } from "components/common/ListLoader/ListLoader";
 
 export const OurFriendsPage = () => {
     const dispatch = useDispatch()
-    const partners = useSelector(state => state.sponsors.partners)
+    const partners = useSelector(parnersList)
+    const wait = useSelector(waiting)
     const isFirstRender = useRef(true)
 
     useEffect(() => {
@@ -24,18 +27,13 @@ export const OurFriendsPage = () => {
         }
     }, [dispatch])
 
-    return <>
-    <Container>
-        <Title mb={[11]} fontSize={['24px', '48px', '40px']}>Our friends</Title>
-        {partners ? (
-            <FriendsList>
-            {partners.map(partner => {
-                return (<OurFriendItem key={partner._id} partners={partner} />
-                    )
-                })}
-            </FriendsList>) : 
-            (<NoInfoBox><NoInfoText>Sorry, searching for the information</NoInfoText></NoInfoBox>)
-        }
+    return <Container>
+        {wait ? (<ListLoader />) : (<>
+            <Title mb={[11]} fontSize={['24px', '48px', '40px']}>Our friends</Title>
+            {partners ? (<FriendsList>
+            {partners.map(partner => (<OurFriendItem key={partner._id} partners={partner} />)
+            )}</FriendsList>) : 
+            (<NoInfoBox><NoInfoText>Sorry, there is no information</NoInfoText></NoInfoBox>)}
+            </>)}
         </Container>
-    </>;
 };

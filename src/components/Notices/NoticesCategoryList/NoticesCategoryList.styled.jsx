@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Pagination } from '@mui/material';
 
 export const CardList = styled(motion.ul)`
+  margin-bottom: 40px;
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     display: flex;
     flex-wrap: wrap;
@@ -22,5 +24,23 @@ export const CardItem = styled.li`
   }
   @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
     width: calc((100% - 32px * 3) / 4);
+  }
+`;
+
+export const PaginationList = styled(Pagination)`
+  display: flex;
+  justify-content: center;
+  & > ul > li > button {
+    color: ${p => p.theme.colors.black};
+
+    &.Mui-selected {
+      background-color: ${p => p.theme.colors.accent};
+      color: ${p => p.theme.colors.white};
+      :hover,
+      :focus {
+        background-color: ${p => p.theme.colors.accent};
+        color: ${p => p.theme.colors.white};
+      }
+    }
   }
 `;

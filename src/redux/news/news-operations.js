@@ -3,10 +3,9 @@ import axios from "axios";
 
 export const fetchNews = createAsyncThunk(
   "news/fetchNews",
-  async ({ search, signal = {} }, thunkAPI) => {
+  async ({ search }, thunkAPI) => {
     try {
        const options = {
-        signal,
         params: {
           query: search,
         },
