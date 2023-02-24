@@ -15,6 +15,12 @@ const UserPageBox = styled(motion.div)`
     display: flex;
   }
 `
+const UserInformation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-right: 32px;
+  height: 47px;
+`
 
 const UserPageTitle = styled.p`
   font-family: ${p => p.theme.colors.main};
@@ -36,6 +42,7 @@ const PetTitleBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 47px;
 `;
 const AddPetBox = styled.div`
   display: flex;
@@ -52,6 +59,7 @@ const AddPetText = styled.p`
 const AddPetBtn = styled.button`
   border: none;
   background-color: transparent;
+  cursor: pointer;
 
   :hover {
     transform: scale(1.3);
@@ -124,6 +132,7 @@ const NoPetsText = styled.p`
 
 export {
   UserPageTitle,
+  UserInformation,
     PetTitleBox,
     AddPetBox,
     AddPetText,

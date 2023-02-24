@@ -44,6 +44,7 @@ const UserInfoData = styled.p`
 const UserDataChangeBtn = styled.button`
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `
 const UserInfoInput = styled.input`
   border: none;
