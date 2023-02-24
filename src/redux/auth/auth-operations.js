@@ -129,3 +129,20 @@ export const pushUserPhoto = createAsyncThunk(
     }
   }
 );
+
+export const verifyUser = createAsyncThunk(
+  '/verify/:token',
+  async (token, thunkAPI) => {
+    try {
+      const res = await axios.get(`/verify/:${token}`);
+
+      return res.data;
+    } catch (error) {
+      if (error.response.status === 404) {
+        return thunkAPI.rejectWithValue('User not found or already verified');
+      }
+
+      thunkAPI.rejectWithValue('Something get wrong, try again');
+    }
+  }
+);
