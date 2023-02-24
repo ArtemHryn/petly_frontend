@@ -1,13 +1,13 @@
-import { Accent, Lot } from './Header.styled';
+import { Accent, LogoText } from './Header.styled';
 
 export const Logo = () => {
   return (
     <>
-      <Lot>
+      <LogoText>
         pe
         <Accent>t</Accent>
         ly
-      </Lot>
+      </LogoText>
     </>
   );
 };

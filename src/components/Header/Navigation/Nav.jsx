@@ -14,7 +14,14 @@ export const Nav = props => {
       <Box as="ul" {...props}>
         {links.map(({ to, label, key }) => (
           <MotionLi key={key}>
-            <Link to={to}>{label}</Link>
+            <Link
+              to={to}
+              // fontSize={['32px', '16px']}
+              // lineHeight={[1.37]}
+              // fontWeight={'500'}
+            >
+              {label}
+            </Link>
           </MotionLi>
         ))}
       </Box>
