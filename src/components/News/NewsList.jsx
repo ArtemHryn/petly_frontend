@@ -16,7 +16,6 @@ export const NewsList = () => {
         const controller = new AbortController();
         dispatch(fetchNews({
             search,
-            signal: controller.signal,
         }));
         return () => controller.abort();
     }, [dispatch, search]);
