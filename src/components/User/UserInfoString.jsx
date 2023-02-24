@@ -18,9 +18,17 @@ export const InfoItem = ({ item }) => {
   const [focus, setFocus] = useState(false);
   const [newValue, setNewValue] = useState('');
 
+  const setInputType = () => {
+    if (name === "birthday") {
+      return "date"
+    }
+    return "text"
+  }
+
   const onEdit = () => {
     setFocus(prev => !prev);
     setNewValue(value);
+    setInputType()
     if (value === newValue) {
       return;
     }
@@ -38,7 +46,7 @@ export const InfoItem = ({ item }) => {
         </UserInfoData>
       ) : (
         <UserInfoInput
-          type="text"
+          type={setInputType()}
           value={newValue}
           onChange={evt => setNewValue(evt.target.value)}
           autoFocus
