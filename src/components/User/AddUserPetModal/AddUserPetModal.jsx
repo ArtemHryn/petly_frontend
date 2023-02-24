@@ -1,12 +1,12 @@
 import { Box } from 'components/Box';
-import { useDimensions } from 'helpers/useDimensions';
-import { useRef } from 'react';
+import { TextField } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addPet } from 'redux/pets/petsOperations';
 import PropTypes from 'prop-types';
 import {
+  Wrapper,
   ActionButton,
   Error,
   FileIcon,
@@ -27,8 +27,6 @@ export const AddUserPetModal = ({ setShowModal }) => {
   const [rows, setRows] = useState(1);
   const [commentVal, setCommentVal] = useState('');
   const [nextPage, setNextpage] = useState(false);
-  const containerRef = useRef(null);
-  const { width } = useDimensions(containerRef);
 
   const {
     register,
@@ -40,14 +38,8 @@ export const AddUserPetModal = ({ setShowModal }) => {
 
   const onChangeTextArea = e => {
     const { value } = e.target;
-    const { inputType } = e.nativeEvent;
     const inputRows = value.split('\n').length;
     setRows(inputRows);
-    const rowNumber = width > 400 ? 50 : 20;
-    if (value.length % rowNumber === 0 && inputType === 'insertText') {
-      setCommentVal(prev => prev + '\n');
-      return;
-    }
     setCommentVal(value);
   };
 
@@ -75,7 +67,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} ref={containerRef}>
+    <form onSubmit={handleSubmit(onFormSubmit)} >
       <Title>Add Pet</Title>
       {!nextPage ? (
         <>
@@ -106,14 +98,24 @@ export const AddUserPetModal = ({ setShowModal }) => {
             </LabelTitle>
             {errors?.name?.message && <Error>{errors.name.message}</Error>}
           </LabelContainer>
-          <LabelTitle>
+          <LabelTitle htmlFor="birth" mb={['8px', '12px']}>
             Date of birth
-            <InputEnter
-              type="text"
-              placeholder="Enter the birthday"
-              {...register('date', { required: 'date is required' })}
-            />
           </LabelTitle>
+          <Wrapper>
+            <TextField
+              id="birth"
+              fullWidth
+              // label="Birthday"
+              type="date"
+              min="1980-01-01"
+              max={Date.now()}
+              defaultValue="2017-05-24"
+              {...register('date', { required: 'date is required' })}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Wrapper>
           <LabelContainer>
             <LabelTitle>
               Breed{' '}
@@ -183,7 +185,6 @@ export const AddUserPetModal = ({ setShowModal }) => {
             as="textarea"
             name="comments"
             rows={rows}
-            columns={width > 400 ? 50 : 20}
             borderRadius={rows > 1 && '20px'}
             value={commentVal}
             onChange={onChangeTextArea}

@@ -4,6 +4,33 @@ import { motion } from 'framer-motion';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { Box } from 'components/Box';
 
+export const Wrapper = styled(Box)`
+  border-radius: 40px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+
+  & fieldset {
+   border: none;
+  }
+  & input {
+    background-color: #fdf7f2;
+
+    width: 100%;
+    padding: 11px 20px 12px 20px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: rgba(17, 17, 17, 0.6);
+    @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+      font-size: 20px;
+    }
+  }
+`;
+
 export const Title = styled.h4`
   font-family: 'Manrope';
   font-style: normal;
@@ -168,6 +195,7 @@ const AddPetModalTextarea = styled.textarea`
     padding: 12px 14px;
     color: rgba(27, 27, 27, 0.6);
     resize: none;
+    overFlow: hidden;
 
     ::placeholder {
         font-family: ${p => p.theme.colors.main};
