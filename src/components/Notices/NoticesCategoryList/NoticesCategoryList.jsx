@@ -1,18 +1,22 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
 import { NoticePetCard } from '../NoticesPetCard/NoticesPetCard';
-import { CardList } from './NoticesCategoryList.styled';
+import { CardList, PaginationList } from './NoticesCategoryList.styled';
 import { fetchNotices } from 'redux/notices/notices-operations';
 import {
   getNoticeIsLoading,
   getNotices,
+  getPage,
   getSearch,
+  getTotalPages,
 } from 'redux/notices/noticesSelectors';
-import { changeCategory } from 'redux/notices/searchSlice';
+import { changeCategory, changePage } from 'redux/notices/searchSlice';
 import { getFavorites, getIsLoggedIn } from 'redux/auth/authSelector';
 import { ListLoader } from 'components/common/ListLoader/ListLoader';
-import { ToastContainer } from 'react-toastify';
+import { useState } from 'react';
 
 export const NoticeCategoryList = () => {
   const { categoryName } = useParams();
@@ -22,6 +26,10 @@ export const NoticeCategoryList = () => {
   const favorites = useSelector(getFavorites);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isLoading = useSelector(getNoticeIsLoading);
+  const page = useSelector(getPage);
+  const totalPages = useSelector(getTotalPages);
+
+  const [isAvailablePagination, setIsAvailablePagination] = useState(true);
 
   const filteredNotices = notices.map(notice => {
     if (isLoggedIn && favorites.includes(notice._id)) {
@@ -30,18 +38,24 @@ export const NoticeCategoryList = () => {
     return { ...notice, isFavorite: false };
   });
 
+  const onPageChange = (e, page) => {
+    dispatch(changePage(page));
+  };
+
   useEffect(() => {
     const controller = new AbortController();
+    setIsAvailablePagination(categoryName !== 'own' && categoryName !== 'favorite')
     dispatch(changeCategory(categoryName));
     dispatch(
       fetchNotices({
         category: categoryName,
         search,
+        page,
         signal: controller.signal,
       })
     );
     return () => controller.abort();
-  }, [categoryName, dispatch, search]);
+  }, [categoryName, dispatch, search, page]);
 
   return isLoading ? (
     <ListLoader />
@@ -68,6 +82,17 @@ export const NoticeCategoryList = () => {
           <NoticePetCard key={item._id} item={item} />
         ))}
       </CardList>
+      {isAvailablePagination && (
+        <PaginationList
+          count={totalPages}
+          boundaryCount={0}
+          variant="outlined"
+          shape="rounded"
+          siblingCount={1}
+          page={page}
+          onChange={onPageChange}
+        />
+      )}
     </>
   );
 };

@@ -3,11 +3,12 @@ import axios from 'axios';
 
 export const fetchNotices = createAsyncThunk(
   'notices/fetchNotices',
-  async ({ category, search }, thunkAPI) => {
+  async ({ category, search, page }, thunkAPI) => {
     try {
       const options = {
         params: {
           query: search,
+          page
         },
       };
       if (category === 'for-free') {
@@ -15,14 +16,14 @@ export const fetchNotices = createAsyncThunk(
       }
       if (category === 'favorite') {
         const favorite = await axios.get(`notices/favorites/all`, options);
-        return favorite.data.favorites;
+        return { result: favorite.data.favorites, totalPages: 1 };
       }
       if (category === 'own') {
         const own = await axios.get(`notices/owner`, options);
-        return own.data.notices;
+        return { result: own.data.notices, totalPages: 1};
       }
       const notices = await axios.get(`notices/${category}`, options);
-      return notices.data.result;
+      return notices.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
