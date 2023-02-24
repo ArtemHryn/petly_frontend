@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const NewsList = styled.ul`
+export const List = styled(motion.ul)`
   display: grid;
   grid-row-gap: ${p => p.theme.space[15]}px;
   margin-top: ${p => p.theme.space[15]}px;
