@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import { IoTrashSharp } from 'react-icons/io5';
+
+export const Trash = styled(IoTrashSharp)`
+  color: rgba(17, 17, 17, 0.6); 
+  font-size: 20px;
+`
 
 const PetItem = styled.li`
   position: relative;

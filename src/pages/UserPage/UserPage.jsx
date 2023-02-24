@@ -1,6 +1,4 @@
-import { AiFillPlusCircle } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
-import { ThreeCircles } from 'react-loader-spinner';
 import {
   UserPageTitle,
   PetTitleBox,
@@ -11,6 +9,7 @@ import {
   UserPageBox,
   NoUserPetsBox,
   NoPetsText,
+  PlusCircle,
 } from './UserPage.styled';
 import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
@@ -19,13 +18,19 @@ import { ModalLayout } from 'components/ModalLayout/ModalLayout';
 import { AddUserPetModal } from 'components/User/AddUserPetModal/AddUserPetModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPets } from 'redux/pets/petsOperations';
-import { petAwait, petsList } from 'redux/pets/petSelectors';
+import { petAwait, petsList, updateList } from 'redux/pets/petSelectors';
 import { AnimatePresence } from 'framer-motion';
+import { ListLoader } from 'components/common/ListLoader/ListLoader';
+import { UpdatingLoader } from 'components/common/UpdatingLoader/UpdatingLoader';
+import { updateUser } from 'redux/auth/authSelector';
+import { Box } from 'components/Box';
 
 export const UserPage = () => {
   const dispatch = useDispatch();
   const userPets = useSelector(petsList);
-  const petListUpdate = useSelector(petAwait);
+  const pageAwait = useSelector(petAwait);
+  const updatePetList = useSelector(updateList)
+  const upadeteUserInfo = useSelector(updateUser)
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -38,24 +43,34 @@ export const UserPage = () => {
   return (
     <>
       <Container>
-        <UserPageBox>
+        {pageAwait ? (<ListLoader />) : (
+          <UserPageBox
+            initial={{
+              y: -70,
+              opacity: 0.3,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.7,
+            type: 'cubic-bezier(.49,.99,.82,.98)',
+            delayChildren: 0.5,
+          },
+        }}>
           <div>
-            <UserPageTitle>My information:</UserPageTitle>
+              <UserPageTitle>My information:</UserPageTitle>
+              {upadeteUserInfo && <UpdatingLoader />}
             <UserInfo />
           </div>
-          <div>
+          <Box flexGrow='1'>
             <PetTitleBox>
-              <UserPageTitle>My pets:</UserPageTitle>
+                <UserPageTitle>My pets:</UserPageTitle>
+                {updatePetList && <UpdatingLoader />}
               <AddPetBox>
                 <AddPetText>Add pet</AddPetText>
                 <AddPetBtn type="button" onClick={toggleModal}>
-                  <AiFillPlusCircle
-                    style={{
-                      display: 'block',
-                      fontSize: '40px',
-                      color: '#F59256',
-                    }}
-                  />
+                  <PlusCircle/>
                 </AddPetBtn>
               </AddPetBox>
             </PetTitleBox>
@@ -70,36 +85,15 @@ export const UserPage = () => {
                 <NoPetsText>There is no pets in your list</NoPetsText>
               </NoUserPetsBox>
             )}
-          </div>
-          {petListUpdate && (
-            <div
-              style={{
-                justifyContent: 'center',
-                marginTop: '20px',
-                display: 'flex',
-              }}
-            >
-              <ThreeCircles
-                height="100"
-                width="100"
-                color="#ffc107"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-                ariaLabel="three-circles-rotating"
-                outerCircleColor=""
-                innerCircleColor=""
-                middleCircleColor=""
-              />
-            </div>
-          )}
+          </Box>
         </UserPageBox>
+        )}
         <AnimatePresence>
           {showModal && (
             <ModalLayout
               setShowModal={setShowModal}
               maxWidth={[null, '608px']}
-              maxHeight={[null, '540px']}
+              maxHeight={[null, '670px']}
               p={[null, '40px 80px']}
             >
               <AddUserPetModal setShowModal={setShowModal} />

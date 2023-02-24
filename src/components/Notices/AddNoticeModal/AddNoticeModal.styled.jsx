@@ -92,7 +92,7 @@ export const LabelTitle = styled.label`
 
 export const InputEnter = styled.input`
   width: 100%;
-  background: #fdf7f2;
+  background-color: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   margin-top: 8px;
@@ -216,8 +216,8 @@ export const ImgFile = styled.img`
 
 export const CommentInput = styled(InputEnter)`
   margin-top: 0px;
-  margin-bottom: 40px;
   resize: none;
+  overflow: hidden;
   ${border}
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     min-height: 113px;
@@ -241,4 +241,31 @@ export const Error = styled.p`
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
+`;
+
+export const Wrapper = styled(Box)`
+  border-radius: 40px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+
+  & fieldset {
+   border: none;
+  }
+  & input {
+    background-color: #fdf7f2;
+
+    width: 100%;
+    padding: 11px 20px 12px 20px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: rgba(17, 17, 17, 0.6);
+    @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+      font-size: 20px;
+    }
+  }
 `;

@@ -1,4 +1,18 @@
 import styled from 'styled-components';
+import { MdPhotoCamera } from 'react-icons/md';
+import { FiLogOut } from 'react-icons/fi';
+
+export const Camera = styled(MdPhotoCamera)`
+  color: #F59256;
+  margin-right: 5px;
+  width: 18px;
+  height: 18p;'
+`
+export const LogOutIcon = styled(FiLogOut)`
+  color: #F59256; 
+  margin-right: 8px; 
+  font-size:'18p;'
+`
 
 const UserBox = styled.div`
   width: 280px;
