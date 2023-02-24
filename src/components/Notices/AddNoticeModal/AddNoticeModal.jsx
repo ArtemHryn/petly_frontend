@@ -1,6 +1,5 @@
+import { TextField } from '@mui/material';
 import { Box } from 'components/Box';
-import { useDimensions } from 'helpers/useDimensions';
-import { useRef } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -24,16 +23,14 @@ import {
   SexTitle,
   Title,
   Warning,
+  Wrapper,
 } from './AddNoticeModal.styled';
 
 export const AddNoticeModal = ({ setShowModal }) => {
   const dispatch = useDispatch();
   const [choosedCategory, setChoosedCategory] = useState('lost-found');
   const [rows, setRows] = useState(1);
-  const [commentVal, setCommentVal] = useState('');
   const [nextPage, setNextpage] = useState(false);
-  const containerRef = useRef(null);
-  const { width } = useDimensions(containerRef);
 
   const {
     register,
@@ -49,15 +46,8 @@ export const AddNoticeModal = ({ setShowModal }) => {
 
   const onChangeTextArea = e => {
     const { value } = e.target;
-    const { inputType } = e.nativeEvent;
     const inputRows = value.split('\n').length;
     setRows(inputRows);
-    const rowNumber = width > 400 ? 50 : 20;
-    if (value.length % rowNumber === 0 && inputType === 'insertText') {
-      setCommentVal(prev => prev + '\n');
-      return;
-    }
-    setCommentVal(value);
   };
 
   const onChangePage = () => {
@@ -69,6 +59,7 @@ export const AddNoticeModal = ({ setShowModal }) => {
     setNextpage(true);
   };
   const onFormSubmit = data => {
+    console.log(Date.parse(data.birthdate));
     const formData = new FormData();
     Object.keys(data).forEach(key => {
       if (key === 'noticeAvatar') {
@@ -77,14 +68,14 @@ export const AddNoticeModal = ({ setShowModal }) => {
       }
       formData.append(key, data[key]);
     });
-    formData.append('comments', commentVal);
     dispatch(addNotice(formData));
-    setShowModal(false)
+    setShowModal(false);
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} ref={containerRef}>
+    <form onSubmit={handleSubmit(onFormSubmit)}>
       <Title>Add Pet</Title>
+
       {!nextPage ? (
         <>
           <Warning>
@@ -146,7 +137,7 @@ export const AddNoticeModal = ({ setShowModal }) => {
             </LabelTitle>
             {errors?.title?.message && <Error>{errors.title.message}</Error>}
           </LabelContainer>
-          <LabelContainer>
+          <LabelContainer mb={['20px', '30px', '20px']}>
             <LabelTitle>
               Name pet{' '}
               <Warning as="span" color="red">
@@ -160,15 +151,24 @@ export const AddNoticeModal = ({ setShowModal }) => {
             </LabelTitle>
             {errors?.name?.message && <Error>{errors.name.message}</Error>}
           </LabelContainer>
-
-          <LabelTitle>
+          <LabelTitle htmlFor="date" mb={['8px', '12px']}>
             Date of birth
-            <InputEnter
-              type="text"
-              placeholder="Enter the birthday"
-              {...register('birthdate', { required: 'birthdate is required' })}
-            />
           </LabelTitle>
+          <Wrapper>
+            <TextField
+              id="date"
+              fullWidth
+              // label="Birthday"
+              type="date"
+              min="1980-01-01"
+              max={Date.now()}
+              defaultValue="2017-05-24"
+              {...register('birthdate', { required: 'birthdate is required' })}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Wrapper>
           <LabelTitle mb={['40px', '40px']}>
             Breed
             <InputEnter
@@ -295,18 +295,27 @@ export const AddNoticeModal = ({ setShowModal }) => {
               })}
             />
           </Box>
-          <LabelTitle>Comments</LabelTitle>
-          <CommentInput
-            as="textarea"
-            name="comments"
-            rows={rows}
-            columns={width > 400 ? 50 : 20}
-            borderRadius={rows > 1 && '20px'}
-            value={commentVal}
-            onChange={onChangeTextArea}
-            placeholder="Leave your comment"
-            // {...register('comments')}
-          />
+          <Box mb={['40px']}>
+            <LabelTitle>Comments</LabelTitle>
+            <CommentInput
+              as="textarea"
+              name="comments"
+              rows={rows}
+              borderRadius={rows > 1 && '20px'}
+              onChange={onChangeTextArea}
+              placeholder="Leave your comment"
+              {...register('comments', {
+                required: 'Please, leave some comment',
+                minLength: {
+                  value: 8,
+                  message: 'Comment must be min 8 symbols',
+                },
+              })}
+            />
+            {errors?.comments?.message && (
+              <Error>{errors.comments.message}</Error>
+            )}
+          </Box>
           <Box display={[null, 'flex']}>
             <ActionButton
               type="submit"
