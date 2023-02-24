@@ -13,7 +13,7 @@ export const Section = styled.section`
     padding-top: 88px;
   }
   @media screen and (min-width: 1280px) {
-    padding-top: 60px;
+    padding-top: 4.688vw;
   }
 `;
 
@@ -26,6 +26,7 @@ export const Wrap = styled(Box)`
     padding: 0 32px;
   }
   @media screen and (min-width: 1280px) {
+    padding: 0 1.25vw;
     margin: 0;
     display: flex;
     justify-content: space-between;
@@ -106,7 +107,7 @@ export const Title = styled.h1`
     margin-bottom: 118px;
   }
   @media screen and (min-width: 1280px) {
-    margin-top: 32px;
+    margin-top: 2.5vw;
     width: 45.94vw;
     font-size: 5.313vw;
     line-height: 7.813vw;

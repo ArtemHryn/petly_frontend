@@ -62,7 +62,7 @@ export const MenuMob = ({ size }) => {
         custom={height}
         ref={containerRef}
       >
-        {size > 768 && (
+        {size >= 768 && (
           <>
             <Box as="ul" pr={'62px'}>
               {isLoggedIn && <UserNav variants={'variants.open'} />}
