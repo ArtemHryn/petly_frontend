@@ -57,7 +57,7 @@ const UserPage = lazy(() =>
 );
 
 const VerifyPage = lazy(() =>
-  import('../pages/VerifyPage').then(module => ({
+  import('../pages/VerifyPage/VerifyPage').then(module => ({
     default: module.VerifyPage,
   }))
 );
@@ -128,7 +128,10 @@ export const App = () => {
             <Route
               path="verify/:token"
               element={
-                <RestrictedRoute redirectTo="/" component={<VerifyPage />} />
+                <RestrictedRoute
+                  redirectTo="/login"
+                  component={<VerifyPage />}
+                />
               }
             />
             <Route

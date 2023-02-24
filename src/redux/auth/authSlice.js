@@ -10,6 +10,7 @@ import {
   register,
   updateLike,
   updateUser,
+  verifyUser,
 } from './auth-operations';
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   favoriteError: null,
   isChangingFavorite: false,
   isUpdating: false,
+  isVerified: false,
 };
 
 const persistConfig = {
@@ -125,6 +127,12 @@ const authSlice = createSlice({
       .addCase(pushUserPhoto.rejected, (state, action) => {
         state.error = action.payload;
         state.isUpdating = false;
+      })
+      .addCase(verifyUser.fulfilled, (state, _) => {
+        state.isVerified = true;
+      })
+      .addCase(verifyUser.rejected, (state, action) => {
+        state.error = action.payload;
       }),
 });
 
