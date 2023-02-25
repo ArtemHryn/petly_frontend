@@ -150,6 +150,7 @@ const TimeBtn = styled.button`
   color: inherit;
   padding: 0;
   margin-bottom: 4px;
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     font-size: 14px;
