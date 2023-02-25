@@ -12,7 +12,7 @@ const FriendsList = styled(motion.ul)`
   }
 `;
 
-const NoInfoBox = styled.div`
+const NoInfoBox = styled(motion.div)`
   width: 280px;
   height: 140px;
   margin-top: 18px;
