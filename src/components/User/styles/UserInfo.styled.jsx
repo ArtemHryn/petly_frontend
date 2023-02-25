@@ -50,6 +50,7 @@ const UserBox = styled.div`
 `;
 const UserPhotoBox = styled.div``;
 const UserPhoto = styled.img`
+  object-fit: contain;
   width: 233px;
   height: 233px;
   border-radius: 50%;
