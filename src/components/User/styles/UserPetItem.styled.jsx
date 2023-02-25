@@ -30,6 +30,7 @@ const PetItem = styled.li`
   }
 `;
 const PetPhoto = styled.img`
+  object-fit: contain;
   width: 240px;
   height: 240px;
   border-radius: 20px;
