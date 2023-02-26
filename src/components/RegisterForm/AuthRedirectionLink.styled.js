@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-// import { aliases } from 'theme';
 
 export const Text = styled.p`
   font-family: ${({ theme }) => theme.fonts.main};
@@ -17,11 +16,7 @@ export const Link = styled(NavLink)`
   margin-left: ${({ theme }) => theme.space[1]}px;
   color: ${({ theme }) => theme.colors.blue};
 
-  background: linear-gradient(
-      to right,
-      rgba(100, 200, 200, 1),
-      rgba(100, 200, 200, 1)
-    ),
+  background: linear-gradient(to right, #ff6101, #f59256),
     linear-gradient(
       to right,
       rgba(255, 0, 0, 1),

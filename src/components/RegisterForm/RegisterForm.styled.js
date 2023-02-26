@@ -152,11 +152,7 @@ export const ResendVerificationButton = styled.button`
   color: ${({ theme }) => theme.colors.blue};
   border-color: transparent;
 
-  background: linear-gradient(
-      to right,
-      rgba(100, 200, 200, 1),
-      rgba(100, 200, 200, 1)
-    ),
+  background: linear-gradient(to right, #ff6101, #f59256),
     linear-gradient(
       to right,
       rgba(255, 0, 0, 1),
