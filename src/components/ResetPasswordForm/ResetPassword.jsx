@@ -11,10 +11,11 @@ import {
   toastError,
   toastSuccess,
 } from 'helpers/toast-notifications/toasts-notifications';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const ResetPasswordForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { token } = useParams();
 
   const onSubmit = async ({ password }) => {
@@ -30,6 +31,7 @@ export const ResetPasswordForm = () => {
       return;
     }
     toastSuccess('Password changed, go back to login');
+    navigate('/login');
     return;
   };
 
