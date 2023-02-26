@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { theme } from '../../../theme';
+import { IoTrashSharp } from 'react-icons/io5';
+import { fontWeight, space } from 'styled-system'
+
+export const Trash = styled(IoTrashSharp)`
+  color: rgba(17, 17, 17, 0.6); 
+  font-size: 20px;
+`
 
 const PetItem = styled.li`
   position: relative;
@@ -24,9 +30,11 @@ const PetItem = styled.li`
   }
 `;
 const PetPhoto = styled.img`
+  object-fit: contain;
   width: 240px;
   height: 240px;
   border-radius: 20px;
+  margin-bottom: 20px;
 
   @media screen and (min-width: 768px) {
     width: 161px;
@@ -41,10 +49,11 @@ const PetPhoto = styled.img`
 `;
 const DeletePetBtn = styled.button`
   position: absolute;
-  top: 252px;
+  top: 272px;
   right: 20px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     top: 20px;
@@ -55,12 +64,10 @@ const DeletePetBtn = styled.button`
     display: block;
   }
 `;
-const PetInfoList = styled.ul``;
+const PetInfoList = styled.ul`
+  overflow: hidden;
+`;
 const PetInfoItem = styled.li`
-  font-family: ${theme.fonts.main};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.36;
   display: flex;
   align-items: center;
   letter-spacing: 0.04em;
@@ -69,12 +76,20 @@ const PetInfoItem = styled.li`
   :not(:last-child) {
     margin-bottom: 12px;
   }
+`;
+
+const PetInfoText = styled.p`
+  font-family: ${p => p.theme.fonts.main};
+  font-size: 14px;
+  line-height: 1.36;
 
   @media screen and (min-width: 768px) {
     font-size: 16px;
     line-height: 1.38;
   }
-`;
+  ${fontWeight};
+  ${space};
+`
 
 export {
   PetItem,
@@ -82,4 +97,5 @@ export {
   DeletePetBtn,
   PetInfoList,
   PetInfoItem,
+  PetInfoText
 };

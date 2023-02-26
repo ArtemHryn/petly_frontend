@@ -1,16 +1,29 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { theme } from '../../theme';
 import noPets from "../../images/noPets.jpg"
 import noPetsMob from "../../images/noPetsMob.jpg"
+import { AiFillPlusCircle } from 'react-icons/ai';
 
-const UserPageBox = styled.div`
+export const PlusCircle = styled(AiFillPlusCircle)`
+  display: block;
+  font-size: 40px;
+  color: #F59256;
+`
+
+const UserPageBox = styled(motion.div)`
   @media screen and (min-width: 1280px) {
     display: flex;
   }
 `
+const UserInformation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-right: 32px;
+  height: 47px;
+`
 
 const UserPageTitle = styled.p`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 20px;
   line-height: 1.35;
@@ -29,6 +42,7 @@ const PetTitleBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 47px;
 `;
 const AddPetBox = styled.div`
   display: flex;
@@ -36,7 +50,7 @@ const AddPetBox = styled.div`
   align-items: center;
 `;
 const AddPetText = styled.p`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 20px;
   line-height: 1.35;
@@ -45,6 +59,11 @@ const AddPetText = styled.p`
 const AddPetBtn = styled.button`
   border: none;
   background-color: transparent;
+  cursor: pointer;
+
+  :hover {
+    transform: scale(1.3);
+  }
 `;
 const PetList = styled.ul`
   margin-top: 26px;
@@ -83,7 +102,7 @@ const NoUserPetsBox = styled.div`
   }
 
   @media screen and (min-width: 1280px) {
-    width: 411px;
+    width: 100%;;
     height: 590px;
     margin-left: auto;
     padding: 20px 16px 18px;
@@ -93,7 +112,7 @@ const NoUserPetsBox = styled.div`
 `
 
 const NoPetsText = styled.p`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 16px;
   line-height: 1.35;
@@ -113,6 +132,7 @@ const NoPetsText = styled.p`
 
 export {
   UserPageTitle,
+  UserInformation,
     PetTitleBox,
     AddPetBox,
     AddPetText,

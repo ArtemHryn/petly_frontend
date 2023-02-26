@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import {theme} from "../../theme"
 
@@ -149,6 +150,7 @@ const TimeBtn = styled.button`
   color: inherit;
   padding: 0;
   margin-bottom: 4px;
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     font-size: 14px;
@@ -167,7 +169,7 @@ const FriendsInfoLink = styled.a`
   text-decoration: none;
 `;
 
-const TimeList = styled.ul`
+const TimeList = styled(motion.ul)`
   position: absolute;
   z-index: 2;
   width: 120px;

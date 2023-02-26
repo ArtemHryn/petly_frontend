@@ -1,72 +1,109 @@
-import { AiFillPlusCircle } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import {
-    UserPageTitle,
-    PetTitleBox,
-    AddPetBox,
-    AddPetText,
-    AddPetBtn,
-    PetList,
-    UserPageBox,
-    NoUserPetsBox,
-    NoPetsText,
-} from "./UserPage.styled"
+  UserPageTitle,
+  PetTitleBox,
+  AddPetBox,
+  AddPetText,
+  AddPetBtn,
+  PetList,
+  UserPageBox,
+  NoUserPetsBox,
+  NoPetsText,
+  PlusCircle,
+  UserInformation,
+} from './UserPage.styled';
 import { Container } from 'components/Container/Container';
 import { UserInfo } from '../../components/User/UserInfo';
 import { UserPetItem } from '../../components/User/UserPetItem';
-import { getUserPets } from 'helpers/axios/getUserPets';
 import { ModalLayout } from 'components/ModalLayout/ModalLayout';
-import {AddUserPetModal} from "components/AddUserPetModal/AddUserPetModal"
+import { AddUserPetModal } from 'components/User/AddUserPetModal/AddUserPetModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPets } from 'redux/pets/petsOperations';
+import { petAwait, petsList, updateList } from 'redux/pets/petSelectors';
+import { AnimatePresence } from 'framer-motion';
+import { ListLoader } from 'components/common/ListLoader/ListLoader';
+import { UpdatingLoader } from 'components/common/UpdatingLoader/UpdatingLoader';
+import { updateUser } from 'redux/auth/authSelector';
+import { Box } from 'components/Box';
 
 export const UserPage = () => {
-  const [petList, setPetList] = useState(null)
-  const [showModal, setShowModal] = useState(false)
+  const dispatch = useDispatch();
+  const userPets = useSelector(petsList);
+  const pageAwait = useSelector(petAwait);
+  const updatePetList = useSelector(updateList)
+  const upadeteUserInfo = useSelector(updateUser)
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-        getUserPets().then(res => {
-            console.log(res);
-            setPetList(res.data)
-        })
-  }, [])
-  
-  const toggleModal = () => {
-    setShowModal(showModal => !showModal)
-  }
+    dispatch(getPets());
+  }, [dispatch]);
 
-    return <>
+  const toggleModal = () => {
+    setShowModal(true);
+  };
+  return (
+    <>
       <Container>
-        <UserPageBox>
-          <div>
-            <UserPageTitle>My information:</UserPageTitle>
-            <UserInfo/>
+        {pageAwait ? (<ListLoader />) : (
+          <UserPageBox
+            initial={{
+              y: -70,
+              opacity: 0.3,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0.7,
+                type: 'cubic-bezier(.49,.99,.82,.98)',
+                delayChildren: 0.5,
+              },
+            }}>
+            <div>
+              <UserInformation>
+                <UserPageTitle>My information:</UserPageTitle>
+                {upadeteUserInfo && <UpdatingLoader />}
+              </UserInformation>
+              <UserInfo />
           </div>
-          <div>
+          <Box flexGrow='1'>
             <PetTitleBox>
                 <UserPageTitle>My pets:</UserPageTitle>
-                <AddPetBox>
-                    <AddPetText>Add pet</AddPetText>
+                {updatePetList && <UpdatingLoader />}
+              <AddPetBox>
+                <AddPetText>Add pet</AddPetText>
                 <AddPetBtn type="button" onClick={toggleModal}>
-                        <AiFillPlusCircle style={{display: "block", fontSize: "40px", color: "#F59256"}} />
-                    </AddPetBtn>
-                </AddPetBox>
+                  <PlusCircle/>
+                </AddPetBtn>
+              </AddPetBox>
             </PetTitleBox>
-            {petList ? (<PetList>
-              {petList.map(pet => {
-                const {_id, name, breed, date, avatarURL, comments} = pet
-                return (<UserPetItem key={_id} id={_id} name={name} breed={breed} date={date} avatarURL={avatarURL} comments={comments} />)
-              })}
-            </PetList>) : 
-              (
+            {userPets.length !== 0 ? (
+              <PetList>
+                {userPets.map(pet => (
+                  <UserPetItem key={pet._id} pet={pet} />
+                ))}
+              </PetList>
+            ) : (
               <NoUserPetsBox>
-                  <NoPetsText>There is no pets in your list</NoPetsText>
+                <NoPetsText>There is no pets in your list</NoPetsText>
               </NoUserPetsBox>
-            )
-            }
-          </div>
+            )}
+          </Box>
         </UserPageBox>
-        {showModal && <ModalLayout setShowModal={toggleModal}>
-          <AddUserPetModal onClose={toggleModal}/>
-        </ModalLayout>}
-        </Container>
-    </>;
+        )}
+        <AnimatePresence>
+          {showModal && (
+            <ModalLayout
+              setShowModal={setShowModal}
+              maxWidth={[null, '608px']}
+              maxHeight={[null, '670px']}
+              p={[null, '40px 80px']}
+            >
+              <AddUserPetModal setShowModal={setShowModal} />
+            </ModalLayout>
+          )}
+        </AnimatePresence>
+      </Container>
+    </>
+  );
 };

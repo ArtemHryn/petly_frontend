@@ -1,6 +1,10 @@
 import { Box } from 'components/Box';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOwnerInfo } from 'redux/notices/notices-operations';
+import { selectOwnerInfo } from 'redux/notices/noticesSelectors';
 import {
   IsLikedSvg,
   LikeContainer,
@@ -26,26 +30,33 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
     breed,
     location,
     birthdate,
-    // _id,
     isFavorite,
-    // owner,
+    owner,
     comments,
     name,
     sex,
     price = null,
   } = item;
-
-  const formatedDate = format(new Date(Date.parse(birthdate)), 'dd.MM.yyyy');
+  const dispatch = useDispatch();
+  const { email, phone } = useSelector(selectOwnerInfo);
+  // const error = useSelector(getNoticeError);
+  const formatedDate = birthdate
+    ? format(new Date(Date.parse(birthdate)), 'dd.MM.yyyy')
+    : 'no info';
   const list = [
     { title: 'Name:', value: name },
     { title: 'Birthday:', value: formatedDate },
     { title: 'Breed:', value: breed },
     { title: 'Location:', value: location },
     { title: 'The sex:', value: sex },
-    { title: 'Email:', value: 'somemail' },
-    { title: 'Phone:', value: 'phone' },
-    { title: 'price:', value: price },
+    { title: 'Email:', value: email },
+    { title: 'Phone:', value: phone },
+    { title: 'price:', value: `${price}$` },
   ];
+
+  useEffect(() => {
+    dispatch(getOwnerInfo(owner));
+  }, [dispatch, owner]);
   return (
     <>
       <Box display={[null, 'flex']} mb={['28px']}>
@@ -80,7 +91,7 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
         <ContactLink
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.8 }}
-          href={`tel:${breed}`}
+          href={`tel:${phone}`}
         >
           Contact
         </ContactLink>

@@ -4,3 +4,5 @@ export const getIsLoggedIn = state => state.auth.isLoggedIn;
 export const getUserId = state => state.auth.user._id;
 export const getUser = state => state.auth.user;
 export const getUserError = state => state.auth.error;
+export const updateUser = state => state.auth.isUpdating;
+export const getIsVerified = state => state.auth.isVerified;

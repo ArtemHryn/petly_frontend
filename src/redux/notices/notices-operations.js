@@ -3,12 +3,12 @@ import axios from 'axios';
 
 export const fetchNotices = createAsyncThunk(
   'notices/fetchNotices',
-  async ({ category, search, signal = {} }, thunkAPI) => {
+  async ({ category, search, page }, thunkAPI) => {
     try {
       const options = {
-        signal,
         params: {
           query: search,
+          page
         },
       };
       if (category === 'for-free') {
@@ -16,14 +16,14 @@ export const fetchNotices = createAsyncThunk(
       }
       if (category === 'favorite') {
         const favorite = await axios.get(`notices/favorites/all`, options);
-        return favorite.data.favorites;
+        return { result: favorite.data.favorites, totalPages: 1 };
       }
       if (category === 'own') {
         const own = await axios.get(`notices/owner`, options);
-        return own.data.notices;
+        return { result: own.data.notices, totalPages: 1};
       }
       const notices = await axios.get(`notices/${category}`, options);
-      return notices.data.result;
+      return notices.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -42,4 +42,26 @@ export const deleteNotice = createAsyncThunk(
   }
 );
 
+export const getOwnerInfo = createAsyncThunk(
+  'noticces/getOwnerInfo',
+  async (owner, thunkAPI) => {
+    try {
+      const result = await axios(`notices/notice/${owner}`);
+      return result.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
+export const addNotice = createAsyncThunk(
+  'notices/addNotice',
+  async (formData, thunkAPI) => {
+    try {
+      const result = await axios.post('notices/', formData)
+      return result.data.pet
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { theme } from '../../../theme';
 import { FaPen } from 'react-icons/fa';
 import { BsCheckLg } from "react-icons/bs";
 
 const UserInfoDescr = styled.p`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
@@ -45,6 +44,7 @@ const UserInfoData = styled.p`
 const UserDataChangeBtn = styled.button`
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `
 const UserInfoInput = styled.input`
   border: none;

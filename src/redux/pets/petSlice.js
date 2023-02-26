@@ -5,6 +5,7 @@ const initialState = {
   pets: [],
   isLoading: false,
   error: null,
+  isUpdating: false,
 };
 
 const petsSlice = createSlice({
@@ -13,40 +14,40 @@ const petsSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(getPets.fulfilled, (state, action) => {
-        state.pets = action.payload;
+        state.pets = action.payload.pets;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(getPets.pending, (state, action) => {
-        state.isRefreshing = true;
+      .addCase(getPets.pending, state => {
+        state.isLoading = true;
       })
       .addCase(getPets.rejected, (state, action) => {
-        state.isLoggedIn = false;
+        state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(addPet.fulfilled, (state, action) => {
-        state.pets = [...state.pets, action.payload];
-        state.isLoading = false;
+        state.pets = [action.payload, ...state.pets];
+        state.isUpdating = false;
         state.error = null;
       })
-      .addCase(addPet.pending, (state, action) => {
-        state.isRefreshing = true;
+      .addCase(addPet.pending, state => {
+        state.isUpdating = true;
       })
       .addCase(addPet.rejected, (state, action) => {
-        state.isLoggedIn = false;
+        state.isUpdating = false;
         state.error = action.payload;
       })
       .addCase(deletePet.fulfilled, (state, action) => {
         const index = state.pets.findIndex(pet => pet._id === action.payload);
         state.pets.splice(index, 1);
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = null;
       })
-      .addCase(deletePet.pending, (state, action) => {
-        state.isRefreshing = true;
+      .addCase(deletePet.pending, state => {
+        state.isUpdating = true;
       })
       .addCase(deletePet.rejected, (state, action) => {
-        state.isLoggedIn = false;
+        state.isUpdating = false;
         state.error = action.payload;
       }),
 });

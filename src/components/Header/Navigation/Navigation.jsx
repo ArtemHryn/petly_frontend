@@ -2,28 +2,18 @@ import { Box } from 'components/Box';
 import { AuthNav } from './AuthNav';
 import { Nav } from './Nav';
 import { UserNav } from './UserNav';
-import { useState } from 'react';
 import { MenuMob } from '../Menu/MenuMob';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'redux/auth/authSelector';
+import useWindowDimensions from 'helpers/useWindowDimensions';
 
 export const Navigation = () => {
-  const [windowSize, setWindowSize] = useState(getWindowSize());
+  const { width } = useWindowDimensions();
   const isLoggedIn = useSelector(getIsLoggedIn);
-  useEffect(() => {
-    function handleWindowResize() {
-      setWindowSize(getWindowSize());
-    }
-    window.addEventListener('resize', handleWindowResize);
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    };
-  }, []);
 
   return (
     <>
-      {windowSize.innerWidth >= 1280 && (
+      {width >= 1280 && (
         <Box as="nav" width="100%">
           <Box as="ul" display="flex" justifyContent="space-between">
             <li>
@@ -39,12 +29,7 @@ export const Navigation = () => {
           </Box>
         </Box>
       )}
-      {windowSize.innerWidth < 1280 && <MenuMob size={windowSize.innerWidth} />}
+      {width < 1280 && <MenuMob size={width} />}
     </>
   );
 };
-
-function getWindowSize() {
-  const { innerWidth, innerHeight } = window;
-  return { innerWidth, innerHeight };
-}

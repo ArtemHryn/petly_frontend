@@ -1,5 +1,18 @@
 import styled from 'styled-components';
-import { theme } from '../../../theme';
+import { MdPhotoCamera } from 'react-icons/md';
+import { FiLogOut } from 'react-icons/fi';
+
+export const Camera = styled(MdPhotoCamera)`
+  color: #F59256;
+  margin-right: 5px;
+  width: 18px;
+  height: 18p;'
+`
+export const LogOutIcon = styled(FiLogOut)`
+  color: #F59256; 
+  margin-right: 8px; 
+  font-size:'18p;'
+`
 
 const UserBox = styled.div`
   width: 280px;
@@ -37,6 +50,7 @@ const UserBox = styled.div`
 `;
 const UserPhotoBox = styled.div``;
 const UserPhoto = styled.img`
+  object-fit: contain;
   width: 233px;
   height: 233px;
   border-radius: 50%;
@@ -54,7 +68,7 @@ const UserPhotoForm = styled.form`
   }
 `;
 const UserPhotoLabel = styled.label`
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 400;
   font-size: 12px;
   line-height: 1.83;
@@ -63,6 +77,7 @@ const UserPhotoLabel = styled.label`
   justify-content: end;
   letter-spacing: 0.04em;
   color: #111111;
+  cursor: pointer;
 `;
 
 const UserInfoList = styled.ul`
@@ -79,12 +94,13 @@ const UserInfoList = styled.ul`
 
 
 const LogOutBtn = styled.button`
+  cursor: pointer;
   border: none;
   background-color: transparent;
   display: flex;
   align-items: center;
   margin-left: auto;
-  font-family: ${theme.fonts.main};
+  font-family: ${p => p.theme.colors.main};
   font-weight: 500;
   font-size: 16px;
   line-height: 1.38;

@@ -12,6 +12,7 @@ import { getRefreshing } from 'redux/auth/authSelector';
 // import { AnimatePresence } from 'framer-motion';
 import { RestrictedRoute } from 'helpers/PublicRoute';
 import { PrivateRoute } from 'helpers/PrivateRoute';
+import { MainLoader } from './common/Loader/MainLoader';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage').then(module => ({
@@ -56,7 +57,7 @@ const UserPage = lazy(() =>
 );
 
 const VerifyPage = lazy(() =>
-  import('../pages/VerifyPage').then(module => ({
+  import('../pages/VerifyPage/VerifyPage').then(module => ({
     default: module.VerifyPage,
   }))
 );
@@ -82,7 +83,6 @@ export const App = () => {
 
   const dispatch = useDispatch();
   const isRefreshing = useSelector(getRefreshing);
-  console.log(isRefreshing);
 
   useEffect(() => {
     dispatch(fetchUser());
@@ -91,65 +91,72 @@ export const App = () => {
   return (
     <>
       <ScrollToTop />
-
-      {/* <AnimatePresence mode="wait"> */}
-      <Routes key={location.pathname} location={location}>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Navigate replace to="home" />} />
-          <Route path="home" element={<HomePage />} />
-          <Route path="notices" element={<NoticesPage />}>
-            <Route index element={<Navigate replace to="sell" />} />
-            <Route path=":categoryName" element={<NoticeCategoryList />} />
+      {isRefreshing ? (
+        <MainLoader />
+      ) : (
+        <Routes key={location.pathname} location={location}>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<Navigate replace to="home" />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="notices" element={<NoticesPage />}>
+              <Route index element={<Navigate replace to="sell" />} />
+              <Route path=":categoryName" element={<NoticeCategoryList />} />
+            </Route>
+            <Route path="news" element={<NewsPage />} />
+            <Route path="friends" element={<OurFriendsPage />} />
+            <Route
+              path="login"
+              element={
+                <RestrictedRoute redirectTo="/user" component={<LoginPage />} />
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/user"
+                  component={<RegisterPage />}
+                />
+              }
+            />
+            <Route
+              path="user"
+              element={
+                <PrivateRoute redirectTo="/login" component={<UserPage />} />
+              }
+            />
+            <Route
+              path="verify/:token"
+              element={
+                <RestrictedRoute
+                  redirectTo="/login"
+                  component={<VerifyPage />}
+                />
+              }
+            />
+            <Route
+              path="restore-password/:token"
+              element={
+                <RestrictedRoute
+                  redirectTo="/"
+                  component={<RestorePasswordPage />}
+                />
+              }
+            />
+            <Route
+              path="forgot-password"
+              element={
+                <RestrictedRoute
+                  redirectTo="/"
+                  component={<ForgotPasswordPage />}
+                />
+              }
+            />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-          <Route path="news" element={<NewsPage />} />
-          <Route path="friends" element={<OurFriendsPage />} />
-          <Route
-            path="login"
-            element={
-              <RestrictedRoute redirectTo="/" component={<LoginPage />} />
-            }
-          />
-          <Route
-            path="register"
-            element={
-              <RestrictedRoute redirectTo="/" component={<RegisterPage />} />
-            }
-          />
-          <Route
-            path="user"
-            element={
-              <PrivateRoute redirectTo="/login" component={<UserPage />} />
-            }
-          />
-          <Route
-            path="verify/:token"
-            element={
-              <RestrictedRoute redirectTo="/" component={<VerifyPage />} />
-            }
-          />
-          <Route
-            path="restore-password/:token"
-            element={
-              <RestrictedRoute
-                redirectTo="/"
-                component={<RestorePasswordPage />}
-              />
-            }
-          />
-          <Route
-            path="forgot-password"
-            element={
-              <RestrictedRoute
-                redirectTo="/"
-                component={<ForgotPasswordPage />}
-              />
-            }
-          />
           <Route path="*" element={<NotFoundPage />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      {/* </AnimatePresence> */}
+        </Routes>
+      )}
     </>
   );
 };

@@ -1,10 +1,11 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { MdAccountCircle } from 'react-icons/md';
 
 export const Link = styled(NavLink)`
   display: block;
   font-family: ${p => p.theme.fonts.main};
-  font-weight: ${p => p.theme.fonts.regular};
+  font-weight: ${p => p.theme.fontWeights.regular};
   font-size: ${p => p.theme.fontSizes.mobile[8]};
   line-height: ${p => p.theme.lineHeights.mobile[3]};
   color: ${p => p.theme.colors.links};
@@ -14,12 +15,18 @@ export const Link = styled(NavLink)`
     text-decoration: underline;
     color: ${p => p.theme.colors.accent};
   }
-
   @media screen and (min-width: 768px) {
     font-size: ${p => p.theme.fontSizes.mobile[10]};
   }
   @media screen and (min-width: 1280px) {
     font-size: ${p => p.theme.fontSizes.mobile[5]};
     line-height: ${p => p.theme.lineHeights.mobile[1]};
+  }
+`;
+
+export const User = styled(MdAccountCircle)`
+  font-size: ${p => p.theme.fontSizes.mobile[4]};
+  @media screen and (min-width: 768px) {
+    font-size: ${p => p.theme.fontSizes.mobile[6]};
   }
 `;

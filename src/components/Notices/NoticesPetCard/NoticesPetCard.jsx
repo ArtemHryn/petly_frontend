@@ -2,9 +2,13 @@ import { intervalToDuration } from 'date-fns';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateLike } from 'redux/auth/auth-operations';
-import { getFavorites, getUserId } from 'redux/auth/authSelector';
+import {
+  getFavorites,
+  getIsLoggedIn,
+  getUserId,
+} from 'redux/auth/authSelector';
 import { deleteNotice } from 'redux/notices/notices-operations';
-import { getCategory } from 'redux/notices/noticesSelectors';
+import { getCategory, getNoticeError } from 'redux/notices/noticesSelectors';
 import { LearnMoreModal } from '../LearnMoreModal/LearnMoreModal';
 import { ModalLayout } from 'components/ModalLayout/ModalLayout';
 import { CardItem } from '../NoticesCategoryList/NoticesCategoryList.styled';
@@ -24,6 +28,7 @@ import {
   Text,
 } from './NoticesPetCard.styled';
 import { AnimatePresence } from 'framer-motion';
+import { toastError } from 'helpers/toast-notifications/toasts-notifications';
 
 export const NoticePetCard = ({ item }) => {
   const {
@@ -41,11 +46,17 @@ export const NoticePetCard = ({ item }) => {
   const favorites = useSelector(getFavorites);
   const categoryName = useSelector(getCategory);
   const userId = useSelector(getUserId);
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const error = useSelector(getNoticeError)
   const [showModal, setShowModal] = useState(false);
 
-  const parsedDate = new Date(Date.parse(birthdate));
+  if (error) {
+  toastError(error)
+}
 
   const getAge = () => {
+    const parsedDate = new Date(Date.parse(birthdate));
+
     const { years, months } = intervalToDuration({
       start: new Date(),
       end: parsedDate,
@@ -57,6 +68,11 @@ export const NoticePetCard = ({ item }) => {
   };
 
   const onLikeClick = () => {
+    if (!isLoggedIn) {
+      toastError("Yohoho, you aren't still log in ");
+
+      return;
+    }
     dispatch(updateLike({ isLiked: favorites.includes(_id), _id }));
   };
 
@@ -124,7 +140,7 @@ export const NoticePetCard = ({ item }) => {
                   <Text>{location}</Text>
                 </ListElement>
                 <ListElement mb="0px">
-                  <Text>{getAge()}</Text>
+                  <Text>{birthdate ? getAge() : 'no info'}</Text>
                 </ListElement>
               </ul>
             </Box>

@@ -1,4 +1,9 @@
-import { deleteNotice, fetchNotices } from './notices-operations';
+import {
+  addNotice,
+  deleteNotice,
+  fetchNotices,
+  getOwnerInfo,
+} from './notices-operations';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
@@ -7,6 +12,8 @@ const initialState = {
   cardOwner: {},
   isLoading: false,
   error: null,
+  isUpdating: false,
+  totalPages: 2
 };
 
 const noticesSlice = createSlice({
@@ -20,17 +27,18 @@ const noticesSlice = createSlice({
       .addCase(fetchNotices.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.notices = action.payload;
+        state.notices = action.payload.result;
+        state.totalPages = action.payload.totalPages
       })
       .addCase(fetchNotices.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
       .addCase(deleteNotice.pending, state => {
-        state.isLoading = true;
+        state.isUpdating = true;
       })
       .addCase(deleteNotice.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = null;
         const index = state.notices.findIndex(
           notice => notice._id === action.payload
@@ -38,8 +46,27 @@ const noticesSlice = createSlice({
         state.notices.splice(index, 1);
       })
       .addCase(deleteNotice.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isUpdating = false;
         state.error = action.payload.message;
+      })
+      .addCase(getOwnerInfo.fulfilled, (state, action) => {
+        state.error = null;
+        state.cardOwner = { ...action.payload };
+      })
+      .addCase(getOwnerInfo.rejected, (state, action) => {
+        state.error = action.error;
+      })
+      .addCase(addNotice.pending, state => {
+        state.isUpdating = true;
+      })
+      .addCase(addNotice.fulfilled, (state, action) => {
+        state.error = null
+        state.isUpdating = false;
+        state.notices.unshift(action.payload);
+      })
+      .addCase(addNotice.rejected, (state, action) => {
+        state.isUpdating = false;
+        state.error = action.payload;
       }),
 });
 

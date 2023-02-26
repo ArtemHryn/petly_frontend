@@ -12,6 +12,8 @@ import {
   updateUser,
   reset,
   resetPassword,
+  verifyUser,
+
 } from './auth-operations';
 
 const initialState = {
@@ -31,6 +33,7 @@ const initialState = {
   favoriteError: null,
   isChangingFavorite: false,
   isUpdating: false,
+  isVerified: false,
 };
 
 const persistConfig = {
@@ -84,6 +87,7 @@ const authSlice = createSlice({
       .addCase(fetchUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
+        state.token = null
       })
       .addCase(updateLike.pending, state => {
         state.error = null;
@@ -100,9 +104,8 @@ const authSlice = createSlice({
           state.user.favorites.push(action.payload._id);
           return;
         }
-
         const index = state.user.favorites.findIndex(
-          favorite => favorite._id === action.payload._id
+          favorite => favorite === action.payload._id
         );
         state.user.favorites.splice(index, 1);
       })
@@ -140,6 +143,12 @@ const authSlice = createSlice({
       .addCase(pushUserPhoto.rejected, (state, action) => {
         state.error = action.payload;
         state.isUpdating = false;
+      })
+      .addCase(verifyUser.fulfilled, (state, _) => {
+        state.isVerified = true;
+      })
+      .addCase(verifyUser.rejected, (state, action) => {
+        state.error = action.payload;
       }),
 });
 
