@@ -37,6 +37,32 @@ export const logIn = createAsyncThunk(
     }
   }
 );
+export const reset = createAsyncThunk(
+  'auth/forgot-password',
+  async (resetData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('/users/forgot-password', resetData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  `auth/restore-password`,
+  async ({ password, token }, { rejectWithValue }) => {
+    try {
+      console.log(password);
+      const response = await axios.patch(`/users/restore-password/${token}`, {
+        password: `${password}`,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const fetchUser = createAsyncThunk(
   'auth/relogin',

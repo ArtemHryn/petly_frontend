@@ -10,7 +10,10 @@ import {
   register,
   updateLike,
   updateUser,
+  reset,
+  resetPassword,
   verifyUser,
+
 } from './auth-operations';
 
 const initialState = {
@@ -58,6 +61,18 @@ const authSlice = createSlice({
       })
       .addCase(logIn.rejected, (state, action) => {
         state.isLoggedIn = false;
+        state.error = action.payload;
+      })
+      .addCase(reset.fulfilled, (state, action) => {
+        state.error = null;
+      })
+      .addCase(reset.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.error = null;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
         state.error = action.payload;
       })
       .addCase(fetchUser.pending, state => {

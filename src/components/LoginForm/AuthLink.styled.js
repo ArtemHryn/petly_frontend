@@ -7,7 +7,6 @@ export const Text = styled.p`
   font-size: ${({ theme }) => theme.fontSizes[0]};
   line-height: ${({ theme }) => theme.lineHeights[0]};
   letter-spacing: 0.04em;
-
   text-align: center;
   color: ${({ theme }) => theme.colors.gray};
 `;
