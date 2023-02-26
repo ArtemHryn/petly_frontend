@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { space } from 'styled-system';
+import { space, flexbox } from 'styled-system';
 
 export const Form = styled.form`
   display: flex;
@@ -28,6 +28,8 @@ export const Form = styled.form`
     padding-left: 80px;
     padding-right: 80px;
   }
+  ${space}
+  ${flexbox}
 `;
 
 export const Input = styled.input`
@@ -71,6 +73,7 @@ export const Input = styled.input`
 
     background-color: ${({ theme }) => theme.colors.sectionBG};
   }
+  ${space}
 `;
 
 export const Button = styled.button`
@@ -139,5 +142,34 @@ export const ShowPasswordButton = styled.button`
 
   &:hover {
     color: rgba(17, 17, 17, 1);
+  }
+`;
+
+export const ResendVerificationButton = styled.button`
+  cursor: pointer;
+  width: fit-content;
+  margin: 0 auto;
+  color: ${({ theme }) => theme.colors.blue};
+  border-color: transparent;
+
+  background: linear-gradient(
+      to right,
+      rgba(100, 200, 200, 1),
+      rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(0, 100, 200, 1)
+    );
+  background-size: 100% 2px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+
+  &:hover,
+  &:focus {
+    background-size: 0 2px, 100% 2px;
   }
 `;

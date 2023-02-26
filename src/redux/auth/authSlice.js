@@ -13,7 +13,7 @@ import {
   reset,
   resetPassword,
   verifyUser,
-
+  resendVerificationLink,
 } from './auth-operations';
 
 const initialState = {
@@ -87,7 +87,7 @@ const authSlice = createSlice({
       .addCase(fetchUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
-        state.token = null
+        state.token = null;
       })
       .addCase(updateLike.pending, state => {
         state.error = null;
@@ -148,6 +148,9 @@ const authSlice = createSlice({
         state.isVerified = true;
       })
       .addCase(verifyUser.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(resendVerificationLink.rejected, (state, action) => {
         state.error = action.payload;
       }),
 });

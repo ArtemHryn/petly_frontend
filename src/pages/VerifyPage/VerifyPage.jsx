@@ -8,7 +8,6 @@ import backgroundTablet from 'images/registration/waves_tablet.png';
 import backgroundDesktop from 'images/registration/waves_desktop.png';
 import { Title } from 'components/Title/Title';
 import { getUserError, getIsVerified } from 'redux/auth/authSelector';
-import { AnimatedBox } from './VerifyPage.styled';
 
 export const VerifyPage = () => {
   const { token } = useParams();
@@ -44,18 +43,11 @@ export const VerifyPage = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <AnimatedBox
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        backgroundColor="hightAccent"
-        p="10"
-        borderRadius="sm"
-      >
-        <Title>
-          {(isVerified && 'Success, redirect to Login page') || error}
+      {error && (
+        <Title backgroundColor="hightAccent" p="10" borderRadius="sm">
+          {error}
         </Title>
-      </AnimatedBox>
+      )}
     </Container>
   );
 };

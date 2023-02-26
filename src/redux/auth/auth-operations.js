@@ -168,7 +168,20 @@ export const verifyUser = createAsyncThunk(
         return thunkAPI.rejectWithValue('User not found or already verified');
       }
 
-      thunkAPI.rejectWithValue('Something get wrong, try again');
+      return thunkAPI.rejectWithValue('Something get wrong, try again');
+    }
+  }
+);
+
+export const resendVerificationLink = createAsyncThunk(
+  '/verify',
+  async (email, thunkAPI) => {
+    try {
+      const res = await axios.post('/users/verify', email);
+
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.status);
     }
   }
 );
