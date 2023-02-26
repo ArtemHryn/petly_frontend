@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { Box } from 'components/Box';
-
 import { toast, ToastContainer } from 'react-toastify';
 import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
@@ -14,6 +13,7 @@ import {
   Button,
   ErrorMsg,
   ShowPasswordButton,
+  ResendVerificationButton,
 } from './RegisterForm.styled';
 import { Title } from 'components/Title/Title';
 import {
@@ -21,10 +21,13 @@ import {
   toastError,
 } from 'helpers/toast-notifications/toasts-notifications';
 
-export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
+export const RegisterForm = ({
+  isTheSecondStep,
+  setIsTheSecondStep,
+  setIsResendVereficationActive,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isRegistered, setIsRegistered] = useState(false);
   const [showPassword, setShowPassword] = useState({
     showPassBtn: false,
     showConfirmPassBtn: false,
@@ -100,13 +103,22 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
       toastSuccess(
         '🐶 Registered! Check your email and confirm the registration!'
       );
+      setFormValues({
+        email: '',
+        password: '',
+        confirmedPassword: '',
+        name: '',
+        city: '',
+        phone: '',
+      });
+      setIsTheSecondStep(false);
 
       toast.onChange(async payload => {
         if (payload.status === 'removed') {
           navigate('/login');
         }
       });
-      setIsRegistered(true);
+
       return;
     }
 
@@ -114,8 +126,8 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      {!isRegistered && (
+    <>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <>
           <Title
             fontSize={['24px', '36px']}
@@ -298,9 +310,15 @@ export const RegisterForm = ({ isTheSecondStep, setIsTheSecondStep }) => {
             text="Already have account?"
             linkText="Login"
           />
+          <ResendVerificationButton
+            type="button"
+            onClick={() => setIsResendVereficationActive(true)}
+          >
+            Resend email verification
+          </ResendVerificationButton>
         </>
-      )}
-      <ToastContainer />
-    </Form>
+        <ToastContainer />
+      </Form>
+    </>
   );
 };
