@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { space } from 'styled-system';
-import { NavLink } from 'react-router-dom';
 
 export const Form = styled.form`
   display: flex;
@@ -37,7 +36,7 @@ export const Input = styled.input`
 
   border: ${({ theme }) => theme.borders.input};
   border-radius: ${({ theme }) => theme.radii.lg};
-  margin-bottom: ${({ theme }) => theme.space[8]}px;
+  margin-bottom: ${({ theme }) => theme.space[12]}px;
   padding-top: ${({ theme }) => theme.space[6]}px;
   padding-bottom: ${({ theme }) => theme.space[6]}px;
   padding-left: ${({ theme }) => theme.space[8]}px;
@@ -55,7 +54,7 @@ export const Input = styled.input`
   }
 `;
 
-export const LoginBtn = styled.button`
+export const ResetBtn = styled.button`
   font-family: ${({ theme }) => theme.fonts.main};
   font-weight: ${({ theme }) => theme.fontWeights.regular};
   font-size: ${({ theme }) => theme.fontSizes.mobile[5]};
@@ -93,19 +92,4 @@ export const Error = styled.p`
   margin-bottom: ${({ theme }) => theme.space[7]}px;
 
   ${space}
-`;
-
-export const Text = styled.p`
-  font-family: ${({ theme }) => theme.fonts.main};
-  font-weight: ${({ theme }) => theme.fontWeights.light};
-  font-size: ${({ theme }) => theme.fontSizes[0]};
-  line-height: ${({ theme }) => theme.lineHeights[0]};
-  letter-spacing: 0.04em;
-  text-align: center;
-  margin-bottom: 10px;
-  color: ${({ theme }) => theme.colors.gray};
-`;
-export const Link = styled(NavLink)`
-  margin-left: ${({ theme }) => theme.space[1]}px;
-  color: ${({ theme }) => theme.colors.blue};
 `;

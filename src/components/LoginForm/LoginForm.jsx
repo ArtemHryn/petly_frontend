@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthLink } from './AuthLink';
-import { Error, Form, Input, LoginBtn } from './LoginForm.styled';
+import { Error, Form, Input, LoginBtn, Text, Link } from './LoginForm.styled';
 import { Title } from 'components/Title/Title';
 import { logIn } from 'redux/auth/auth-operations';
 import { ToastContainer } from 'react-toastify';
@@ -73,11 +73,15 @@ export const LoginForm = () => {
       )}
 
       <LoginBtn type="submit">Login</LoginBtn>
+      <Text>
+        Forgot your password? <Link to={'/forgot-password'}>Reset</Link>
+      </Text>
       <AuthLink
         path="/register"
         text="Don't have an account?"
         linkText="Register"
       />
+
       <ToastContainer />
     </Form>
   );
