@@ -105,6 +105,15 @@ const StyledFaPen = styled(FaPen)`
   display: block; 
   font-size: 20px; 
   border-radius: 50%;
+
+  :hover {
+    background:#F59256; 
+    color:  #FDF7F2;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 28px;
+  }
 `
 
 const StyledCheck = styled(BsCheckLg)`
