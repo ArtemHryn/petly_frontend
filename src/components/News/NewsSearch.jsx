@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { Label, SearchInput, SearchBtnContainer, Button } from './NewsSearch.styled';
+import { AiOutlineSearch, AiOutlineCloseCircle } from 'react-icons/ai';
+import { Label, SearchInput, SearchBtnContainer, Button, ResetButton } from './NewsSearch.styled';
 import { fetchNews } from 'redux/news/news-operations';
 import { selectFilter } from 'redux/news/news-selectors';
 import { setNewsFilter } from 'redux/news/newsFilterSlice';
@@ -38,6 +38,16 @@ export const NewsSearch = () => {
                 onKeyDown={onPressEnter}
             />
             <SearchBtnContainer>
+            {searchQuery !== '' && (
+                <ResetButton
+                    type="button"
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
+                    onClick={() => setSearchQuery('')}
+                >
+                    <AiOutlineCloseCircle style={{ width: '24px', height: '24px' }} />
+                </ResetButton>
+        )}
                 <Button
                     type="button"
                     whileHover={{ scale: 1.2 }}
