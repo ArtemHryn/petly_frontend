@@ -21,6 +21,10 @@ export const SearchInput = styled.input`
   padding-bottom: ${p => p.theme.space[5]}px;
   padding-right: ${p => p.theme.space[9]}px;
   padding-left: ${p => p.theme.space[9]}px;
+  &:hover,
+  &:focus {
+    border: 1px solid ${p => p.theme.colors.accent};
+  }
   &::placeholder {
     font-family: ${p => p.theme.fonts.main};
     font-size: ${p => p.theme.fontSizes.mobile[3]};
@@ -47,4 +51,11 @@ export const Button = styled(motion.button)`
   cursor: pointer;
   background-color: transparent;
   border: ${p => p.theme.borders.none};
+`;
+
+export const ResetButton = styled(motion.button)`
+  cursor: pointer;
+  background-color: transparent;
+  border: ${p => p.theme.borders.none};
+  padding: ${p => p.theme.space[0]}px;
 `;
