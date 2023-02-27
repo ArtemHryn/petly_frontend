@@ -44,6 +44,7 @@ export const Like = styled(motion.button)`
   backdrop-filter: blur(2px);
   border-radius: 50%;
   border: none;
+  cursor: pointer;
 `;
 
 export const LikeContainer = styled(motion.div)`

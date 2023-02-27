@@ -7,7 +7,7 @@ import { UpdatingLoader } from 'components/common/UpdatingLoader/UpdatingLoader'
 
 import { toastError } from 'helpers/toast-notifications/toasts-notifications';
 import {
-  AddPetButton,
+  AddpetButtonTab,
   AddPetText,
   ButtonElement,
   ButtonList,
@@ -57,18 +57,17 @@ export const NoticeCategoryNav = ({ setShowModal }) => {
         </ButtonList>
         <Box display={['none', 'flex']} alignItems="center">
           <AddPetText>Add pet</AddPetText>
-          <AddPetButton
+          <AddpetButtonTab
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
             type="button"
             display={[null, 'flex']}
-            position={['static']}
             width={[null, '44px']}
             height={[null, '44px']}
             onClick={onOpenModal}
           >
             <AiOutlinePlus style={{ color: '#FFFFFF', fontSize: '26px' }} />
-          </AddPetButton>
+          </AddpetButtonTab>
         </Box>
       </Box>
       <ToastContainer />

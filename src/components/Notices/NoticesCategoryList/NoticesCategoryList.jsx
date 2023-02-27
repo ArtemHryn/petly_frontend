@@ -17,6 +17,7 @@ import { changeCategory, changePage } from 'redux/notices/searchSlice';
 import { getFavorites, getIsLoggedIn } from 'redux/auth/authSelector';
 import { ListLoader } from 'components/common/ListLoader/ListLoader';
 import { useState } from 'react';
+import { NoAnimals } from 'components/User/NoAnimals/NoAnimals';
 
 export const NoticeCategoryList = () => {
   const { categoryName } = useParams();
@@ -57,42 +58,45 @@ export const NoticeCategoryList = () => {
     return () => controller.abort();
   }, [categoryName, dispatch, search, page]);
 
-  return isLoading ? (
-    <ListLoader />
-  ) : (
-    <>
-      {' '}
-      <ToastContainer />
-      <CardList
-        initial={{
-          y: -70,
-          opacity: 0.3,
-        }}
-        animate={{
-          y: 0,
-          opacity: 1,
-          transition: {
-            duration: 0.7,
-            type: 'cubic-bezier(.49,.99,.82,.98)',
-            delayChildren: 0.5,
-          },
-        }}
-      >
-        {filteredNotices.map(item => (
-          <NoticePetCard key={item._id} item={item} />
-        ))}
-      </CardList>
-      {isAvailablePagination && (
-        <PaginationList
-          count={totalPages}
-          boundaryCount={0}
-          variant="outlined"
-          shape="rounded"
-          siblingCount={1}
-          page={page}
-          onChange={onPageChange}
-        />
-      )}
-    </>
-  );
+  if (notices.length === 0) {
+    return (<NoAnimals> Sorry, there are no Notices</NoAnimals>)
+  }
+    return isLoading ? (
+      <ListLoader />
+    ) : (
+      <>
+        {' '}
+        <ToastContainer />
+        <CardList
+          initial={{
+            y: -70,
+            opacity: 0.3,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+            transition: {
+              duration: 0.7,
+              type: 'cubic-bezier(.49,.99,.82,.98)',
+              delayChildren: 0.5,
+            },
+          }}
+        >
+          {filteredNotices.map(item => (
+            <NoticePetCard key={item._id} item={item} />
+          ))}
+        </CardList>
+        {isAvailablePagination && (
+          <PaginationList
+            count={totalPages}
+            boundaryCount={0}
+            variant="outlined"
+            shape="rounded"
+            siblingCount={1}
+            page={page}
+            onChange={onPageChange}
+          />
+        )}
+      </>
+    );
 };

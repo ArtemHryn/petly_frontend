@@ -70,7 +70,7 @@ export const Button = styled.button`
   }
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled(motion.button)`
   position: absolute;
   top: 20px;
   right: 20px;
@@ -84,10 +84,7 @@ export const CloseButton = styled.button`
   height: 34px;
 
   backdrop-filter: blur(2px);
-  @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
-    top: 24px;
-    right: 24px;
-  }
+  cursor: pointer;
 `;
 
 export const CloseIcon = styled(AiOutlineClose)`

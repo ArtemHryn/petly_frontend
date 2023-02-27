@@ -38,7 +38,7 @@ export const ModalLayout = ({ setShowModal, children, ...props }) => {
       onClick={onBackdropClick}
     >
       <ModalContainer {...props}>
-        <CloseButton onClick={() => setShowModal(false)}>
+        <CloseButton whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => setShowModal(false)}>
           <CloseIcon />
         </CloseButton>
         {children}

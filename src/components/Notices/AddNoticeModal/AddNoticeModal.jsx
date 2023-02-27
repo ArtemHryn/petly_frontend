@@ -100,7 +100,14 @@ export const AddNoticeModal = ({ setShowModal }) => {
               {...register('category')}
               defaultChecked
             />
-            <Lable htmlFor="lost-found">lost/found </Lable>
+            <Lable
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              htmlFor="lost-found"
+            >
+              lost/found{' '}
+            </Lable>
 
             <Input
               type="radio"
@@ -110,7 +117,14 @@ export const AddNoticeModal = ({ setShowModal }) => {
               id="in-good-hands"
               {...register('category')}
             />
-            <Lable htmlFor="in-good-hands">in good hands </Lable>
+            <Lable
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              htmlFor="in-good-hands"
+            >
+              in good hands{' '}
+            </Lable>
 
             <Input
               type="radio"
@@ -120,7 +134,14 @@ export const AddNoticeModal = ({ setShowModal }) => {
               {...register('category')}
               onChange={onChange}
             />
-            <Lable htmlFor="sell">sell </Lable>
+            <Lable
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              htmlFor="sell"
+            >
+              sell{' '}
+            </Lable>
           </Box>
           <LabelContainer>
             {' '}
@@ -179,6 +200,9 @@ export const AddNoticeModal = ({ setShowModal }) => {
           </LabelTitle>
           <Box display={[null, 'flex']}>
             <ActionButton
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               mb={['12px', '0px']}
               order={[null, '1']}
               onClick={onChangePage}
@@ -186,6 +210,9 @@ export const AddNoticeModal = ({ setShowModal }) => {
               Next
             </ActionButton>
             <ActionButton
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               bg="white"
               color="black"
               mr={[null, '12px']}
@@ -215,7 +242,12 @@ export const AddNoticeModal = ({ setShowModal }) => {
                   {...register('sex', { required: 'Choose animal sex' })}
                 />
 
-                <SexLabel htmlFor="male">
+                <SexLabel
+                  whileHover={{ scale: 1.05 }}
+                  whileFocus={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  htmlFor="male"
+                >
                   <SexIconsMale />
                   <span>male</span>
                 </SexLabel>
@@ -228,7 +260,12 @@ export const AddNoticeModal = ({ setShowModal }) => {
                   id="female"
                   {...register('sex', { required: 'Choose animal sex' })}
                 />
-                <SexLabel htmlFor="female">
+                <SexLabel
+                  whileHover={{ scale: 1.05 }}
+                  whileFocus={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  htmlFor="female"
+                >
                   <SexIcons />
                   <span>female</span>
                 </SexLabel>
@@ -322,6 +359,9 @@ export const AddNoticeModal = ({ setShowModal }) => {
           </Box>
           <Box display={[null, 'flex']}>
             <ActionButton
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               type="submit"
               mb={['12px', '0px']}
               order={[null, '1']}
@@ -329,6 +369,9 @@ export const AddNoticeModal = ({ setShowModal }) => {
               Done
             </ActionButton>
             <ActionButton
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               bg="white"
               color="black"
               mr={[null, '12px']}

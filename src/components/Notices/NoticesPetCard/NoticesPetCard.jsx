@@ -31,6 +31,16 @@ import { AnimatePresence } from 'framer-motion';
 import { toastError } from 'helpers/toast-notifications/toasts-notifications';
 
 export const NoticePetCard = ({ item }) => {
+  switch (item.category) {
+    case 'lost-found':
+      item.category = 'lost/found';
+      break;
+    case 'in-good-hands':
+      item.category = 'in good hands';
+      break;
+    default:
+      break;
+  }
   const {
     imgURL,
     category,
@@ -47,12 +57,12 @@ export const NoticePetCard = ({ item }) => {
   const categoryName = useSelector(getCategory);
   const userId = useSelector(getUserId);
   const isLoggedIn = useSelector(getIsLoggedIn);
-  const error = useSelector(getNoticeError)
+  const error = useSelector(getNoticeError);
   const [showModal, setShowModal] = useState(false);
 
   if (error) {
-  toastError(error)
-}
+    toastError(error);
+  }
 
   const getAge = () => {
     const parsedDate = new Date(Date.parse(birthdate));

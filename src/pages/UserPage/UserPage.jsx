@@ -7,8 +7,6 @@ import {
   AddPetBtn,
   PetList,
   UserPageBox,
-  NoUserPetsBox,
-  NoPetsText,
   PlusCircle,
   UserInformation,
 } from './UserPage.styled';
@@ -25,6 +23,7 @@ import { ListLoader } from 'components/common/ListLoader/ListLoader';
 import { UpdatingLoader } from 'components/common/UpdatingLoader/UpdatingLoader';
 import { updateUser } from 'redux/auth/authSelector';
 import { Box } from 'components/Box';
+import { NoAnimals } from 'components/User/NoAnimals/NoAnimals';
 
 export const UserPage = () => {
   const dispatch = useDispatch();
@@ -44,7 +43,9 @@ export const UserPage = () => {
   return (
     <>
       <Container>
-        {pageAwait ? (<ListLoader />) : (
+        {pageAwait ? (
+          <ListLoader />
+        ) : (
           <UserPageBox
             initial={{
               y: -70,
@@ -58,38 +59,37 @@ export const UserPage = () => {
                 type: 'cubic-bezier(.49,.99,.82,.98)',
                 delayChildren: 0.5,
               },
-            }}>
+            }}
+          >
             <div>
               <UserInformation>
                 <UserPageTitle>My information:</UserPageTitle>
                 {upadeteUserInfo && <UpdatingLoader />}
               </UserInformation>
               <UserInfo />
-          </div>
-          <Box flexGrow='1'>
-            <PetTitleBox>
+            </div>
+            <Box flexGrow="1">
+              <PetTitleBox>
                 <UserPageTitle>My pets:</UserPageTitle>
                 {updatePetList && <UpdatingLoader />}
-              <AddPetBox>
-                <AddPetText>Add pet</AddPetText>
-                <AddPetBtn type="button" onClick={toggleModal}>
-                  <PlusCircle/>
-                </AddPetBtn>
-              </AddPetBox>
-            </PetTitleBox>
-            {userPets.length !== 0 ? (
-              <PetList>
-                {userPets.map(pet => (
-                  <UserPetItem key={pet._id} pet={pet} />
-                ))}
-              </PetList>
-            ) : (
-              <NoUserPetsBox>
-                <NoPetsText>There is no pets in your list</NoPetsText>
-              </NoUserPetsBox>
-            )}
-          </Box>
-        </UserPageBox>
+                <AddPetBox>
+                  <AddPetText>Add pet</AddPetText>
+                  <AddPetBtn type="button" onClick={toggleModal}>
+                    <PlusCircle />
+                  </AddPetBtn>
+                </AddPetBox>
+              </PetTitleBox>
+              {userPets.length !== 0 ? (
+                <PetList>
+                  {userPets.map(pet => (
+                    <UserPetItem key={pet._id} pet={pet} />
+                  ))}
+                </PetList>
+              ) : (
+                <NoAnimals>There is no pets in your list</NoAnimals>
+              )}
+            </Box>
+          </UserPageBox>
         )}
         <AnimatePresence>
           {showModal && (
