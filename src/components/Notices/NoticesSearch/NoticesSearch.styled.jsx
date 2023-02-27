@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 export const Label = styled.label`
   display: block;
@@ -47,9 +48,27 @@ export const ButtonContainer = styled.div`
   right: 0%;
   top: 50%;
   transform: translate(-5%, -50%);
+  display: flex;
+  align-items: center;
 `;
 
 export const SearchButton = styled(motion.button)`
   border: none;
   background-color: transparent;
+`;
+
+export const ClearButton = styled(motion.button)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0px;
+  border: none;
+  background-color: transparent;
+`;
+
+export const ClearIcon = styled(AiOutlineCloseCircle)`
+  font-size: 50px;
+  width: 30px;
 `;

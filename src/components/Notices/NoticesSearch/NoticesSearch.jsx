@@ -7,6 +7,8 @@ import { changeSearch } from 'redux/notices/searchSlice';
 
 import {
   ButtonContainer,
+  ClearButton,
+  ClearIcon,
   Input,
   Label,
   SearchButton,
@@ -23,18 +25,18 @@ export const NoticeSearch = () => {
     dispatch(
       fetchNotices({
         category,
-        search,
+        search: searchValue,
       })
     );
   };
 
-  const onPressEnter = (e) => {
+  const onPressEnter = e => {
     if (e.key === 'Enter') {
       onSearch();
     }
-    return
-  } 
-  
+    return;
+  };
+
   return (
     <Label>
       <Input
@@ -44,6 +46,15 @@ export const NoticeSearch = () => {
         onKeyDown={onPressEnter}
       />
       <ButtonContainer>
+        {searchValue !== '' && (
+          <ClearButton
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            onClick={() => setSearchValue('')}
+          >
+            <ClearIcon />
+          </ClearButton>
+        )}
         <SearchButton
           type="button"
           whileHover={{ scale: 1.2 }}

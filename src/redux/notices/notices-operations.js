@@ -10,6 +10,7 @@ export const fetchNotices = createAsyncThunk(
           query: search,
           page
         },
+
       };
       if (category === 'for-free') {
         category = 'in-good-hands';
