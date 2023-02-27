@@ -45,7 +45,7 @@ export const ResendEmailForm = ({ setIsResendVereficationActive }) => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} justifyContent="space-between">
-      <Box>
+      <Box mb={8} position="relative">
         <Title
           fontSize={['24px', '36px']}
           fontWeight={['700', '500']}
@@ -68,12 +68,9 @@ export const ResendEmailForm = ({ setIsResendVereficationActive }) => {
           onChange={e => {
             setEmail(e.target.value);
           }}
-          marginBottom="0px"
-          style={errors.email && { marginBottom: 1, borderColor: 'red' }}
+          borderColor={errors.email && 'red'}
         />
-        {errors.email && (
-          <ErrorMsg marginBottom="0px">{errors.email?.message}</ErrorMsg>
-        )}
+        {errors.email && <ErrorMsg>{errors.email?.message}</ErrorMsg>}
       </Box>
       <Box display="flex" flexDirection="column">
         <Button

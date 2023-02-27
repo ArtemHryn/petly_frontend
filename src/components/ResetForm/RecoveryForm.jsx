@@ -5,6 +5,7 @@ import { AuthLink } from '../LoginForm/AuthLink';
 import { reset } from 'redux/auth/auth-operations';
 import { Error, Form, Input, ResetBtn } from './RecoveryForm.styled';
 import { Title } from 'components/Title/Title';
+import { Box } from 'components/Box';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -46,21 +47,20 @@ export const RecoveryForm = () => {
       >
         Reset Password
       </Title>
-      <Input
-        type="text"
-        placeholder="Email"
-        {...register('email', {
-          required: 'Please,enter your email',
-          pattern: {
-            value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-            message: 'Please, enter valid email',
-          },
-        })}
-      />
-      {errors.email?.message && (
-        <Error mt={'-25px'}>{errors.email.message}</Error>
-      )}
-
+      <Box mb={12} position="relative">
+        <Input
+          type="text"
+          placeholder="Email"
+          {...register('email', {
+            required: 'Please,enter your email',
+            pattern: {
+              value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              message: 'Please, enter valid email',
+            },
+          })}
+        />
+        {errors.email?.message && <Error>{errors.email.message}</Error>}
+      </Box>
       <ResetBtn type="submit">Reset</ResetBtn>
 
       <AuthLink path="/login" text="Back to" linkText="Login" />

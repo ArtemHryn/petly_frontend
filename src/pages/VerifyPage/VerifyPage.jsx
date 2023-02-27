@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
 import { Container } from 'components/Container/Container';
 import { verifyUser } from 'redux/auth/auth-operations';
 import backgroundMobile from 'images/registration/waves_mobile.png';
@@ -8,6 +9,7 @@ import backgroundTablet from 'images/registration/waves_tablet.png';
 import backgroundDesktop from 'images/registration/waves_desktop.png';
 import { Title } from 'components/Title/Title';
 import { getUserError, getIsVerified } from 'redux/auth/authSelector';
+import { toastSuccess } from 'helpers/toast-notifications/toasts-notifications';
 
 export const VerifyPage = () => {
   const { token } = useParams();
@@ -18,7 +20,12 @@ export const VerifyPage = () => {
 
   useEffect(() => {
     if (isVerified) {
-      navigate('/login');
+      toastSuccess('Verification is success, redirect to login');
+      toast.onChange(async payload => {
+        if (payload.status === 'removed') {
+          navigate('/login');
+        }
+      });
     }
     const verify = async () => {
       await dispatch(verifyUser(token));
@@ -48,6 +55,7 @@ export const VerifyPage = () => {
           {error}
         </Title>
       )}
+      <ToastContainer />
     </Container>
   );
 };
