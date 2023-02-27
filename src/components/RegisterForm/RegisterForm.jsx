@@ -126,19 +126,19 @@ export const RegisterForm = ({
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <>
-          <Title
-            fontSize={['24px', '36px']}
-            fontWeight={['700', '500']}
-            lineHeight={['1.38', '1.36']}
-            marginBottom="15"
-          >
-            Registration
-          </Title>
-          {!isTheSecondStep ? (
-            <>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <>
+        <Title
+          fontSize={['24px', '36px']}
+          fontWeight={['700', '500']}
+          lineHeight={['1.38', '1.36']}
+          marginBottom="15"
+        >
+          Registration
+        </Title>
+        {!isTheSecondStep ? (
+          <>
+            <Box mb={8} position="relative">
               <Input
                 {...register('email', {
                   required: 'Please,enter your email',
@@ -151,90 +151,88 @@ export const RegisterForm = ({
                 type="email"
                 placeholder="Email"
                 onChange={handleChange}
-                style={errors.email && { marginBottom: 1, borderColor: 'red' }}
+                borderColor={errors.email && 'red'}
               />
               {errors.email && <ErrorMsg>{errors.email?.message}</ErrorMsg>}
-              <Box mb={errors.password ? 1 : 8} position="relative">
-                <Input
-                  type={showPassword.showPassBtn ? 'text' : 'password'}
-                  {...register('password', {
-                    required: 'Please, enter your password',
-                    minLength: { value: 7, message: 'Min-length is 7' },
-                    maxLength: {
-                      value: 32,
-                      message: 'Max-length is 32',
-                    },
-                  })}
-                  placeholder="Password"
-                  value={formValues.password}
-                  onChange={handleChange}
-                  style={errors.password && { borderColor: 'red' }}
-                />
-                <ShowPasswordButton
-                  type="button"
-                  name="showPassBtn"
-                  onClick={handleShowPassword}
-                >
-                  {showPassword.showPassBtn ? (
-                    <AiFillEye size="20px" />
-                  ) : (
-                    <AiFillEyeInvisible size="20px" />
-                  )}
-                </ShowPasswordButton>
-              </Box>
+            </Box>
+            <Box mb={8} position="relative">
+              <Input
+                type={showPassword.showPassBtn ? 'text' : 'password'}
+                {...register('password', {
+                  required: 'Please, enter your password',
+                  minLength: { value: 7, message: 'Min-length is 7' },
+                  maxLength: {
+                    value: 32,
+                    message: 'Max-length is 32',
+                  },
+                })}
+                placeholder="Password"
+                value={formValues.password}
+                onChange={handleChange}
+                borderColor={errors.password && 'red'}
+              />
+              <ShowPasswordButton
+                type="button"
+                name="showPassBtn"
+                onClick={handleShowPassword}
+              >
+                {showPassword.showPassBtn ? (
+                  <AiFillEye size="20px" />
+                ) : (
+                  <AiFillEyeInvisible size="20px" />
+                )}
+              </ShowPasswordButton>
               {errors.password && (
                 <ErrorMsg>{errors.password?.message}</ErrorMsg>
               )}
-              <Box mb={errors.confirmedPassword ? 1 : 15} position="relative">
-                <Input
-                  type={showPassword.showConfirmPassBtn ? 'text' : 'password'}
-                  {...register('confirmedPassword', {
-                    required: 'Please, confirm password',
-                  })}
-                  placeholder="Confirm password"
-                  value={formValues.confirmedPassword}
-                  onChange={handleChange}
-                  mb
-                  style={
-                    errors.confirmedPassword && {
-                      borderColor: 'red',
-                    }
-                  }
-                />
-                <ShowPasswordButton
-                  type="button"
-                  name="showConfirmPassBtn"
-                  onClick={handleShowPassword}
-                >
-                  {showPassword.showConfirmPassBtn ? (
-                    <AiFillEye size="20px" />
-                  ) : (
-                    <AiFillEyeInvisible size="20px" />
-                  )}
-                </ShowPasswordButton>
-              </Box>
-              {errors.confirmedPassword && (
-                <ErrorMsg marginBottom={15}>
-                  {errors.confirmedPassword?.message}
-                </ErrorMsg>
-              )}
-              <Button
+            </Box>
+
+            <Box mb={15} position="relative">
+              <Input
+                type={showPassword.showConfirmPassBtn ? 'text' : 'password'}
+                {...register('confirmedPassword', {
+                  required: 'Please, confirm password',
+                })}
+                placeholder="Confirm password"
+                value={formValues.confirmedPassword}
+                onChange={handleChange}
+                mb
+                borderColor={errors.confirmedPassword && 'red'}
+              />
+              <ShowPasswordButton
                 type="button"
-                onClick={handleNextClick}
-                disabled={
-                  !formValues.email ||
-                  !formValues.password ||
-                  !formValues.confirmedPassword ||
-                  errors.email ||
-                  errors.password ||
-                  errors.confirmedPassword
-                }
+                name="showConfirmPassBtn"
+                onClick={handleShowPassword}
               >
-                Next
-              </Button>
-            </>
-          ) : (
-            <>
+                {showPassword.showConfirmPassBtn ? (
+                  <AiFillEye size="20px" />
+                ) : (
+                  <AiFillEyeInvisible size="20px" />
+                )}
+              </ShowPasswordButton>
+              {errors.confirmedPassword && (
+                <ErrorMsg>{errors.confirmedPassword?.message}</ErrorMsg>
+              )}
+            </Box>
+
+            <Button
+              type="button"
+              onClick={handleNextClick}
+              disabled={
+                !formValues.email ||
+                !formValues.password ||
+                !formValues.confirmedPassword ||
+                errors.email ||
+                errors.password ||
+                errors.confirmedPassword
+              }
+            >
+              Next
+            </Button>
+          </>
+        ) : (
+          <>
+            <Box mb={8} position="relative">
               <Input
                 type="text"
                 {...register('name', {
@@ -248,9 +246,11 @@ export const RegisterForm = ({
                 placeholder="Name"
                 value={formValues.name}
                 onChange={handleChange}
-                style={errors.name && { marginBottom: 1, borderColor: 'red' }}
+                borderColor={errors.name && 'red'}
               />
               {errors.name && <ErrorMsg>{errors.name?.message}</ErrorMsg>}
+            </Box>
+            <Box mb={8} position="relative">
               <Input
                 type="text"
                 {...register('city', {
@@ -266,9 +266,11 @@ export const RegisterForm = ({
                 placeholder="City,region"
                 value={formValues.city}
                 onChange={handleChange}
-                style={errors.city && { marginBottom: 1, borderColor: 'red' }}
+                borderColor={errors.city && 'red'}
               />
               {errors.city && <ErrorMsg>{errors.city?.message}</ErrorMsg>}
+            </Box>
+            <Box mb={15} position="relative">
               <Input
                 type="text"
                 {...register('phone', {
@@ -282,43 +284,43 @@ export const RegisterForm = ({
                 placeholder="Mobile phone"
                 value={formValues.phone}
                 onChange={handleChange}
-                style={errors.phone && { marginBottom: 1, borderColor: 'red' }}
+                borderColor={errors.phone && 'red'}
               />
               {isTheSecondStep && errors.phone && (
-                <ErrorMsg marginBottom={15}>{errors.phone?.message}</ErrorMsg>
+                <ErrorMsg>{errors.phone?.message}</ErrorMsg>
               )}
-              <Button
-                type="submit"
-                marginBottom={[6, 8]}
-                disabled={
-                  Object.keys(errors).length ||
-                  !formValues.name ||
-                  !formValues.city ||
-                  !formValues.phone
-                }
-              >
-                Register
-              </Button>
-              <Button type="button" onClick={handleBackClick}>
-                Back
-              </Button>
-            </>
-          )}
+            </Box>
+            <Button
+              type="submit"
+              marginBottom={[6, 8]}
+              disabled={
+                Object.keys(errors).length ||
+                !formValues.name ||
+                !formValues.city ||
+                !formValues.phone
+              }
+            >
+              Register
+            </Button>
+            <Button type="button" onClick={handleBackClick}>
+              Back
+            </Button>
+          </>
+        )}
 
-          <AuthRedirectionLink
-            path="/login"
-            text="Already have account?"
-            linkText="Login"
-          />
-          <ResendVerificationButton
-            type="button"
-            onClick={() => setIsResendVereficationActive(true)}
-          >
-            Resend email verification
-          </ResendVerificationButton>
-        </>
-        <ToastContainer />
-      </Form>
-    </>
+        <AuthRedirectionLink
+          path="/login"
+          text="Already have account?"
+          linkText="Login"
+        />
+        <ResendVerificationButton
+          type="button"
+          onClick={() => setIsResendVereficationActive(true)}
+        >
+          Resend email verification
+        </ResendVerificationButton>
+      </>
+      <ToastContainer />
+    </Form>
   );
 };
