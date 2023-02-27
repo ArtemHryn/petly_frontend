@@ -36,7 +36,6 @@ export const Input = styled.input`
 
   border: ${({ theme }) => theme.borders.input};
   border-radius: ${({ theme }) => theme.radii.lg};
-  margin-bottom: ${({ theme }) => theme.space[12]}px;
   padding-top: ${({ theme }) => theme.space[6]}px;
   padding-bottom: ${({ theme }) => theme.space[6]}px;
   padding-left: ${({ theme }) => theme.space[8]}px;
@@ -85,11 +84,10 @@ export const ResetBtn = styled.button`
 `;
 
 export const Error = styled.p`
+  position: absolute;
   font-family: ${({ theme }) => theme.fonts.main};
   font-weight: ${({ theme }) => theme.fontWeights.light};
-  font-size: ${({ theme }) => theme.fontSizes.mobile[2]};
-  color: red;
-  margin-bottom: ${({ theme }) => theme.space[7]}px;
-
-  ${space}
+  font-size: ${({ theme }) => theme.fontSizes.mobile[0]};
+  color: ${({ theme }) => theme.colors.red};
+  ${space};
 `;
