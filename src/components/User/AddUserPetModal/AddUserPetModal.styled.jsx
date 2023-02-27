@@ -146,7 +146,7 @@ export const FileIcon = styled(AiOutlinePlus)`
 `;
 
 export const ImgFile = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
   height: 100%;
 `;

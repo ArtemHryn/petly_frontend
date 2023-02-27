@@ -6,7 +6,15 @@ export const Camera = styled(MdPhotoCamera)`
   color: #F59256;
   margin-right: 5px;
   width: 18px;
-  height: 18p;'
+  height: 18px;
+
+  :hover {
+    background-color: #F59256;
+    color: #FFF;
+    border-radius: 50%;
+    widthL 23px;
+    height: 23px;
+  }
 `
 export const LogOutIcon = styled(FiLogOut)`
   color: #F59256; 
@@ -50,7 +58,7 @@ const UserBox = styled.div`
 `;
 const UserPhotoBox = styled.div``;
 const UserPhoto = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   width: 233px;
   height: 233px;
   border-radius: 50%;
