@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-
 import {
   CloseButton,
   CloseIcon,
   ModalContainer,
   ModalLayoutBox,
 } from './ModalLayout.styled';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { useRef } from 'react';
 
 const modalRoot = document.querySelector('#modal-root');
 
 export const ModalLayout = ({ setShowModal, children, ...props }) => {
+  const targetRef = useRef();
   useEffect(() => {
+    disableBodyScroll(targetRef);
     const onCloseByEscape = e => {
       if (e.code === 'Escape') {
         setShowModal(false);
@@ -22,6 +25,7 @@ export const ModalLayout = ({ setShowModal, children, ...props }) => {
 
     return () => {
       window.removeEventListener('keydown', onCloseByEscape);
+      clearAllBodyScrollLocks();
     };
   }, [setShowModal]);
 
@@ -36,9 +40,14 @@ export const ModalLayout = ({ setShowModal, children, ...props }) => {
       animate={{ opacity: 1, transition: { duration: 0.3 } }}
       exit={{ opacity: 0, transition: { duration: 0.3 } }}
       onClick={onBackdropClick}
+      ref={targetRef}
     >
       <ModalContainer {...props}>
-        <CloseButton whileHover={{scale: 1.1}} whileTap={{scale: 0.9}} onClick={() => setShowModal(false)}>
+        <CloseButton
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setShowModal(false)}
+        >
           <CloseIcon />
         </CloseButton>
         {children}
