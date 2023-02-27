@@ -5,6 +5,7 @@ import { NewsItem } from './NewsItem';
 import { List } from './NewsList.styled';
 import { fetchNews } from 'redux/news/news-operations';
 import { selectIsLoading, selectNews, selectFilter } from '../../redux/news/news-selectors';
+import { NoAnimals } from 'components/User/NoAnimals/NoAnimals';
 
 export const NewsList = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,14 @@ export const NewsList = () => {
         }));
         return () => controller.abort();
     }, [dispatch, search]);
-       
+
+   if (isLoading) {
+    return <ListLoader />
+    }
+   if (news.length === 0) {
+    return <NoAnimals>Sorry, there are no news!</NoAnimals>;
+    }
+
     return isLoading ? (
         <ListLoader />
     ) : ( 
