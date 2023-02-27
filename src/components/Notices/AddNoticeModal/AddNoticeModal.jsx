@@ -28,7 +28,6 @@ import {
 
 export const AddNoticeModal = ({ setShowModal }) => {
   const dispatch = useDispatch();
-  const [choosedCategory, setChoosedCategory] = useState('lost-found');
   const [rows, setRows] = useState(1);
   const [nextPage, setNextpage] = useState(false);
 
@@ -38,11 +37,11 @@ export const AddNoticeModal = ({ setShowModal }) => {
     watch,
     setError,
     formState: { errors },
-  } = useForm();
-
-  const onChange = e => {
-    setChoosedCategory(e.target.value);
-  };
+  } = useForm({
+    defaultValues: {
+      category: 'lost-found',
+    },
+  });
 
   const onChangeTextArea = e => {
     const { value } = e.target;
@@ -59,7 +58,13 @@ export const AddNoticeModal = ({ setShowModal }) => {
     setNextpage(true);
   };
   const onFormSubmit = data => {
-    console.log(Date.parse(data.birthdate));
+    if (!watch('noticeAvatar') || watch('noticeAvatar').length === 0) {
+      setError('noticeAvatar', {
+        type: 'custom',
+        message: 'Photo is Required',
+      });
+      return;
+    }
     const formData = new FormData();
     Object.keys(data).forEach(key => {
       if (key === 'noticeAvatar') {
@@ -96,9 +101,7 @@ export const AddNoticeModal = ({ setShowModal }) => {
               name="category"
               value="lost-found"
               id="lost-found"
-              onChange={onChange}
               {...register('category')}
-              defaultChecked
             />
             <Lable
               whileHover={{ scale: 1.05 }}
@@ -113,7 +116,6 @@ export const AddNoticeModal = ({ setShowModal }) => {
               type="radio"
               name="category"
               value="in-good-hands"
-              onChange={onChange}
               id="in-good-hands"
               {...register('category')}
             />
@@ -132,7 +134,6 @@ export const AddNoticeModal = ({ setShowModal }) => {
               value="sell"
               id="sell"
               {...register('category')}
-              onChange={onChange}
             />
             <Lable
               whileHover={{ scale: 1.05 }}
@@ -179,7 +180,6 @@ export const AddNoticeModal = ({ setShowModal }) => {
             <TextField
               id="date"
               fullWidth
-              // label="Birthday"
               type="date"
               min="1980-01-01"
               max={Date.now()}
@@ -290,7 +290,7 @@ export const AddNoticeModal = ({ setShowModal }) => {
               <Error>{errors.location.message}</Error>
             )}
           </LabelTitle>
-          {choosedCategory === 'sell' && (
+          {watch('category') === 'sell' && (
             <LabelTitle>
               Price{' '}
               <Warning as="span" color="red">
@@ -331,9 +331,7 @@ export const AddNoticeModal = ({ setShowModal }) => {
               name="noticeAvatar"
               accept="image/png, image/jpeg"
               hidden
-              {...register('noticeAvatar', {
-                required: 'Pet photo is required',
-              })}
+              {...register('noticeAvatar')}
             />
           </Box>
           <Box mb={['40px']}>

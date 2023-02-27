@@ -9,6 +9,12 @@ import { Box } from 'components/Box';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'redux/auth/authSelector';
 import { MotionBackDrop, MotionBkg, MotionNav, MotionUl } from './Menu.styled';
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock';
+import { useEffect } from 'react';
 
 const sidebar = {
   open: (height = 1000) => ({
@@ -42,17 +48,30 @@ const variants = {
 };
 
 export const MenuMob = ({ size }) => {
+  const targetRef = useRef();
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
-
   const isLoggedIn = useSelector(getIsLoggedIn);
+
   const onClose = e => {
     if (e.target.nodeName !== 'A') {
       return;
     }
     toggleOpen();
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      return disableBodyScroll(targetRef);
+    }
+    if (!isOpen) {
+      return enableBodyScroll(targetRef);
+    }
+    return () => {
+      clearAllBodyScrollLocks();
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -89,6 +108,7 @@ export const MenuMob = ({ size }) => {
                 exit={'closed'}
                 key="list"
                 onClick={onClose}
+                ref={targetRef}
               >
                 {size < 768 && (
                   <>

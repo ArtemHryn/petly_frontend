@@ -53,6 +53,13 @@ export const AddUserPetModal = ({ setShowModal }) => {
   };
 
   const onFormSubmit = data => {
+    if (!watch('petPhoto') || watch('petPhoto').length === 0) {
+      setError('petPhoto', {
+        type: 'custom',
+        message: 'Photo is Required',
+      });
+      return;
+    }
     const formData = new FormData();
     Object.keys(data).forEach(key => {
       if (key === 'petPhoto') {
@@ -67,7 +74,7 @@ export const AddUserPetModal = ({ setShowModal }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} >
+    <form onSubmit={handleSubmit(onFormSubmit)}>
       <Title>Add Pet</Title>
       {!nextPage ? (
         <>
@@ -173,14 +180,10 @@ export const AddUserPetModal = ({ setShowModal }) => {
               name="petPhoto"
               accept="image/png, image/jpeg"
               hidden
-              {...register('petPhoto', {
-                required: 'Pet photo is required',
-              })}
+              {...register('petPhoto')}
             />
           </Box>
-          <LabelTitle style={{ display: 'grid'}}>
-            Comments
-          </LabelTitle>
+          <LabelTitle style={{ display: 'grid' }}>Comments</LabelTitle>
           <AddPetModalTextarea
             as="textarea"
             name="comments"
