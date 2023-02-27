@@ -9,41 +9,20 @@ import {
   FriendsInfoLink,
   TimeList,
   FriendsAddressLink,
+  TimeSpan,
 } from './OurFriendItem.styled';
 
 import AllianceLogoHoriz from '../../images/AllianceLogoHoriz.png';
-import { OurFriendTime } from './OurFriendTime';
-import { useEffect } from 'react';
+
 import { useState } from 'react';
+import { OurFriendTime } from './OurFriendTime';
 
 const days = ['MN', 'TU', 'WE', 'TH', 'FR', 'ST', 'SU'];
 
-export const OurFriendItem = ({ partners }) => {
+export const OurFriendItem = ({ id, partners }) => {
   const [showTime, setShowTime] = useState(false);
 
-  useEffect(() => {
-    const onCloseByEscape = e => {
-      if (e.code === 'Escape') {
-          setShowTime(false);
-          const timeLabels = document.querySelectorAll("#timeBtn")
-          timeLabels.forEach(label => label.style.color = '#000000')
-          }
-      };
-
-      const onBackdropClick = evt => {
-            // if (evt.target === evt.currentTarget) {
-            //     setShowTime(false)
-            // }
-    }
-      window.addEventListener("click", onBackdropClick)
-      window.addEventListener('keydown', onCloseByEscape);
-
-    return () => {
-      window.removeEventListener('keydown', onCloseByEscape);
-    };
-  }, [setShowTime]);
-
-    const toggleTime = evt => {
+  const toggleTime = evt => {
     setShowTime(showTime => !showTime);
     if (!showTime) {
       evt.currentTarget.style.color = '#f59256';
@@ -55,6 +34,7 @@ export const OurFriendItem = ({ partners }) => {
 
   const { title, url, addressUrl, imageUrl, address, workDays, phone, email } =
     partners;
+
 
   const get = () => {
     if (!workDays || workDays.length === 0) {
@@ -77,9 +57,15 @@ export const OurFriendItem = ({ partners }) => {
 
   const workTime = get();
   return (
-    <FriendsItem>
+    <FriendsItem key={id}>
       <h2>
-        <FriendsMainLink href={url} target="_blank" rel="noreferrer">
+        <FriendsMainLink
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+        >
           {title}
         </FriendsMainLink>
       </h2>
@@ -89,39 +75,63 @@ export const OurFriendItem = ({ partners }) => {
           alt="friendLogo"
         />
         <FriendsInfoList>
-            <FriendsInfoItem
-                id="timeBtn"
-                style={{ display: 'block', cursor: 'pointer' }}
-                onClick={evt => toggleTime(evt)}
+          <FriendsInfoItem
+            style={{ display: 'block' }}
+            onClick={evt => toggleTime(evt)}
           >
-            <TimeBtn type="button">Time</TimeBtn>
-            {workDays && workDays.length !== 0
-              ? (workDays[0].isOpen &&
-                  `${workDays[0].from}-${workDays[0].to}`) ||
-                (!workDays[0].isOpen && `${workDays[6].from}-${workDays[6].to}`)
-              : '---------'}
+            <TimeBtn whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <TimeSpan> Time</TimeSpan>
+              {workDays && workDays.length !== 0
+                ? (workDays[0].isOpen &&
+                    `${workDays[0].from}-${workDays[0].to}`) ||
+                  (!workDays[0].isOpen &&
+                    `${workDays[6].from}-${workDays[6].to}`)
+                : '---------'}
+            </TimeBtn>
           </FriendsInfoItem>
           <FriendsInfoItem>Address:</FriendsInfoItem>
           <FriendsInfoItem>
-            <FriendsAddressLink
-              href={addressUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {address ? address : '---------'}
-            </FriendsAddressLink>
+            {address ? (
+              <FriendsAddressLink
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                href={addressUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {address}
+              </FriendsAddressLink>
+            ) : (
+              <p>---------</p>
+            )}
           </FriendsInfoItem>
           <FriendsInfoItem>Email:</FriendsInfoItem>
           <FriendsInfoItem>
-            <FriendsInfoLink href={`mailto:${email}`}>
-              {email ? email : '---------'}
-            </FriendsInfoLink>
+            {email ? (
+              <FriendsInfoLink
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                href={`mailto:${email}`}
+              >
+                {email}
+              </FriendsInfoLink>
+            ) : (
+              <p>---------</p>
+            )}
           </FriendsInfoItem>
           <FriendsInfoItem>Phone:</FriendsInfoItem>
           <FriendsInfoItem>
-            <FriendsInfoLink href={`tel:${phone}`}>
-              {phone ? phone : '---------'}
-            </FriendsInfoLink>
+            {phone ? (
+              <FriendsInfoLink
+                whileHover={{ scale:  1.1  }}
+                whileTap={{ scale:  0.9 }}
+                href={`tel:${phone}`}
+              >
+                {phone}
+              </FriendsInfoLink>
+            ) : (
+              <p>---------</p>
+            )}
           </FriendsInfoItem>
         </FriendsInfoList>
 

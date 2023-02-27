@@ -53,6 +53,28 @@ export const Text = styled.p`
   ${typography}
 `;
 
+export const TextLink = styled(motion.a)`
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #000000;
+  text-decoration: none;
+  @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #000000;
+  }
+
+  ${layout}
+  ${typography}
+`;
+
 export const Comment = styled.p`
   font-family: 'Manrope';
   font-style: normal;
@@ -97,7 +119,7 @@ export const ContactLink = styled(motion.a)`
   line-height: ${p => p.theme.lineHeights.mobile[1]};
   background-color: ${p => p.theme.backgroundColor.orange};
   color: ${p => p.theme.colors.white};
-
+  cursor: pointer;
   ${layout};
   ${typography};
   ${space};
@@ -106,7 +128,6 @@ export const ContactLink = styled(motion.a)`
     height: 40px;
     margin-bottom: 0;
     order: 1;
-
   }
 `;
 
@@ -124,7 +145,7 @@ export const AddTo = styled.button`
   font-weight: ${p => p.theme.fonts.regular};
   font-size: ${p => p.theme.fontSizes.mobile[1]};
   line-height: ${p => p.theme.lineHeights.mobile[1]};
-
+  cursor: pointer;
   height: 44px;
   background-color: ${p => p.theme.backgroundColor.white};
   color: ${p => p.theme.colors.black};

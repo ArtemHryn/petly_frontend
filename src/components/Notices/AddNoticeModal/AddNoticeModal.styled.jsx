@@ -40,7 +40,7 @@ export const Warning = styled.p`
   ${color}
 `;
 
-export const Lable = styled.label`
+export const Lable = styled(motion.label)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,6 +57,7 @@ export const Lable = styled.label`
   letter-spacing: 0.04em;
 
   color: #000000;
+  cursor: pointer;
   input:checked + & {
     background-color: #f59256;
     color: #ffffff;
@@ -139,7 +140,7 @@ export const SexTitle = styled.p`
   }
 `;
 
-export const SexLabel = styled.label`
+export const SexLabel = styled(motion.label)`
   display: block;
   width: 95px;
   font-family: 'Manrope';
@@ -155,6 +156,7 @@ export const SexLabel = styled.label`
   color: #000000;
   border-radius: 20px;
   padding: 5px 10px;
+  cursor: pointer;
   &:hover {
   }
   input:checked + & {

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import {theme} from "../../theme"
+import { theme } from '../../theme';
 
 const FriendsItem = styled.li`
   width: 280px;
@@ -30,7 +30,7 @@ const FriendsItem = styled.li`
     width: calc(100% / 3 - 32px);
   }
 `;
-const FriendsMainLink = styled.a`
+const FriendsMainLink = styled(motion.a)`
   font-family: ${theme.fonts.main};
   font-style: normal;
   font-weight: 700;
@@ -106,7 +106,7 @@ const FriendsInfoItem = styled.li`
     }
   }
 `;
-const FriendsAddressLink = styled.a`
+const FriendsAddressLink = styled(motion.a)`
   font-family: ${theme.fonts.main};
   font-weight: 500;
   font-size: 12px;
@@ -137,8 +137,8 @@ const FriendsAddressLink = styled.a`
       margin-bottom: 12px;
     }
   }
-`
-const TimeBtn = styled.button`
+`;
+const TimeBtn = styled(motion.button)`
   border: none;
   background-color: transparent;
   font-family: ${theme.fonts.main};
@@ -146,7 +146,7 @@ const TimeBtn = styled.button`
   font-size: 12px;
   line-height: 16px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   color: inherit;
   padding: 0;
   margin-bottom: 4px;
@@ -164,7 +164,7 @@ const TimeBtn = styled.button`
     margin-bottom: 12px;
   }
 `;
-const FriendsInfoLink = styled.a`
+const FriendsInfoLink = styled(motion.a)`
   color: inherit;
   text-decoration: none;
 `;
@@ -206,22 +206,22 @@ const TimeItem = styled.li`
   }
 `;
 
-const TimeSpan = styled.span`
+const TimeSpan = styled.p`
   width: 15px;
   margin-right: 5px;
-`
+`;
 
 export {
-    FriendsItem,
-    FriendsMainLink,
-    FriendsInfoBox,
-    FriendsLogo,
-    FriendsInfoList,
-    FriendsInfoItem,
-    TimeBtn,
-    FriendsInfoLink,
-    TimeList,
-    TimeItem,
-    FriendsAddressLink,
-    TimeSpan,
-}
+  FriendsItem,
+  FriendsMainLink,
+  FriendsInfoBox,
+  FriendsLogo,
+  FriendsInfoList,
+  FriendsInfoItem,
+  TimeBtn,
+  FriendsInfoLink,
+  TimeList,
+  TimeItem,
+  FriendsAddressLink,
+  TimeSpan,
+};

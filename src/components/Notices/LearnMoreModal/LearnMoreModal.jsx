@@ -20,6 +20,7 @@ import {
   Img,
   ListElement,
   Text,
+  TextLink,
 } from './LearnMoreModal.styled';
 
 export const LearnMoreModal = ({ item, onLikeClick }) => {
@@ -39,7 +40,6 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
   } = item;
   const dispatch = useDispatch();
   const { email, phone } = useSelector(selectOwnerInfo);
-  // const error = useSelector(getNoticeError);
   const formatedDate = birthdate
     ? format(new Date(Date.parse(birthdate)), 'dd.MM.yyyy')
     : 'no info';
@@ -51,8 +51,37 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
     { title: 'The sex:', value: sex },
     { title: 'Email:', value: email },
     { title: 'Phone:', value: phone },
-    { title: 'price:', value: `${price}$` },
+    { title: 'Price:', value: price ? `${price}$` : price },
   ];
+
+  const setValues = (title, value) => {
+    if (!value) {
+      return <Hidden key={title}></Hidden>;
+    }
+    if (title === 'Email:' || title === 'Phone:') {
+      const type = title === 'Email:' ? 'mailto:' : 'tel:'
+      return (
+        <ListElement key={title}>
+          <Text width={['100px', '130px']}>{title}</Text>
+          <TextLink
+            whileHover={{ scale: 1.05 }}
+            whileFocus={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href={`${type}${value}`}
+            fontWeight="500"
+          >
+            {value}
+          </TextLink>
+        </ListElement>
+      );
+    }
+    return (
+      <ListElement key={title}>
+        <Text width={['100px', '130px']}>{title}</Text>
+        <Text fontWeight="500">{value}</Text>
+      </ListElement>
+    );
+  };
 
   useEffect(() => {
     dispatch(getOwnerInfo(owner));
@@ -68,16 +97,7 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
           <CardTitle>{title}</CardTitle>
 
           <Box as="ul">
-            {list.map(({ title, value }) =>
-              !value ? (
-                <Hidden key={title}></Hidden>
-              ) : (
-                <ListElement key={title}>
-                  <Text width={['100px', '130px']}>{title}</Text>
-                  <Text fontWeight="500">{value}</Text>
-                </ListElement>
-              )
-            )}
+            {list.map(({ title, value }) => setValues(title, value))}
           </Box>
         </Box>
       </Box>
@@ -89,13 +109,13 @@ export const LearnMoreModal = ({ item, onLikeClick }) => {
       </Comment>
       <Box display={[null, 'flex']} justifyContent="flex-end">
         <ContactLink
-          whileHover={{ scale: 1.2 }}
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.8 }}
           href={`tel:${phone}`}
         >
           Contact
         </ContactLink>
-        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.8 }}>
           <AddTo onClick={() => onLikeClick()}>
             {isFavorite ? 'Remove from' : 'Add to'}
             {isFavorite ? (

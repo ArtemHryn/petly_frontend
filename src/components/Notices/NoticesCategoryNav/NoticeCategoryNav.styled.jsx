@@ -43,9 +43,14 @@ export const FilterButton = styled(NavLink)`
   letter-spacing: 0.04em;
 
   color: #111111;
+  transition: all 150ms ease-in;
+  outline: none;
   &.active {
     background: #f59256;
     color: #ffffff;
+  }
+  &:hover, :focus {
+    scale: 1.1;
   }
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     padding: 10px 28px;
@@ -63,7 +68,7 @@ export const AddPetButton = styled(motion.button)`
   width: 80px;
   height: 80px;
   background-color: #f59256;
-
+  cursor: pointer;
   font-family: ${p => p.theme.fonts.main};
   font-style: normal;
   font-weight: 500;
@@ -92,4 +97,9 @@ export const AddPetText = styled.p`
   color: #111111;
 
   margin-right: 12px;
+`;
+
+export const AddpetButtonTab = styled(AddPetButton)`
+  z-index: 0;
+  position: static;
 `;
