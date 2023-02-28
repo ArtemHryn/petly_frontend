@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { Container } from 'components/Container/Container';
 import { verifyUser } from 'redux/auth/auth-operations';
 import backgroundMobile from 'images/registration/waves_mobile.png';
@@ -21,11 +21,7 @@ export const VerifyPage = () => {
   useEffect(() => {
     if (isVerified) {
       toastSuccess('Verification is success, redirect to login');
-      toast.onChange(async payload => {
-        if (payload.status === 'removed') {
-          navigate('/login');
-        }
-      });
+      setTimeout(() => navigate('/login'), 3000);
     }
     const verify = dispatch(verifyUser(token));
 

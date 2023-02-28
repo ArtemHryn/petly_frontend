@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { Box } from 'components/Box';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { register as registerUser } from 'redux/auth/auth-operations';
 import { AuthRedirectionLink } from './AuthRedirectionLink';
 import {
@@ -113,11 +113,7 @@ export const RegisterForm = ({
       });
       setIsTheSecondStep(false);
 
-      toast.onChange(async payload => {
-        if (payload.status === 'removed') {
-          navigate('/login');
-        }
-      });
+      setTimeout(() => navigate('/login'), 3000);
 
       return;
     }
