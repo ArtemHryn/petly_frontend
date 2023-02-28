@@ -11,6 +11,8 @@ import {
   StyledCheck,
 } from './styles/UserInfoString.styled';
 import PropTypes from 'prop-types';
+import { format } from 'date-fns';
+import { useEffect } from 'react';
 
 export const InfoItem = ({ item }) => {
   const [name, value] = item;
@@ -19,16 +21,29 @@ export const InfoItem = ({ item }) => {
   const [newValue, setNewValue] = useState('');
 
   const setInputType = () => {
-    if (name === "birthday") {
-      return "date"
+    if (name === 'birthday') {
+      return 'date';
     }
-    return "text"
-  }
+    return 'text';
+  };
+
+  useEffect(() => {}, [name, value]);
 
   const onEdit = () => {
     setFocus(prev => !prev);
     setNewValue(value);
-    setInputType()
+    if (name === 'birthday') {
+      const [day, month, year] = value.split('.');
+
+      setNewValue(
+        format(
+          new Date(parseInt(year), parseInt(month) - 1, parseInt(day)),
+          'yyyy-MM-dd'
+        )
+      );
+    }
+
+    setInputType();
     if (value === newValue) {
       return;
     }

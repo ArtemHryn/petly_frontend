@@ -9,11 +9,10 @@ import { fetchNotices } from 'redux/notices/notices-operations';
 import {
   getNoticeIsLoading,
   getNotices,
-  getPage,
   getSearch,
   getTotalPages,
 } from 'redux/notices/noticesSelectors';
-import { changeCategory, changePage } from 'redux/notices/searchSlice';
+import { changeCategory } from 'redux/notices/searchSlice';
 import { getFavorites, getIsLoggedIn } from 'redux/auth/authSelector';
 import { ListLoader } from 'components/common/ListLoader/ListLoader';
 import { useState } from 'react';
@@ -21,27 +20,32 @@ import { NoAnimals } from 'components/User/NoAnimals/NoAnimals';
 
 export const NoticeCategoryList = () => {
   const { categoryName } = useParams();
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const notices = useSelector(getNotices);
   const search = useSelector(getSearch);
   const favorites = useSelector(getFavorites);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isLoading = useSelector(getNoticeIsLoading);
-  const page = useSelector(getPage);
   const totalPages = useSelector(getTotalPages);
 
   const [isAvailablePagination, setIsAvailablePagination] = useState(true);
 
-  const filteredNotices = notices.map(notice => {
+  const categoryForFilter =
+    categoryName === 'for-free' ? 'in-good-hands' : categoryName;
+  const correctNotices = notices.filter(notice => {
+    if (!isAvailablePagination) {
+      return notice;
+    }
+    return categoryForFilter === notice.category;
+  });
+
+  const filteredNotices = correctNotices.map(notice => {
     if (isLoggedIn && favorites.includes(notice._id)) {
       return { ...notice, isFavorite: true };
     }
     return { ...notice, isFavorite: false };
   });
-
-  const onPageChange = (e, page) => {
-    dispatch(changePage(page));
-  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -61,7 +65,7 @@ export const NoticeCategoryList = () => {
   }, [categoryName, dispatch, search, page]);
 
   if (isLoading) {
-    return <ListLoader />
+    return <ListLoader />;
   }
 
   if (filteredNotices.length === 0) {
@@ -100,7 +104,7 @@ export const NoticeCategoryList = () => {
           shape="rounded"
           siblingCount={1}
           page={page}
-          onChange={onPageChange}
+          onChange={(e, page) => setPage(page)}
         />
       )}
     </>

@@ -10,6 +10,7 @@ import {
   LogOutBtn,
   Camera,
   LogOutIcon,
+  PhotoEdiotContainer,
 } from './styles/UserInfo.styled';
 import userAvatar from '../../images/userAvatar.png';
 import { InfoItem } from './UserInfoString';
@@ -60,8 +61,15 @@ export const UserInfo = () => {
               onChange={onChange}
               encType="multipart/form-data"
             />
-            <Camera/>
-            Edit photo
+            <PhotoEdiotContainer
+              whileHover={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.05 }}
+              whileTap={{scale: 0.95}}
+            >
+              {' '}
+              <Camera />
+              Edit photo
+            </PhotoEdiotContainer>
           </UserPhotoLabel>
         </UserPhotoForm>
       </UserPhotoBox>
@@ -72,7 +80,7 @@ export const UserInfo = () => {
           ))}
         </UserInfoList>
         <LogOutBtn type="button" onClick={() => dispatch(logout())}>
-          <LogOutIcon/>
+          <LogOutIcon />
           Log Out
         </LogOutBtn>
       </div>

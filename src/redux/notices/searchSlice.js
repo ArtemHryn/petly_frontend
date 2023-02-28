@@ -10,10 +10,7 @@ export const filterSlice = createSlice({
     changeCategory(state, action) {
       state.category = action.payload;
     },
-    changePage(state, action) {
-      state.page = action.payload
-    }
   },
 });
 
-export const { changeSearch, changeCategory, changePage } = filterSlice.actions;
+export const { changeSearch, changeCategory } = filterSlice.actions;

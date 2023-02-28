@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 import { MdPhotoCamera } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+
+
+const PhotoEdiotContainer = styled(motion.div)`
+  display: flex;
+  align-items: center;
+`
 
 export const Camera = styled(MdPhotoCamera)`
   color: #F59256;
   margin-right: 5px;
   width: 18px;
   height: 18px;
-
-  :hover {
-    background-color: #F59256;
-    color: #FFF;
-    border-radius: 50%;
-    widthL 23px;
-    height: 23px;
-  }
 `
 export const LogOutIcon = styled(FiLogOut)`
   color: #F59256; 
@@ -122,11 +121,12 @@ const LogOutBtn = styled.button`
 `;
 
 export {
-    UserBox,
-    UserPhotoBox,
-    UserPhoto,
-    UserPhotoForm,
-    UserPhotoLabel,
-    UserInfoList,
-    LogOutBtn
-}
+  UserBox,
+  UserPhotoBox,
+  UserPhoto,
+  UserPhotoForm,
+  UserPhotoLabel,
+  UserInfoList,
+  LogOutBtn,
+  PhotoEdiotContainer,
+};
