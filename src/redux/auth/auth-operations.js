@@ -167,7 +167,7 @@ export const verifyUser = createAsyncThunk(
       return res.data;
     } catch (error) {
       if (error.response.status === 404) {
-        return thunkAPI.rejectWithValue('User not found or already verified');
+        return null
       }
 
       return thunkAPI.rejectWithValue('Something get wrong, try again');
