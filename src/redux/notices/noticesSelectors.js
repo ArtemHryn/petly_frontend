@@ -8,7 +8,6 @@ export const getTotalPages = state => state.notices.totalPages
 //filter
 export const getSearch = state => state.filter.search;
 export const getCategory = state => state.filter.category;
-export const getPage = state => state.filter.page
 
 //owner
 export const selectOwnerInfo = state => state.notices.cardOwner

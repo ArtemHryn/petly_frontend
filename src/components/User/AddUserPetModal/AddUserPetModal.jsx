@@ -112,7 +112,6 @@ export const AddUserPetModal = ({ setShowModal }) => {
             <TextField
               id="birth"
               fullWidth
-              // label="Birthday"
               type="date"
               min="1980-01-01"
               max={Date.now()}
