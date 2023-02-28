@@ -40,12 +40,15 @@ export const ModalContainer = styled.div`
 
   border-radius: 20px;
   overflow-y: scroll;
-  
+
   @media screen and (min-width: ${p => p.theme.sizes.tablet}) {
     padding: 32px 24px 32px 20px;
     max-width: 704px;
     height: 100%;
     max-height: 540px;
+  }
+  @media screen and (min-width: ${p => p.theme.sizes.desktop}) {
+    overflow: hidden;
   }
   ${color}
   ${space}
