@@ -160,7 +160,9 @@ export const verifyUser = createAsyncThunk(
   '/verify/:token',
   async (token, thunkAPI) => {
     try {
-      const res = await axios.get(`/users/verify/${token}`);
+      const res = await axios.get(`/users/verify/${token}`, {
+        signal: thunkAPI.signal,
+      });
 
       return res.data;
     } catch (error) {
