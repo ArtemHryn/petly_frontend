@@ -145,6 +145,7 @@ const authSlice = createSlice({
         state.isUpdating = false;
       })
       .addCase(verifyUser.fulfilled, (state, _) => {
+        state.error = null
         state.isVerified = true;
       })
       .addCase(verifyUser.rejected, (state, action) => {
