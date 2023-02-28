@@ -1,5 +1,6 @@
 import { Box } from 'components/Box';
 import styled, { keyframes } from 'styled-components';
+import { space, layout } from 'styled-system';
 
 export const Section = styled.section`
   position: relative;
@@ -112,4 +113,6 @@ export const Title = styled.h1`
     font-size: 5.313vw;
     line-height: 7.813vw;
   }
+  ${space};
+  ${layout};
 `;
