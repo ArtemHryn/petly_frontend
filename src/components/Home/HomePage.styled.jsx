@@ -1,17 +1,6 @@
 import { Box } from 'components/Box';
 import styled, { keyframes } from 'styled-components';
-import {
-  color,
-  space,
-  layout,
-  flexbox,
-  grid,
-  background,
-  border,
-  position,
-  shadow,
-  typography,
-} from 'styled-system';
+import { space, layout } from 'styled-system';
 
 export const Section = styled.section`
   position: relative;
