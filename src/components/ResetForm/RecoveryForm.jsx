@@ -12,9 +12,12 @@ import {
   toastError,
   toastSuccess,
 } from 'helpers/toast-notifications/toasts-notifications';
+import { useNavigate } from 'react-router-dom';
 
 export const RecoveryForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onSubmit = async ({ email }) => {
     const response = await dispatch(reset({ email }));
     if (response.payload === 'Request failed with status code 401') {
@@ -22,6 +25,7 @@ export const RecoveryForm = () => {
       return;
     }
     toastSuccess('Check your email');
+    setTimeout(() => navigate('/login'), 3000);
     return;
   };
   const [formValues] = useState({
