@@ -27,11 +27,11 @@ export const VerifyPage = () => {
         }
       });
     }
-    const verify = async () => {
-      await dispatch(verifyUser(token));
-    };
+    const verify = dispatch(verifyUser(token));
 
-    verify();
+    return () => {
+      verify.abort();
+    };
   }, [dispatch, isVerified, navigate, token]);
 
   return (
@@ -51,7 +51,7 @@ export const VerifyPage = () => {
       justifyContent="center"
     >
       {error && (
-        <Title backgroundColor="hightAccent" p="10" borderRadius="sm">
+        <Title backgroundColor="accent" p="10" borderRadius="sm">
           {error}
         </Title>
       )}
