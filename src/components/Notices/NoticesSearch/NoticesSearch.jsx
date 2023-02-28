@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { fetchNotices } from 'redux/notices/notices-operations';
 import { getCategory, getSearch } from 'redux/notices/noticesSelectors';
 import { changeSearch } from 'redux/notices/searchSlice';
@@ -19,13 +20,28 @@ export const NoticeSearch = () => {
   const [searchValue, setSearchValue] = useState(() => search);
   const category = useSelector(getCategory);
   const dispatch = useDispatch();
+  const [, setSearchParams] = useSearchParams();
 
   const onSearch = () => {
+    setSearchParams({ page: 1 });
+
     dispatch(changeSearch(searchValue));
     dispatch(
       fetchNotices({
         category,
         search: searchValue,
+      })
+    );
+  };
+
+  const onCleanUp = () => {
+    setSearchParams({ page: 1 });
+    setSearchValue('');
+    dispatch(changeSearch(''));
+    dispatch(
+      fetchNotices({
+        category,
+        search: '',
       })
     );
   };
@@ -50,7 +66,7 @@ export const NoticeSearch = () => {
           <ClearButton
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
-            onClick={() => setSearchValue('')}
+            onClick={onCleanUp}
           >
             <ClearIcon />
           </ClearButton>

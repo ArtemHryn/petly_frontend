@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
@@ -28,6 +28,8 @@ export const NoticeCategoryList = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isLoading = useSelector(getNoticeIsLoading);
   const totalPages = useSelector(getTotalPages);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filteredPage = searchParams.get('page') ?? 1;
 
   const [isAvailablePagination, setIsAvailablePagination] = useState(true);
 
@@ -47,7 +49,13 @@ export const NoticeCategoryList = () => {
     return { ...notice, isFavorite: false };
   });
 
+  const onPageChange = (e, page) => {
+    setPage(page);
+    setSearchParams({ page });
+  };
+
   useEffect(() => {
+    setSearchParams( filteredPage ? {page: filteredPage} : {page}  );
     const controller = new AbortController();
     setIsAvailablePagination(
       categoryName !== 'own' && categoryName !== 'favorite'
@@ -57,12 +65,12 @@ export const NoticeCategoryList = () => {
       fetchNotices({
         category: categoryName,
         search,
-        page,
+        page: filteredPage ? filteredPage : page,
         signal: controller.signal,
       })
     );
     return () => controller.abort();
-  }, [categoryName, dispatch, search, page]);
+  }, [categoryName, dispatch, search, page, setSearchParams, filteredPage]);
 
   if (isLoading) {
     return <ListLoader />;
@@ -103,8 +111,8 @@ export const NoticeCategoryList = () => {
           variant="outlined"
           shape="rounded"
           siblingCount={1}
-          page={page}
-          onChange={(e, page) => setPage(page)}
+          page={filteredPage ? parseInt(filteredPage) : page}
+          onChange={onPageChange}
         />
       )}
     </>
