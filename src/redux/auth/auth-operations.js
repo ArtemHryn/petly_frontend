@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://arcane-everglades-20653.herokuapp.com';
+axios.defaults.baseURL = 'https://petlybackend-production.up.railway.app';
 
 const token = {
   set(token) {
